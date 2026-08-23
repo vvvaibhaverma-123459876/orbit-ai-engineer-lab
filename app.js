@@ -22,6 +22,9 @@ function showView(name) {
 }
 function openLesson() {
   $("#lesson-modal").hidden = false;
+  $("#next-lesson").hidden = true;
+  $("#test-result").className = "";
+  $("#test-result").textContent = "";
   document.body.style.overflow = "hidden";
   $("#code-editor").focus();
 }
@@ -36,10 +39,12 @@ function runTests() {
   if (valid) {
     result.className = "success";
     result.innerHTML = "✓ Hidden tests passed. Your function works for positive, negative and zero inputs. <b>Next: explain why it works.</b>";
+    $("#next-lesson").hidden = false;
     $("#editor-status").textContent = "Development history captured · 1 attempt";
     if (state.lessons < 2) { state.lessons = 2; state.portfolio = Math.max(2, state.portfolio); save(); updateProgress(); }
   } else {
     result.className = "error";
+    $("#next-lesson").hidden = true;
     result.textContent = "Not quite yet. Hidden tests expect the function to return number multiplied by two. Replace pass with a return statement.";
     $("#editor-status").textContent = "Attempt recorded · keep working";
   }
@@ -51,6 +56,7 @@ $$("[data-open-lesson]").forEach((button) => button.addEventListener("click", op
 $$("[data-close-modal]").forEach((node) => node.addEventListener("click", closeLesson));
 document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !$("#lesson-modal").hidden) closeLesson(); });
 $("#run-code").addEventListener("click", runTests);
+$("#next-lesson").addEventListener("click", () => { closeLesson(); showView("learn"); });
 $("#code-editor").addEventListener("paste", (event) => { event.preventDefault(); $("#editor-status").textContent = "Paste is disabled. Build the solution yourself."; });
 $("#code-editor").addEventListener("drop", (event) => event.preventDefault());
 $("#code-editor").addEventListener("input", () => { $("#editor-status").textContent = "Typing captured · hidden tests ready"; });
