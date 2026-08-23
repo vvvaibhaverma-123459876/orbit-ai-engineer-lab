@@ -14,6 +14,10 @@ const lessonContent = {
     prompt: "Write double(number) so it returns the input multiplied by two.",
     hint: "Try a small number first. Hidden examples will check your code.",
     starter: "def double(number):\n    # write your return statement here\n    pass",
+    theory: [
+      { question: "What does a Python function give you?", options: ["A reusable named block of logic", "A special type of loop"], answer: "a" },
+      { question: "What does return do inside a function?", options: ["Sends a result back to the caller", "Prints the result automatically"], answer: "a" }
+    ],
     validate: (code) => /return\s+number\s*\*\s*2/.test(code)
   },
   3: {
@@ -24,6 +28,10 @@ const lessonContent = {
     prompt: "Write total(scores) so it returns the sum of every value in the list.",
     hint: "Python already has a built-in function that adds the values in a list.",
     starter: "def total(scores):\n    # return the sum of the values\n    pass",
+    theory: [
+      { question: "What is a Python list?", options: ["An ordered collection of values", "A single number"], answer: "a" },
+      { question: "Which built-in adds all values in scores?", options: ["sum(scores)", "max(scores)"], answer: "a" }
+    ],
     validate: (code) => /return\s+sum\s*\(\s*scores\s*\)/.test(code)
   }
 };
@@ -91,6 +99,26 @@ function renderLesson() {
   $("#prompt-hint").textContent = data.hint;
   $("#code-editor").value = data.starter;
   $("#next-lesson").textContent = state.currentLesson === 2 ? "Continue to Lesson 3 →" : "Return to learning path →";
+  renderTheory(data);
+}
+
+function renderTheory(data) {
+  const fields = $$("#theory-check fieldset");
+  data.theory.forEach((question, index) => {
+    const field = fields[index];
+    field.querySelector("legend").textContent = question.question;
+    field.querySelectorAll("label").forEach((label, optionIndex) => {
+      const input = label.querySelector("input");
+      input.name = "theory-" + (index + 1);
+      input.value = optionIndex === 0 ? "a" : "b";
+      input.checked = false;
+      label.innerHTML = "";
+      label.append(input, document.createTextNode(" " + question.options[optionIndex]));
+    });
+  });
+  $("#theory-score").textContent = "0 / 2 answered";
+  $("#theory-result").textContent = "";
+  $("#theory-check").className = "theory-check";
 }
 
 function openLesson() {
@@ -100,7 +128,9 @@ function openLesson() {
   $("#next-lesson").hidden = true;
   $("#test-result").className = "";
   $("#test-result").textContent = "";
-  $("#editor-status").textContent = "Paste is disabled for this assessment.";
+  $("#code-editor").disabled = true;
+  $("#run-code").disabled = true;
+  $("#editor-status").textContent = "Pass the theory checkpoint to unlock the coding test.";
   document.documentElement.classList.add("modal-open");
   document.body.classList.add("modal-open");
   document.body.style.top = "-" + lockedScrollY + "px";
@@ -113,6 +143,29 @@ function closeLesson() {
   document.body.classList.remove("modal-open");
   document.body.style.top = "";
   window.scrollTo(0, lockedScrollY);
+}
+
+function checkTheory() {
+  const data = lessonContent[state.currentLesson] || lessonContent[2];
+  const selected = $$("#theory-check input:checked");
+  const score = selected.reduce((total, input, index) => total + (input.value === data.theory[index].answer ? 1 : 0), 0);
+  $("#theory-score").textContent = selected.length + " / 2 answered";
+  const result = $("#theory-result");
+  if (selected.length < 2) {
+    $("#theory-check").className = "theory-check failed";
+    result.textContent = "Answer both theory questions before starting the coding test.";
+    return;
+  }
+  if (score === 2) {
+    $("#theory-check").className = "theory-check passed";
+    result.textContent = "✓ Theory checkpoint passed. The coding test is now unlocked.";
+    $("#code-editor").disabled = false;
+    $("#run-code").disabled = false;
+    $("#editor-status").textContent = "Theory passed · paste is disabled for this assessment.";
+  } else {
+    $("#theory-check").className = "theory-check failed";
+    result.textContent = "Not quite. Review the explanation above and try the theory questions again.";
+  }
 }
 
 function runTests() {
@@ -168,6 +221,7 @@ $$("[data-close-modal]").forEach((node) => node.addEventListener("click", closeL
 document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !$("#lesson-modal").hidden) closeLesson(); });
 $("#run-code").addEventListener("click", runTests);
 $("#next-lesson").addEventListener("click", continueAfterPass);
+$("#check-theory").addEventListener("click", checkTheory);
 $("#code-editor").addEventListener("paste", (event) => { event.preventDefault(); $("#editor-status").textContent = "Paste is disabled. Build the solution yourself."; });
 $("#code-editor").addEventListener("drop", (event) => event.preventDefault());
 $("#code-editor").addEventListener("input", () => { $("#editor-status").textContent = "Typing captured · hidden tests ready"; });
