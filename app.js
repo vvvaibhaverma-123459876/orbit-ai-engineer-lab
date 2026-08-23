@@ -18,6 +18,7 @@ function loadState() {
 let state = loadState();
 let lockedScrollY = 0;
 let attempts = 0;
+let lastTrigger = null;
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
@@ -183,12 +184,21 @@ function updateLessonRows() {
   });
 }
 
+function prefersReducedMotion() {
+  return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 function showView(name) {
   $$(".view").forEach((view) => view.classList.toggle("active-view", view.id === "view-" + name));
-  $$(".nav").forEach((button) => button.classList.toggle("active", button.dataset.view === name));
+  $$(".nav").forEach((button) => {
+    const isActive = button.dataset.view === name;
+    button.classList.toggle("active", isActive);
+    if (isActive) button.setAttribute("aria-current", "page");
+    else button.removeAttribute("aria-current");
+  });
   const titles = { overview: "Overview", learn: "Learning path", portfolio: "Portfolio", pulse: "AI pulse" };
   $("#view-title").textContent = titles[name] || "Overview";
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? "auto" : "smooth" });
 }
 
 function renderLesson() {
@@ -248,11 +258,18 @@ function renderTheory(data) {
   $("#theory-check").className = "theory-check";
 }
 
+const FOCUSABLE = 'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+function focusableInModal() {
+  return $$(FOCUSABLE, $(".modal-panel")).filter((node) => !node.hidden && node.offsetParent !== null);
+}
+
 function openLesson() {
   if (!lessonContent[state.currentLesson]) {
     showView("learn");
     return;
   }
+  lastTrigger = document.activeElement;
   lockedScrollY = window.scrollY;
   attempts = 0;
   renderLesson();
@@ -266,15 +283,40 @@ function openLesson() {
   document.documentElement.classList.add("modal-open");
   document.body.classList.add("modal-open");
   document.body.style.top = "-" + lockedScrollY + "px";
-  $("#code-editor").focus();
+  // Keep the page behind the dialog out of the tab order and the accessibility
+  // tree; previously a keyboard user tabbed straight through the backdrop.
+  $(".app-shell").inert = true;
+  // The editor is disabled until the theory checkpoint passes, so focusing it
+  // was a no-op that left focus outside the dialog entirely.
+  $(".modal-panel").focus();
 }
 
 function closeLesson() {
   $("#lesson-modal").hidden = true;
+  $(".app-shell").inert = false;
   document.documentElement.classList.remove("modal-open");
   document.body.classList.remove("modal-open");
   document.body.style.top = "";
   window.scrollTo(0, lockedScrollY);
+  if (lastTrigger && document.contains(lastTrigger)) lastTrigger.focus();
+  lastTrigger = null;
+}
+
+// Keep Tab inside the dialog while it is open.
+function trapFocus(event) {
+  if (event.key !== "Tab" || $("#lesson-modal").hidden) return;
+  const nodes = focusableInModal();
+  if (!nodes.length) return;
+  const first = nodes[0];
+  const last = nodes[nodes.length - 1];
+  const panel = $(".modal-panel");
+  if (event.shiftKey && (document.activeElement === first || document.activeElement === panel)) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
 }
 
 function checkTheory() {
@@ -355,7 +397,7 @@ function continueAfterPass() {
     showView("learn");
     setTimeout(() => {
       const row = $(".lesson-row.now");
-      if (row) row.scrollIntoView({ behavior: "smooth", block: "center" });
+      if (row) row.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "center" });
     }, 250);
   } else {
     // No further content. Park the pointer past the last lesson so the finished
@@ -378,17 +420,34 @@ document.addEventListener("click", (event) => {
   if (lessonButton) openLesson();
 });
 $$("[data-close-modal]").forEach((node) => node.addEventListener("click", closeLesson));
-document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !$("#lesson-modal").hidden) closeLesson(); });
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !$("#lesson-modal").hidden) closeLesson();
+  trapFocus(event);
+});
 $("#run-code").addEventListener("click", runTests);
 $("#next-lesson").addEventListener("click", continueAfterPass);
 $("#check-theory").addEventListener("click", checkTheory);
 $("#code-editor").addEventListener("paste", (event) => { event.preventDefault(); $("#editor-status").textContent = "Paste is disabled. Build the solution yourself."; });
 $("#code-editor").addEventListener("drop", (event) => event.preventDefault());
 $("#code-editor").addEventListener("input", () => { $("#editor-status").textContent = "Typing captured · hidden tests ready"; });
-$("#theme-toggle").addEventListener("click", () => { state.theme = state.theme === "dark" ? "light" : "dark"; document.body.classList.toggle("dark", state.theme === "dark"); save(); });
+function applyTheme() {
+  const isDark = state.theme === "dark";
+  // The class goes on the root element so html, and the overscroll area behind
+  // the page, pick up the dark background too.
+  document.documentElement.classList.toggle("dark", isDark);
+  const toggle = $("#theme-toggle");
+  toggle.setAttribute("aria-pressed", String(isDark));
+  $(".visually-hidden", toggle).textContent = isDark ? "Dark theme on" : "Dark theme off";
+}
+
+$("#theme-toggle").addEventListener("click", () => {
+  state.theme = state.theme === "dark" ? "light" : "dark";
+  applyTheme();
+  save();
+});
 $("#reset-progress").addEventListener("click", () => { state = Object.assign({}, defaults); save(); updateProgress(); updateLessonRows(); });
 $$(".filters button").forEach((button) => button.addEventListener("click", () => { $$(".filters button").forEach((item) => item.classList.remove("selected")); button.classList.add("selected"); }));
-document.body.classList.toggle("dark", state.theme === "dark");
+applyTheme();
 repairLessonPointer();
 updateProgress();
 updateLessonRows();
