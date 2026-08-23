@@ -1,6 +1,21 @@
 const key = "orbit-prototype-state";
 const defaults = { lessons: 1, portfolio: 1, currentLesson: 2, theme: "light" };
-let state = Object.assign({}, defaults, JSON.parse(localStorage.getItem(key) || "{}"));
+
+// Storage is best-effort: a corrupt value or a browser that blocks localStorage
+// must never stop the rest of the app from starting.
+function loadState() {
+  try {
+    const raw = localStorage.getItem(key);
+    const stored = raw ? JSON.parse(raw) : null;
+    if (!stored || typeof stored !== "object" || Array.isArray(stored)) return Object.assign({}, defaults);
+    return Object.assign({}, defaults, stored);
+  } catch (error) {
+    console.warn("Orbit: saved progress could not be read, starting from defaults.", error);
+    return Object.assign({}, defaults);
+  }
+}
+
+let state = loadState();
 let lockedScrollY = 0;
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
@@ -56,7 +71,30 @@ const lessonContent = {
   }
 };
 
-function save() { localStorage.setItem(key, JSON.stringify(state)); }
+function save() {
+  try {
+    localStorage.setItem(key, JSON.stringify(state));
+  } catch (error) {
+    console.warn("Orbit: progress could not be saved on this device.", error);
+  }
+}
+
+// Numbers of the lessons that actually have content, in order.
+function lessonNumbers() {
+  return Object.keys(lessonContent).map(Number).sort((a, b) => a - b);
+}
+
+// If the stored pointer names a lesson that does not exist, move it to the first
+// lesson the learner has not finished. Landing past the last lesson is only
+// legitimate once every available lesson is complete.
+function repairLessonPointer() {
+  if (lessonContent[state.currentLesson]) return;
+  const pending = lessonNumbers().find((number) => number > state.lessons);
+  if (pending) {
+    state.currentLesson = pending;
+    save();
+  }
+}
 
 function updateProgress() {
   const percent = Math.max(18, Math.round((state.lessons / 6) * 100));
@@ -233,7 +271,7 @@ function runTests() {
 
 function continueAfterPass() {
   const next = state.currentLesson + 1;
-  if (next <= 6) {
+  if (lessonContent[next]) {
     state.currentLesson = next;
     save();
     updateLessonRows();
@@ -245,6 +283,14 @@ function continueAfterPass() {
       if (row) row.scrollIntoView({ behavior: "smooth", block: "center" });
     }, 250);
   } else {
+    // No further content. Park the pointer past the last lesson so the finished
+    // lesson reads as complete instead of staying "current" forever.
+    const numbers = lessonNumbers();
+    const last = numbers[numbers.length - 1];
+    if (state.lessons >= last) state.currentLesson = last + 1;
+    save();
+    updateLessonRows();
+    updateDashboard();
     closeLesson();
     showView("learn");
   }
@@ -268,6 +314,7 @@ $("#theme-toggle").addEventListener("click", () => { state.theme = state.theme =
 $("#reset-progress").addEventListener("click", () => { state = Object.assign({}, defaults); save(); updateProgress(); updateLessonRows(); });
 $$(".filters button").forEach((button) => button.addEventListener("click", () => { $$(".filters button").forEach((item) => item.classList.remove("selected")); button.classList.add("selected"); }));
 document.body.classList.toggle("dark", state.theme === "dark");
+repairLessonPointer();
 updateProgress();
 updateLessonRows();
 updateDashboard();
