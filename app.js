@@ -1,6 +1,7 @@
 const key = "orbit-prototype-state";
 const defaults = { lessons: 1, portfolio: 1, theme: "light" };
 let state = Object.assign({}, defaults, JSON.parse(localStorage.getItem(key) || "{}"));
+let lockedScrollY = 0;
 const $ = (s, root = document) => root.querySelector(s);
 const $$ = (s, root = document) => Array.from(root.querySelectorAll(s));
 
@@ -21,16 +22,22 @@ function showView(name) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 function openLesson() {
+  lockedScrollY = window.scrollY;
   $("#lesson-modal").hidden = false;
   $("#next-lesson").hidden = true;
   $("#test-result").className = "";
   $("#test-result").textContent = "";
-  document.body.style.overflow = "hidden";
+  document.documentElement.classList.add("modal-open");
+  document.body.classList.add("modal-open");
+  document.body.style.top = "-" + lockedScrollY + "px";
   $("#code-editor").focus();
 }
 function closeLesson() {
   $("#lesson-modal").hidden = true;
-  document.body.style.overflow = "";
+  document.documentElement.classList.remove("modal-open");
+  document.body.classList.remove("modal-open");
+  document.body.style.top = "";
+  window.scrollTo(0, lockedScrollY);
 }
 function runTests() {
   const code = $("#code-editor").value;
