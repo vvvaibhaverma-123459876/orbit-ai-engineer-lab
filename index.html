@@ -56,9 +56,8 @@
       <h2 id="modal-title">Write your first Python function</h2>
       <p id="modal-lead">A function is a named idea you can call again. Read the example, then write one yourself without copying it.</p>
       <section class="theory-check" id="theory-check">
-        <div class="theory-head"><label>THEORY CHECKPOINT</label><small id="theory-score">0 / 2 answered</small></div>
-        <fieldset><legend id="theory-q1">What does a Python function give you?</legend><label><input type="radio" name="theory-1" value="a"> A reusable named block of logic</label><label><input type="radio" name="theory-1" value="b"> A special type of loop</label></fieldset>
-        <fieldset><legend id="theory-q2">What does return do inside a function?</legend><label><input type="radio" name="theory-2" value="a"> Sends a result back to the caller</label><label><input type="radio" name="theory-2" value="b"> Prints the result automatically</label></fieldset>
+        <div class="theory-head"><label>THEORY CHECKPOINT</label><small id="theory-score">0 answered</small></div>
+        <div id="theory-questions"></div>
         <button class="small" id="check-theory" type="button">Check theory</button><div id="theory-result" aria-live="polite"></div>
       </section>
       <pre><span># Example</span>
@@ -74,6 +73,7 @@
       <button class="secondary next-button" id="next-lesson" type="button" hidden>Continue to Lesson 3 →</button>
     </section>
   </div>
+  <script src="python-lite.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

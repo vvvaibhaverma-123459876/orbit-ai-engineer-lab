@@ -17,6 +17,7 @@ function loadState() {
 
 let state = loadState();
 let lockedScrollY = 0;
+let attempts = 0;
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
@@ -30,12 +31,22 @@ const lessonContent = {
     hint: "Try a small number first. Hidden examples will check your code.",
     starter: "def double(number):\n    # write your return statement here\n    pass",
     theory: [
-      { question: "What does a Python function give you?", options: ["A reusable named block of logic", "A special type of loop"], answer: "a" },
-      { question: "What does return do inside a function?", options: ["Sends a result back to the caller", "Prints the result automatically"], answer: "a" }
+      { question: "What does a Python function give you?", options: ["A reusable named block of logic", "A special type of loop", "A way to store a single value"], answer: 0 },
+      { question: "What does return do inside a function?", options: ["Sends a result back to the caller", "Prints the result automatically", "Ends the program"], answer: 0 }
     ],
-    validate: (code) => /return\s+number\s*\*\s*2/.test(code),
-    success: "✓ Hidden tests passed. Your function works for positive, negative and zero inputs. <b>Next: explain why it works.</b>",
-    failure: "Not quite yet. Hidden tests expect a lowercase return statement using number multiplied by two."
+    check: {
+      name: "double",
+      params: ["number"],
+      cases: [
+        { args: [3], expected: 6 },
+        { args: [0], expected: 0 },
+        { args: [-4], expected: -8 },
+        { args: [7.5], expected: 15 },
+        { args: [1000000], expected: 2000000 }
+      ]
+    },
+    success: "Your function holds for positive, negative, zero, fractional and large inputs. <b>Next: explain why it works.</b>",
+    nudge: "Read what your function returned above, then compare it with what doubling that input should give."
   },
   3: {
     kicker: "LESSON 03 · CONCEPT + PRACTICE",
@@ -46,12 +57,22 @@ const lessonContent = {
     hint: "Python already has a built-in function that adds the values in a list.",
     starter: "def total(scores):\n    # return the sum of the values\n    pass",
     theory: [
-      { question: "What is a Python list?", options: ["An ordered collection of values", "A single number"], answer: "a" },
-      { question: "Which built-in adds all values in scores?", options: ["sum(scores)", "max(scores)"], answer: "a" }
+      { question: "What is a Python list?", options: ["An ordered collection of values", "A single number", "A name for one variable"], answer: 0 },
+      { question: "Which built-in adds all values in scores?", options: ["sum(scores)", "max(scores)", "len(scores)"], answer: 0 }
     ],
-    validate: (code) => /return\s+sum\s*\(\s*scores\s*\)/.test(code),
-    success: "✓ Hidden tests passed. Your list function works with empty, short and longer lists. <b>Nice decomposition.</b>",
-    failure: "Not quite yet. Hidden tests expect a lowercase return statement using sum(scores)."
+    check: {
+      name: "total",
+      params: ["scores"],
+      cases: [
+        { args: [[82, 91, 76]], expected: 249 },
+        { args: [[]], expected: 0 },
+        { args: [[5]], expected: 5 },
+        { args: [[-2, 2]], expected: 0 },
+        { args: [[1.5, 2.5]], expected: 4 }
+      ]
+    },
+    success: "Your function holds for empty, single-item, negative and fractional lists. <b>Nice decomposition.</b>",
+    nudge: "The empty list is the case most solutions miss. A loop and the built-in are both accepted."
   },
   4: {
     kicker: "LESSON 04 · PYTHON ENGINEERING",
@@ -62,12 +83,20 @@ const lessonContent = {
     hint: "The value lives at config['training']['learning_rate']. Return it; do not print it.",
     starter: "def get_learning_rate(config):\n    # read the nested training setting\n    pass",
     theory: [
-      { question: "Why keep a learning rate in configuration?", options: ["It can change without rewriting the training code", "It makes the value secret automatically"], answer: "a" },
-      { question: "What kind of data is JSON best described as?", options: ["Structured key-value data", "Executable Python code"], answer: "a" }
+      { question: "Why keep a learning rate in configuration?", options: ["It can change without rewriting the training code", "It makes the value secret automatically", "It makes training run faster"], answer: 0 },
+      { question: "What kind of data is JSON best described as?", options: ["Structured key-value data", "Executable Python code", "A compression format"], answer: 0 }
     ],
-    validate: (code) => /return\s+config\s*\[\s*["']training["']\s*\]\s*\[\s*["']learning_rate["']\s*\]/.test(code),
-    success: "✓ Hidden tests passed. Your function reads the setting from multiple configuration examples without hardcoding the value.",
-    failure: "Not quite yet. Return config['training']['learning_rate'] with a lowercase return statement."
+    check: {
+      name: "get_learning_rate",
+      params: ["config"],
+      cases: [
+        { args: [{ training: { learning_rate: 0.001 } }], expected: 0.001 },
+        { args: [{ training: { learning_rate: 0.05 }, model: { layers: 4 } }], expected: 0.05 },
+        { args: [{ model: { layers: 2 }, training: { epochs: 10, learning_rate: 0.3 } }], expected: 0.3 }
+      ]
+    },
+    success: "Your function reads the setting from every configuration shape without hardcoding the value.",
+    nudge: "A hardcoded number passes the first case and fails the rest. Read the value out of the config you were given."
   }
 };
 
@@ -177,21 +206,44 @@ function renderLesson() {
   renderTheory(data);
 }
 
+function shuffle(items) {
+  const copy = items.slice();
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+// Questions are built from the lesson data rather than from fixed markup, so a
+// lesson may carry any number of them. Option order is shuffled on every render:
+// previously every correct answer was the first radio in the list.
 function renderTheory(data) {
-  const fields = $$("#theory-check fieldset");
+  const host = $("#theory-questions");
+  host.textContent = "";
+
   data.theory.forEach((question, index) => {
-    const field = fields[index];
-    field.querySelector("legend").textContent = question.question;
-    field.querySelectorAll("label").forEach((label, optionIndex) => {
-      const input = label.querySelector("input");
+    const field = document.createElement("fieldset");
+    const legend = document.createElement("legend");
+    legend.textContent = index + 1 + ". " + question.question;
+    field.appendChild(legend);
+
+    shuffle(question.options.map((option, optionIndex) => optionIndex)).forEach((optionIndex) => {
+      const label = document.createElement("label");
+      const input = document.createElement("input");
+      input.type = "radio";
       input.name = "theory-" + (index + 1);
-      input.value = optionIndex === 0 ? "a" : "b";
-      input.checked = false;
-      label.innerHTML = "";
+      // The value carries the option's original position, so shuffling the
+      // display order never changes which answer is correct.
+      input.value = String(optionIndex);
       label.append(input, document.createTextNode(" " + question.options[optionIndex]));
+      field.appendChild(label);
     });
+
+    host.appendChild(field);
   });
-  $("#theory-score").textContent = "0 / 2 answered";
+
+  $("#theory-score").textContent = "0 / " + data.theory.length + " answered";
   $("#theory-result").textContent = "";
   $("#theory-check").className = "theory-check";
 }
@@ -202,6 +254,7 @@ function openLesson() {
     return;
   }
   lockedScrollY = window.scrollY;
+  attempts = 0;
   renderLesson();
   $("#lesson-modal").hidden = false;
   $("#next-lesson").hidden = true;
@@ -226,16 +279,28 @@ function closeLesson() {
 
 function checkTheory() {
   const data = lessonContent[state.currentLesson];
-  const selected = $$("#theory-check input:checked");
-  const score = selected.reduce((total, input, index) => total + (input.value === data.theory[index].answer ? 1 : 0), 0);
-  $("#theory-score").textContent = selected.length + " / 2 answered";
+  if (!data) return;
+  const total = data.theory.length;
+  let answered = 0;
+  let score = 0;
+
+  // Score each question against its own selection. Reducing over the checked
+  // inputs by position silently mismarked answers whenever one was left blank.
+  data.theory.forEach((question, index) => {
+    const chosen = $('#theory-questions input[name="theory-' + (index + 1) + '"]:checked');
+    if (!chosen) return;
+    answered += 1;
+    if (Number(chosen.value) === question.answer) score += 1;
+  });
+
+  $("#theory-score").textContent = answered + " / " + total + " answered";
   const result = $("#theory-result");
-  if (selected.length < 2) {
+  if (answered < total) {
     $("#theory-check").className = "theory-check failed";
-    result.textContent = "Answer both theory questions before starting the coding test.";
+    result.textContent = "Answer every theory question before starting the coding test.";
     return;
   }
-  if (score === 2) {
+  if (score === total) {
     $("#theory-check").className = "theory-check passed";
     result.textContent = "✓ Theory checkpoint passed. The coding test is now unlocked.";
     $("#code-editor").disabled = false;
@@ -247,26 +312,36 @@ function checkTheory() {
   }
 }
 
+// Run the submission against the lesson's real cases. Nothing here inspects the
+// text of the answer: the code is executed and judged on what it returns.
 function runTests() {
-  const code = $("#code-editor").value;
-  const data = lessonContent[state.currentLesson] || lessonContent[2];
+  const data = lessonContent[state.currentLesson];
   const result = $("#test-result");
-  if (data.validate(code)) {
+  if (!data) return;
+
+  attempts += 1;
+  const outcome = PythonLite.checkSolution($("#code-editor").value, data.check);
+
+  if (outcome.status === "passed") {
     result.className = "success";
-    result.innerHTML = data.success;
+    result.innerHTML = "✓ " + outcome.passed + " / " + outcome.total + " hidden tests passed. " + data.success;
     $("#next-lesson").hidden = false;
-    $("#editor-status").textContent = "Development history captured · 1 attempt";
+    $("#editor-status").textContent = "Development history captured · " + attempts + " attempt" + (attempts === 1 ? "" : "s");
     state.lessons = Math.max(state.lessons, state.currentLesson);
-    state.portfolio = Math.max(state.portfolio, state.currentLesson);
     save();
     updateProgress();
     updateLessonRows();
-  } else {
-    result.className = "error";
-    $("#next-lesson").hidden = true;
-    result.textContent = data.failure;
-    $("#editor-status").textContent = "Attempt recorded · keep working";
+    return;
   }
+
+  result.className = "error";
+  $("#next-lesson").hidden = true;
+  // The nudge only makes sense once the code actually ran and produced a result.
+  const ranAtAll = outcome.status === "failed";
+  const progress = ranAtAll ? outcome.passed + " / " + outcome.total + " hidden tests passed. " : "";
+  const nudge = ranAtAll && outcome.failure && data.nudge ? " " + data.nudge : "";
+  result.textContent = progress + outcome.detail + nudge;
+  $("#editor-status").textContent = "Attempt " + attempts + " recorded · keep working";
 }
 
 function continueAfterPass() {
