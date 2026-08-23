@@ -18,7 +18,9 @@ const lessonContent = {
       { question: "What does a Python function give you?", options: ["A reusable named block of logic", "A special type of loop"], answer: "a" },
       { question: "What does return do inside a function?", options: ["Sends a result back to the caller", "Prints the result automatically"], answer: "a" }
     ],
-    validate: (code) => /return\s+number\s*\*\s*2/.test(code)
+    validate: (code) => /return\s+number\s*\*\s*2/.test(code),
+    success: "✓ Hidden tests passed. Your function works for positive, negative and zero inputs. <b>Next: explain why it works.</b>",
+    failure: "Not quite yet. Hidden tests expect a lowercase return statement using number multiplied by two."
   },
   3: {
     kicker: "LESSON 03 · CONCEPT + PRACTICE",
@@ -32,7 +34,25 @@ const lessonContent = {
       { question: "What is a Python list?", options: ["An ordered collection of values", "A single number"], answer: "a" },
       { question: "Which built-in adds all values in scores?", options: ["sum(scores)", "max(scores)"], answer: "a" }
     ],
-    validate: (code) => /return\s+sum\s*\(\s*scores\s*\)/.test(code)
+    validate: (code) => /return\s+sum\s*\(\s*scores\s*\)/.test(code),
+    success: "✓ Hidden tests passed. Your list function works with empty, short and longer lists. <b>Nice decomposition.</b>",
+    failure: "Not quite yet. Hidden tests expect a lowercase return statement using sum(scores)."
+  },
+  4: {
+    kicker: "LESSON 04 · PYTHON ENGINEERING",
+    title: "Read configuration without hardcoding it",
+    lead: "Production AI projects keep changing settings in configuration files instead of scattering magic numbers through the code.",
+    example: "config = {\n    \"training\": {\"learning_rate\": 0.001}\n}",
+    prompt: "Write get_learning_rate(config) so it returns the nested training learning rate.",
+    hint: "The value lives at config['training']['learning_rate']. Return it; do not print it.",
+    starter: "def get_learning_rate(config):\n    # read the nested training setting\n    pass",
+    theory: [
+      { question: "Why keep a learning rate in configuration?", options: ["It can change without rewriting the training code", "It makes the value secret automatically"], answer: "a" },
+      { question: "What kind of data is JSON best described as?", options: ["Structured key-value data", "Executable Python code"], answer: "a" }
+    ],
+    validate: (code) => /return\s+config\s*\[\s*["']training["']\s*\]\s*\[\s*["']learning_rate["']\s*\]/.test(code),
+    success: "✓ Hidden tests passed. Your function reads the setting from multiple configuration examples without hardcoding the value.",
+    failure: "Not quite yet. Return config['training']['learning_rate'] with a lowercase return statement."
   }
 };
 
@@ -47,10 +67,25 @@ function updateProgress() {
   $("#portfolio-bar").style.width = Math.min(100, state.portfolio * 25) + "%";
 }
 
+function updateDashboard() {
+  const data = lessonContent[state.currentLesson];
+  if (!data) {
+    $("#focus-title").textContent = "Next lesson is being prepared";
+    $("#focus-meta").textContent = "Module 0 · More Python engineering practice coming soon";
+    $("#active-lesson-title").textContent = "Next lesson is being prepared";
+    $("#active-lesson-description").textContent = "You have completed the available practice in this slice. Keep your evidence ready for the next lesson.";
+    return;
+  }
+  $("#focus-title").textContent = data.title;
+  $("#focus-meta").textContent = "Lesson " + state.currentLesson + " of 6 · Python engineering";
+  $("#active-lesson-title").textContent = data.title;
+  $("#active-lesson-description").textContent = data.lead;
+}
+
 function updateLessonRows() {
   $$(".lesson-row").forEach((row, index) => {
     const number = index + 1;
-    const isCurrent = number === state.currentLesson;
+    const isCurrent = number === state.currentLesson && Boolean(lessonContent[number]);
     const isDone = number <= state.lessons && !isCurrent;
     const check = row.querySelector("b");
     let marker = row.querySelector("em");
@@ -90,7 +125,8 @@ function showView(name) {
 }
 
 function renderLesson() {
-  const data = lessonContent[state.currentLesson] || lessonContent[2];
+  const data = lessonContent[state.currentLesson];
+  if (!data) return;
   $("#modal-kicker").textContent = data.kicker;
   $("#modal-title").textContent = data.title;
   $("#modal-lead").textContent = data.lead;
@@ -98,7 +134,8 @@ function renderLesson() {
   $("#prompt-title").textContent = data.prompt;
   $("#prompt-hint").textContent = data.hint;
   $("#code-editor").value = data.starter;
-  $("#next-lesson").textContent = state.currentLesson === 2 ? "Continue to Lesson 3 →" : "Return to learning path →";
+  const next = lessonContent[state.currentLesson + 1];
+  $("#next-lesson").textContent = next ? "Continue to Lesson " + (state.currentLesson + 1) + " →" : "Return to learning path →";
   renderTheory(data);
 }
 
@@ -122,6 +159,10 @@ function renderTheory(data) {
 }
 
 function openLesson() {
+  if (!lessonContent[state.currentLesson]) {
+    showView("learn");
+    return;
+  }
   lockedScrollY = window.scrollY;
   renderLesson();
   $("#lesson-modal").hidden = false;
@@ -146,7 +187,7 @@ function closeLesson() {
 }
 
 function checkTheory() {
-  const data = lessonContent[state.currentLesson] || lessonContent[2];
+  const data = lessonContent[state.currentLesson];
   const selected = $$("#theory-check input:checked");
   const score = selected.reduce((total, input, index) => total + (input.value === data.theory[index].answer ? 1 : 0), 0);
   $("#theory-score").textContent = selected.length + " / 2 answered";
@@ -174,9 +215,7 @@ function runTests() {
   const result = $("#test-result");
   if (data.validate(code)) {
     result.className = "success";
-    result.innerHTML = state.currentLesson === 2
-      ? "✓ Hidden tests passed. Your function works for positive, negative and zero inputs. <b>Next: explain why it works.</b>"
-      : "✓ Hidden tests passed. Your list function works with empty, short and longer lists. <b>Nice decomposition.</b>";
+    result.innerHTML = data.success;
     $("#next-lesson").hidden = false;
     $("#editor-status").textContent = "Development history captured · 1 attempt";
     state.lessons = Math.max(state.lessons, state.currentLesson);
@@ -187,18 +226,18 @@ function runTests() {
   } else {
     result.className = "error";
     $("#next-lesson").hidden = true;
-    result.textContent = state.currentLesson === 2
-      ? "Not quite yet. Hidden tests expect a lowercase return statement using number multiplied by two."
-      : "Not quite yet. Hidden tests expect a lowercase return statement using sum(scores).";
+    result.textContent = data.failure;
     $("#editor-status").textContent = "Attempt recorded · keep working";
   }
 }
 
 function continueAfterPass() {
-  if (state.currentLesson === 2) {
-    state.currentLesson = 3;
+  const next = state.currentLesson + 1;
+  if (next <= 6) {
+    state.currentLesson = next;
     save();
     updateLessonRows();
+    updateDashboard();
     closeLesson();
     showView("learn");
     setTimeout(() => {
@@ -231,3 +270,4 @@ $$(".filters button").forEach((button) => button.addEventListener("click", () =>
 document.body.classList.toggle("dark", state.theme === "dark");
 updateProgress();
 updateLessonRows();
+updateDashboard();
