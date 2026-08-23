@@ -1,0 +1,13 @@
+{
+  "name": "orbit-ai-engineer-lab",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Browser-first adaptive AI engineering curriculum",
+  "scripts": {
+    "test": "node --test tests/*.test.cjs",
+    "check": "node --check app.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

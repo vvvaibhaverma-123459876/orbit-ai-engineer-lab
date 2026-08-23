@@ -10,7 +10,10 @@ const defaults = {
   lastActiveDay: null
 };
 
-const TOTAL_LESSONS = 6;
+// The path is intentionally finite and testable: six foundations lessons plus
+// two applied lessons in each IIT-aligned module. Every lesson has theory,
+// an exercise, and hidden cases, so every mapped module has a playable endpoint.
+const TOTAL_LESSONS = 16;
 const PROJECT_MILESTONES = 4;
 
 function clampMilestones(value) {
@@ -121,6 +124,226 @@ const lessonContent = {
     },
     success: "Your function reads the setting from every configuration shape without hardcoding the value.",
     nudge: "A hardcoded number passes the first case and fails the rest. Read the value out of the config you were given."
+  },
+  5: {
+    kicker: "LESSON 05 · WORKFLOW ENGINEERING",
+    title: "Turn practice into a reproducible record",
+    lead: "A reliable AI engineer leaves a trail: a small function, a testable result, and a record another person can inspect.",
+    example: "sessions = [\"functions\", \"lists\"]\nlatest = sessions[-1]",
+    prompt: "Write session_count(sessions) so it returns how many practice sessions are recorded.",
+    hint: "Use the list length. Empty input is a valid and important case.",
+    starter: "def session_count(sessions):\n    # return the number of recorded sessions\n    pass",
+    theory: [
+      { question: "Why keep a development history?", options: ["It makes work reproducible and reviewable", "It makes code execute faster", "It replaces automated tests"], answer: 0 },
+      { question: "Which expression counts values in a list?", options: ["len(sessions)", "max(sessions)", "sessions[0]"], answer: 0 }
+    ],
+    check: { name: "session_count", params: ["sessions"], cases: [
+      { args: [[]], expected: 0 }, { args: [["a"]], expected: 1 },
+      { args: [["a", "b", "c"]], expected: 3 }, { args: [[1, 2, 3, 4, 5]], expected: 5 }
+    ] },
+    success: "Your workflow helper handles empty, small and larger histories. <b>Evidence is part of engineering.</b>",
+    nudge: "Try an empty list as well as a non-empty one; robust workflow tools define both cases."
+  },
+  6: {
+    kicker: "LESSON 06 · FOUNDATIONS CHECKPOINT",
+    title: "Defend a small data decision",
+    lead: "Before moving into GenAI, demonstrate that you can combine functions, conditions and data into a decision a stakeholder can understand.",
+    example: "def ready(score):\n    return score >= 3",
+    prompt: "Write readiness(scores) so it returns True when the total of scores is at least 3, otherwise False.",
+    hint: "Sum the supplied scores and compare the result. Do not hardcode a single example.",
+    starter: "def readiness(scores):\n    # return whether the total score reaches 3\n    pass",
+    theory: [
+      { question: "What makes a checkpoint useful?", options: ["It tests transfer to a new case", "It only repeats the example verbatim", "It rewards the longest answer"], answer: 0 },
+      { question: "What does a comparison such as total >= 3 produce?", options: ["A Boolean decision", "A list of values", "A file on disk"], answer: 0 }
+    ],
+    check: { name: "readiness", params: ["scores"], cases: [
+      { args: [[]], expected: false }, { args: [[1, 1, 1]], expected: true },
+      { args: [[2, 0]], expected: false }, { args: [[5, -1]], expected: true }, { args: [[0, 2.9]], expected: false }
+    ] },
+    success: "Foundations checkpoint passed. <b>Module 01 is now unlocked.</b>",
+    nudge: "The threshold must work for totals below, equal to and above three."
+  },
+  7: {
+    kicker: "MODULE 01 · GENAI + LLMS · CONCEPT",
+    title: "Choose a model for the job",
+    lead: "Model selection is a product decision: quality, latency, cost, and privacy must be weighed against the task—not hype.",
+    example: "request = {\"task\": \"summarise\", \"latency_budget\": 2}",
+    prompt: "Write task_name(request) so it returns the task field from the request dictionary.",
+    hint: "Read the value by key; do not return a hardcoded task.",
+    starter: "def task_name(request):\n    # return the requested task\n    pass",
+    theory: [
+      { question: "What is a language model token?", options: ["A unit of text processed by the model", "A guaranteed factual answer", "A database row"], answer: 0 },
+      { question: "Which trade-off matters in model selection?", options: ["Quality, latency, cost and risk", "Logo colour only", "The number of slides in a demo"], answer: 0 }
+    ],
+    check: { name: "task_name", params: ["request"], cases: [
+      { args: [{ task: "summarise", latency_budget: 2 }], expected: "summarise" },
+      { args: [{ task: "classify", private: true }], expected: "classify" },
+      { args: [{ task: "extract", retries: 3 }], expected: "extract" }
+    ] },
+    success: "You extracted the requirement instead of assuming it. <b>That is the first model-selection habit.</b>",
+    nudge: "The hidden cases vary the task name to catch hardcoded answers."
+  },
+  8: {
+    kicker: "MODULE 01 · GENAI + LLMS · PRACTICE",
+    title: "Measure an answer, not a demo",
+    lead: "A useful evaluation set has explicit expected outcomes. One convincing response is not a quality measurement.",
+    example: "scores = [0.8, 0.9]\naverage = sum(scores) / len(scores)",
+    prompt: "Write mean_score(scores) so it returns the arithmetic mean of a non-empty list.",
+    hint: "Use sum and len; the hidden cases include decimals.",
+    starter: "def mean_score(scores):\n    # return the average score\n    pass",
+    theory: [
+      { question: "What is an evaluation set?", options: ["A repeatable set of inputs and expected outcomes", "A random screenshot", "A model's marketing page"], answer: 0 },
+      { question: "Why use several test cases?", options: ["To detect generalisation failures", "To make the model larger", "To avoid documenting assumptions"], answer: 0 }
+    ],
+    check: { name: "mean_score", params: ["scores"], cases: [
+      { args: [[1, 1]], expected: 1 }, { args: [[0.8, 0.9]], expected: 0.85 }, { args: [[2, 4, 6]], expected: 4 }
+    ] },
+    success: "Your metric is repeatable across several cases. <b>Module 02 is ready next.</b>",
+    nudge: "A mean is total divided by count; avoid returning only the first score."
+  },
+  9: {
+    kicker: "MODULE 02 · PROMPTING + RAG · CONCEPT",
+    title: "Retrieve before you generate",
+    lead: "RAG systems ground a response in relevant context. Retrieval quality is a measurable part of the product, not a hidden magic step.",
+    example: "chunks = [\"policy\", \"pricing\"]\ncontext = chunks[0]",
+    prompt: "Write first_context(chunks) so it returns the first retrieved chunk.",
+    hint: "The list is guaranteed to contain at least one chunk.",
+    starter: "def first_context(chunks):\n    # return the highest-ranked context\n    pass",
+    theory: [
+      { question: "What does retrieval provide to a generator?", options: ["Relevant context", "A guaranteed answer", "A GPU"], answer: 0 },
+      { question: "What should a RAG evaluation measure?", options: ["Retrieval relevance and answer faithfulness", "Only response colour", "Token count alone"], answer: 0 }
+    ],
+    check: { name: "first_context", params: ["chunks"], cases: [
+      { args: [["policy", "pricing"]], expected: "policy" }, { args: [["refund"]], expected: "refund" }, { args: [["a", "b", "c"]], expected: "a" }
+    ] },
+    success: "Your function preserves retrieval order. <b>That makes the grounding contract explicit.</b>",
+    nudge: "Do not select by a hardcoded word; the first chunk changes between cases."
+  },
+  10: {
+    kicker: "MODULE 02 · PROMPTING + RAG · PRACTICE",
+    title: "Set a relevance gate",
+    lead: "Business systems need a refusal path when context is weak. A confidence or relevance threshold is safer than answering every question.",
+    example: "def usable(score):\n    return score >= 0.7",
+    prompt: "Write is_relevant(score) so it returns True for scores at least 0.7.",
+    hint: "Use a comparison; the boundary value matters.",
+    starter: "def is_relevant(score):\n    # apply the relevance threshold\n    pass",
+    theory: [
+      { question: "What is a relevance threshold?", options: ["A rule for deciding whether context is good enough", "A prompt decoration", "A database backup"], answer: 0 },
+      { question: "Why should a RAG system have a refusal path?", options: ["Weak context can produce unsupported claims", "Refusals always improve latency", "It removes the need for evaluation"], answer: 0 }
+    ],
+    check: { name: "is_relevant", params: ["score"], cases: [
+      { args: [0.7], expected: true }, { args: [0.69], expected: false }, { args: [0.95], expected: true }, { args: [0], expected: false }
+    ] },
+    success: "The relevance gate handles the boundary correctly. <b>Module 03 is unlocked.</b>",
+    nudge: "Check exactly 0.7 as well as values just below and above it."
+  },
+  11: {
+    kicker: "MODULE 03 · FINE-TUNING + ALIGNMENT · CONCEPT",
+    title: "Keep the training signal clean",
+    lead: "Fine-tuning changes behaviour through examples. A clean, representative dataset is more valuable than blindly adding more rows.",
+    example: "record = {\"label\": \"helpful\"}\nlabel = record[\"label\"]",
+    prompt: "Write label_of(record) so it returns the label stored in a training record.",
+    hint: "Read the label field from the dictionary.",
+    starter: "def label_of(record):\n    # return the training label\n    pass",
+    theory: [
+      { question: "What does fine-tuning adjust?", options: ["Model behaviour using task examples", "A user's browser theme", "A database schema only"], answer: 0 },
+      { question: "What is alignment evaluation for?", options: ["Checking behaviour against intended constraints", "Maximising token count", "Removing all human review"], answer: 0 }
+    ],
+    check: { name: "label_of", params: ["record"], cases: [
+      { args: [{ label: "helpful", text: "hi" }], expected: "helpful" }, { args: [{ label: "safe" }], expected: "safe" }, { args: [{ label: "needs_review", id: 3 }], expected: "needs_review" }
+    ] },
+    success: "You accessed the label from every record shape. <b>Data quality is an alignment control.</b>",
+    nudge: "The label changes between examples, so read it from the input."
+  },
+  12: {
+    kicker: "MODULE 03 · FINE-TUNING + ALIGNMENT · PRACTICE",
+    title: "Cap a risky setting",
+    lead: "Guardrails often begin as simple bounds. A capped setting prevents an unsafe value from flowing into a larger system.",
+    example: "def cap(value):\n    if value > 1:\n        return 1\n    return value",
+    prompt: "Write cap_temperature(value) so values above 1 return 1 and other values remain unchanged.",
+    hint: "Use an if statement and a fallback return.",
+    starter: "def cap_temperature(value):\n    # cap values above one\n    pass",
+    theory: [
+      { question: "Why validate a generation setting?", options: ["To prevent unsafe or invalid values", "To hide the setting from operators", "To replace monitoring"], answer: 0 },
+      { question: "What should happen below the cap?", options: ["Preserve the requested value", "Always return zero", "Raise a model version"], answer: 0 }
+    ],
+    check: { name: "cap_temperature", params: ["value"], cases: [
+      { args: [0.2], expected: 0.2 }, { args: [1], expected: 1 }, { args: [1.5], expected: 1 }, { args: [-0.2], expected: -0.2 }
+    ] },
+    success: "Your guardrail preserves valid values and caps invalid ones. <b>Module 04 is unlocked.</b>",
+    nudge: "The hidden cases include values on both sides of the boundary."
+  },
+  13: {
+    kicker: "MODULE 04 · MULTIMODAL + AGENTS · CONCEPT",
+    title: "Make tool choice explicit",
+    lead: "An agent is a controlled loop: interpret a goal, choose a tool, observe the result, and continue within limits.",
+    example: "tools = [\"search\", \"calculator\"]\nfirst = tools[0]",
+    prompt: "Write preferred_tool(tools) so it returns the first available tool.",
+    hint: "The first tool is the ranked choice supplied by the planner.",
+    starter: "def preferred_tool(tools):\n    # return the first available tool\n    pass",
+    theory: [
+      { question: "What makes an agent different from a single prompt?", options: ["It can select actions and observe results", "It never needs constraints", "It is always autonomous"], answer: 0 },
+      { question: "Why limit tool calls?", options: ["To control cost, risk and runaway loops", "To make tools less observable", "To remove evaluation"], answer: 0 }
+    ],
+    check: { name: "preferred_tool", params: ["tools"], cases: [
+      { args: [["search", "calculator"]], expected: "search" }, { args: [["vision"]], expected: "vision" }, { args: [["database", "email", "calendar"]], expected: "database" }
+    ] },
+    success: "The planner preserves the ranked tool choice. <b>Explicit policies make agents safer.</b>",
+    nudge: "Return the first supplied tool rather than naming one in the function."
+  },
+  14: {
+    kicker: "MODULE 04 · MULTIMODAL + AGENTS · PRACTICE",
+    title: "Stop an agent within budget",
+    lead: "A production agent needs a budget. A small comparison can prevent an expensive or unsafe plan from running.",
+    example: "def allowed(steps):\n    return steps <= 5",
+    prompt: "Write within_budget(steps) so it returns True when steps are five or fewer.",
+    hint: "Use a less-than-or-equal comparison.",
+    starter: "def within_budget(steps):\n    # enforce the five-step limit\n    pass",
+    theory: [
+      { question: "What is an agent budget?", options: ["A limit on actions, time or spend", "A prompt example", "A training label"], answer: 0 },
+      { question: "What is a safe default when a budget is exceeded?", options: ["Stop and surface the decision", "Silently continue", "Delete the logs"], answer: 0 }
+    ],
+    check: { name: "within_budget", params: ["steps"], cases: [
+      { args: [0], expected: true }, { args: [5], expected: true }, { args: [6], expected: false }, { args: [20], expected: false }
+    ] },
+    success: "The action budget is enforced at the boundary. <b>Module 05 is unlocked.</b>",
+    nudge: "Check both five and six: off-by-one errors matter in safety limits."
+  },
+  15: {
+    kicker: "MODULE 05 · DEPLOYMENT + SAFETY · CONCEPT",
+    title: "Make a cost decision visible",
+    lead: "Deployment is a business decision. A system is ready when its quality, latency, reliability and cost are measurable and defensible.",
+    example: "budget = {\"monthly\": 100}\nlimit = budget[\"monthly\"]",
+    prompt: "Write monthly_limit(budget) so it returns the monthly budget amount.",
+    hint: "Read the monthly field from the configuration.",
+    starter: "def monthly_limit(budget):\n    # return the monthly spending limit\n    pass",
+    theory: [
+      { question: "What is a production SLO?", options: ["A measurable reliability or performance target", "A model prompt", "A private API key"], answer: 0 },
+      { question: "Why track cost per task?", options: ["It connects usage to a business decision", "It guarantees accuracy", "It removes the need for monitoring"], answer: 0 }
+    ],
+    check: { name: "monthly_limit", params: ["budget"], cases: [
+      { args: [{ monthly: 100 }], expected: 100 }, { args: [{ monthly: 0, alert: true }], expected: 0 }, { args: [{ monthly: 250, team: "ml" }], expected: 250 }
+    ] },
+    success: "The cost limit is read from configuration. <b>One final safety exercise remains.</b>",
+    nudge: "Configuration values can change; avoid returning a fixed number."
+  },
+  16: {
+    kicker: "MODULE 05 · DEPLOYMENT + SAFETY · CHECKPOINT",
+    title: "Choose a safe release",
+    lead: "A release decision combines quality and risk. Ship only when both the quality threshold and the safety review are satisfied.",
+    example: "def ship(quality, safe):\n    return quality >= 0.9 and safe",
+    prompt: "Write can_release(quality, safe) so it returns True only when quality is at least 0.9 and safe is True.",
+    hint: "Combine both Boolean conditions; neither condition alone is enough.",
+    starter: "def can_release(quality, safe):\n    # return whether the release is ready\n    pass",
+    theory: [
+      { question: "What belongs in a release review?", options: ["Quality, reliability, cost and safety evidence", "Only a successful demo", "Only the model name"], answer: 0 },
+      { question: "Why require both conditions for release?", options: ["A high-quality unsafe system is still not ready", "It makes deployment instant", "It avoids writing tests"], answer: 0 }
+    ],
+    check: { name: "can_release", params: ["quality", "safe"], cases: [
+      { args: [0.9, true], expected: true }, { args: [0.89, true], expected: false }, { args: [0.99, false], expected: false }, { args: [0.95, true], expected: true }
+    ] },
+    success: "Final checkpoint passed. <b>You completed the end-to-end foundation path.</b>",
+    nudge: "Both the quality threshold and the safety flag must be true."
   }
 };
 
@@ -131,7 +354,9 @@ const modules = [
     status: "IN PROGRESS",
     meta: "In progress",
     summary: "Build enough fluency to learn the IIT Kharagpur GenAI curriculum confidently, then turn your learning into working software.",
-    unlocked: true
+    unlocked: true,
+    lessonIds: [1, 2, 3, 4, 5, 6],
+    unlockAfter: 0
   },
   {
     code: "01",
@@ -139,7 +364,9 @@ const modules = [
     status: "LOCKED",
     meta: "6 weeks · 18 live hours",
     summary: "Deep learning essentials, transformers, embeddings and model selection.",
-    unlocked: false
+    unlocked: false,
+    lessonIds: [7, 8],
+    unlockAfter: 6
   },
   {
     code: "02",
@@ -147,7 +374,9 @@ const modules = [
     status: "LOCKED",
     meta: "6 weeks · 18 live hours",
     summary: "Retrieval, hybrid search, reranking and evaluation you can measure.",
-    unlocked: false
+    unlocked: false,
+    lessonIds: [9, 10],
+    unlockAfter: 8
   },
   {
     code: "03",
@@ -155,7 +384,9 @@ const modules = [
     status: "LOCKED",
     meta: "6 weeks · 18 live hours",
     summary: "Adapting a base model to a task, and keeping its behaviour predictable once you have.",
-    unlocked: false
+    unlocked: false,
+    lessonIds: [11, 12],
+    unlockAfter: 10
   },
   {
     code: "04",
@@ -163,7 +394,9 @@ const modules = [
     status: "LOCKED",
     meta: "6 weeks · 18 live hours",
     summary: "Systems that read images and documents, call tools and carry a task across several steps.",
-    unlocked: false
+    unlocked: false,
+    lessonIds: [13, 14],
+    unlockAfter: 12
   },
   {
     code: "05",
@@ -171,7 +404,9 @@ const modules = [
     status: "LOCKED",
     meta: "8 weeks · 24 live hours",
     summary: "Serving a model at a cost you can defend, and the safety work that has to ship with it.",
-    unlocked: false
+    unlocked: false,
+    lessonIds: [15, 16],
+    unlockAfter: 14
   }
 ];
 
@@ -181,6 +416,16 @@ const projectMilestones = [
   "Calculate streaks from the stored sessions.",
   "Export a weekly review and cover it with tests."
 ];
+
+const businessCase = {
+  title: "Business case: a support-learning loop",
+  brief: "A support team wants to reduce repeat questions without sending confidential tickets to an unapproved model. Design a small learning log and explain how you would measure usefulness, privacy, cost and escalation.",
+  prompts: [
+    "What user problem is being solved, and what is explicitly out of scope?",
+    "Which evidence would make you ship, pause, or roll back the assistant?",
+    "Where should a human review or refusal path appear?"
+  ]
+};
 
 let selectedModule = 0;
 
@@ -195,6 +440,25 @@ function save() {
 // Numbers of the lessons that actually have content, in order.
 function lessonNumbers() {
   return Object.keys(lessonContent).map(Number).sort((a, b) => a - b);
+}
+
+function moduleForLesson(number) {
+  return modules.find((module) => module.lessonIds.includes(Number(number))) || modules[0];
+}
+
+function isModuleUnlocked(module) {
+  return Boolean(module && state.lessons >= module.unlockAfter);
+}
+
+function modulePercent(module) {
+  if (!module || !module.lessonIds.length) return 0;
+  const done = module.lessonIds.filter((number) => number <= state.lessons).length;
+  return Math.round((done / module.lessonIds.length) * 100);
+}
+
+function moduleStatus(module) {
+  if (!isModuleUnlocked(module)) return "LOCKED";
+  return modulePercent(module) === 100 ? "COMPLETE" : "IN PROGRESS";
 }
 
 // If the stored pointer names a lesson that does not exist, move it to the first
@@ -216,18 +480,27 @@ function updateProgress() {
   const lessonsLabel = state.lessons + " / " + TOTAL_LESSONS + " lessons";
 
   $("#mastery").innerHTML = percent + "<small>%</small>";
-  $("#mastery-note").textContent = "Foundations · " + state.lessons + " of " + TOTAL_LESSONS + " lessons";
+  $("#mastery-note").textContent = state.lessons >= TOTAL_LESSONS ? "All modules · path complete" : "All modules · " + state.lessons + " of " + TOTAL_LESSONS + " lessons";
   $("#roadmap-bar").style.width = percent + "%";
   $("#roadmap-lessons").textContent = lessonsLabel;
   $("#path-percent").textContent = percent + "%";
-  $("#path-status").textContent = "In progress · " + lessonsLabel;
+  $("#path-status").textContent = moduleStatus(modules[0]).toLowerCase() + " · " + modules[0].lessonIds.filter((number) => number <= state.lessons).length + " / " + modules[0].lessonIds.length + " lessons";
   $(".roadmap").style.setProperty("--road-progress", percent + "%");
   $("#active-counter").innerHTML =
     String(state.lessons).padStart(2, "0") + " <small>/ " + String(TOTAL_LESSONS).padStart(2, "0") + "</small>";
-  if (selectedModule === 0) {
-    $("#detail-bar").style.width = percent + "%";
-    $("#detail-label").textContent = percent + "% complete";
-  }
+  $("#path-percent").textContent = modulePercent(modules[0]) + "%";
+  modules.forEach((module, index) => {
+    const button = $(".path[data-module='" + index + "']");
+    if (!button) return;
+    const unlocked = isModuleUnlocked(module);
+    const percentForModule = modulePercent(module);
+    button.classList.toggle("locked", !unlocked);
+    button.querySelector("em").textContent = unlocked ? percentForModule + "%" : "⌑";
+    const small = button.querySelector("small");
+    if (small) small.textContent = unlocked ? moduleStatus(module).toLowerCase() + " · " + module.lessonIds.filter((number) => number <= state.lessons).length + " / " + module.lessonIds.length + " lessons" : module.meta;
+  });
+  $("#detail-bar").style.width = modulePercent(modules[selectedModule]) + "%";
+  $("#detail-label").textContent = modulePercent(modules[selectedModule]) + "% complete";
 
   const done = clampMilestones(state.milestones);
   // Artifacts in progress, which is not the same number as milestones done.
@@ -238,6 +511,18 @@ function updateProgress() {
   $("#milestone-label").textContent = done + " of " + PROJECT_MILESTONES + " milestones";
   $("#mini-milestones").textContent =
     "Artifact 01 · " + done + " " + (done === 1 ? "milestone" : "milestones") + " of " + PROJECT_MILESTONES;
+
+  const projectTwo = $(".locked-project");
+  if (projectTwo) {
+    const unlocked = state.lessons >= 8;
+    projectTwo.classList.toggle("unlocked-project", unlocked);
+    const label = projectTwo.querySelector("label");
+    const copy = projectTwo.querySelector("p");
+    const note = projectTwo.querySelector("small");
+    if (label) label.innerHTML = "PROJECT 02 <i>" + (unlocked ? "READY" : "LOCKED") + "</i>";
+    if (copy) copy.textContent = unlocked ? "A document intelligence system with retrieval evidence, evaluation cases and an explicit refusal path." : "Unlocks after your foundations checkpoint. Your first bridge into the IIT RAG module.";
+    if (note) note.textContent = unlocked ? "Brief ready · define the business metric" : "Complete Module 00 to unlock";
+  }
 }
 
 function dayKey(date) {
@@ -279,50 +564,56 @@ function updateStandingContent() {
 function updateDashboard() {
   const data = lessonContent[state.currentLesson];
   if (!data) {
-    $("#focus-title").textContent = "Next lesson is being prepared";
-    $("#focus-meta").textContent = "Module 0 · More Python engineering practice coming soon";
-    $("#active-lesson-title").textContent = "Next lesson is being prepared";
-    $("#active-lesson-description").textContent = "You have completed the available practice in this slice. Keep your evidence ready for the next lesson.";
+    $("#focus-title").textContent = "All mapped lessons complete";
+    $("#focus-meta").textContent = "16 / 16 lessons · portfolio defence ready";
+    $("#active-lesson-title").textContent = "Your foundation path is complete";
+    $("#active-lesson-description").textContent = "Review your portfolio evidence, then use the business case prompts to explain the decisions behind your work.";
     return;
   }
   $("#focus-title").textContent = data.title;
-  $("#focus-meta").textContent = "Lesson " + state.currentLesson + " of 6 · Python engineering";
+  const module = moduleForLesson(state.currentLesson);
+  $("#focus-meta").textContent = "Lesson " + state.currentLesson + " of " + TOTAL_LESSONS + " · " + module.title;
   $("#active-lesson-title").textContent = data.title;
   $("#active-lesson-description").textContent = data.lead;
 }
 
-function updateLessonRows() {
-  $$(".lesson-row").forEach((row, index) => {
-    const number = index + 1;
-    const isCurrent = number === state.currentLesson && Boolean(lessonContent[number]);
+function renderModuleRows() {
+  const module = modules[selectedModule] || modules[0];
+  const host = $("#module-lessons");
+  host.textContent = "";
+  module.lessonIds.forEach((number) => {
+    const data = lessonContent[number];
+    const row = document.createElement("div");
+    const isCurrent = number === state.currentLesson && Boolean(data);
     const isDone = number <= state.lessons && !isCurrent;
-    const check = row.querySelector("b");
-    let marker = row.querySelector("em");
-    let start = row.querySelector("[data-open-lesson]");
-
     row.className = "lesson-row" + (isDone ? " done" : isCurrent ? " now" : "");
-    check.textContent = isDone ? "✓" : String(number);
-
+    const marker = document.createElement("b");
+    marker.textContent = isDone ? "✓" : String(number);
+    const info = document.createElement("span");
+    const title = document.createElement("strong");
+    title.textContent = number + ". " + (data ? data.title : number === 1 ? "Your learning system" : "Lesson");
+    const meta = document.createElement("small");
+    meta.textContent = isDone ? "Complete" : isCurrent ? "Current · 25 min" : "Next · 25 min";
+    info.append(title, meta);
+    row.append(marker, info);
     if (isCurrent) {
-      if (marker) marker.remove();
-      if (!start) {
-        start = document.createElement("button");
-        start.className = "small";
-        start.type = "button";
-        start.dataset.openLesson = "";
-        start.textContent = "Start";
-        row.appendChild(start);
-      }
-      start.hidden = false;
+      const start = document.createElement("button");
+      start.className = "small";
+      start.type = "button";
+      start.dataset.openLesson = "";
+      start.textContent = "Start";
+      row.appendChild(start);
     } else {
-      if (start) start.hidden = true;
-      if (!marker) {
-        marker = document.createElement("em");
-        row.appendChild(marker);
-      }
-      marker.textContent = isDone ? "Done" : "Locked";
+      const status = document.createElement("em");
+      status.textContent = isDone ? "Done" : "Locked";
+      row.appendChild(status);
     }
+    host.appendChild(row);
   });
+}
+
+function updateLessonRows() {
+  renderModuleRows();
 }
 
 function prefersReducedMotion() {
@@ -334,6 +625,8 @@ function prefersReducedMotion() {
 function selectModule(index) {
   const module = modules[index];
   if (!module) return;
+  module.unlocked = isModuleUnlocked(module);
+  module.status = moduleStatus(module);
   selectedModule = index;
 
   $$(".path").forEach((button, position) => {
@@ -347,6 +640,7 @@ function selectModule(index) {
   $("#module-summary").textContent = module.summary;
   $("#module-progress").hidden = !module.unlocked;
   $("#module-lessons").hidden = !module.unlocked;
+  renderModuleRows();
 
   let locked = $("#module-locked");
   if (!module.unlocked) {
@@ -356,7 +650,8 @@ function selectModule(index) {
       locked.className = "module-locked";
       $(".module-detail").appendChild(locked);
     }
-    locked.textContent = module.meta + ". Unlocks once you finish the foundations checkpoint.";
+    const prerequisite = modules[index - 1] ? modules[index - 1].title : "the previous module";
+    locked.textContent = module.meta + ". Unlocks once you finish " + prerequisite + ".";
     locked.hidden = false;
   } else if (locked) {
     locked.hidden = true;
@@ -372,6 +667,11 @@ function toggleProjectBrief() {
   const willOpen = panel.hidden;
 
   if (willOpen && !panel.childElementCount) {
+    const heading = document.createElement("h3");
+    heading.textContent = businessCase.title;
+    const brief = document.createElement("p");
+    brief.textContent = businessCase.brief;
+    panel.append(heading, brief);
     const list = document.createElement("ol");
     projectMilestones.forEach((text, index) => {
       const item = document.createElement("li");
@@ -380,6 +680,14 @@ function toggleProjectBrief() {
       list.appendChild(item);
     });
     panel.appendChild(list);
+    const prompts = document.createElement("ul");
+    prompts.className = "business-prompts";
+    businessCase.prompts.forEach((text) => {
+      const item = document.createElement("li");
+      item.textContent = text;
+      prompts.appendChild(item);
+    });
+    panel.appendChild(prompts);
   }
 
   panel.hidden = !willOpen;
@@ -615,6 +923,8 @@ function continueAfterPass() {
   if (lessonContent[next]) {
     state.currentLesson = next;
     save();
+    const nextModule = modules.findIndex((module) => module.lessonIds.includes(next));
+    if (nextModule >= 0) selectModule(nextModule);
     updateLessonRows();
     updateDashboard();
     closeLesson();
