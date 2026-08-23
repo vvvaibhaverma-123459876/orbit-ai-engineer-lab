@@ -1,11 +1,35 @@
 const key = "orbit-prototype-state";
-const defaults = { lessons: 1, portfolio: 1, theme: "light" };
+const defaults = { lessons: 1, portfolio: 1, currentLesson: 2, theme: "light" };
 let state = Object.assign({}, defaults, JSON.parse(localStorage.getItem(key) || "{}"));
 let lockedScrollY = 0;
-const $ = (s, root = document) => root.querySelector(s);
-const $$ = (s, root = document) => Array.from(root.querySelectorAll(s));
+const $ = (selector, root = document) => root.querySelector(selector);
+const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+
+const lessonContent = {
+  2: {
+    kicker: "LESSON 02 · CONCEPT + PRACTICE",
+    title: "Write your first Python function",
+    lead: "A function is a named idea you can call again. Read the example, then write one yourself without copying it.",
+    example: "def greet(name):\n    return f\"Hello, {name}!\"",
+    prompt: "Write double(number) so it returns the input multiplied by two.",
+    hint: "Try a small number first. Hidden examples will check your code.",
+    starter: "def double(number):\n    # write your return statement here\n    pass",
+    validate: (code) => /return\s+number\s*\*\s*2/.test(code)
+  },
+  3: {
+    kicker: "LESSON 03 · CONCEPT + PRACTICE",
+    title: "Data structures hold more than one thing",
+    lead: "Lists let a program work with a collection of values. That idea appears everywhere in data and AI systems.",
+    example: "scores = [82, 91, 76]\nbest_score = max(scores)",
+    prompt: "Write total(scores) so it returns the sum of every value in the list.",
+    hint: "Python already has a built-in function that adds the values in a list.",
+    starter: "def total(scores):\n    # return the sum of the values\n    pass",
+    validate: (code) => /return\s+sum\s*\(\s*scores\s*\)/.test(code)
+  }
+};
 
 function save() { localStorage.setItem(key, JSON.stringify(state)); }
+
 function updateProgress() {
   const percent = Math.max(18, Math.round((state.lessons / 6) * 100));
   $("#mastery").innerHTML = percent + "<small>%</small>";
@@ -14,6 +38,41 @@ function updateProgress() {
   $("#portfolio-count").textContent = String(state.portfolio).padStart(2, "0");
   $("#portfolio-bar").style.width = Math.min(100, state.portfolio * 25) + "%";
 }
+
+function updateLessonRows() {
+  $$(".lesson-row").forEach((row, index) => {
+    const number = index + 1;
+    const isCurrent = number === state.currentLesson;
+    const isDone = number <= state.lessons && !isCurrent;
+    const check = row.querySelector("b");
+    let marker = row.querySelector("em");
+    let start = row.querySelector("[data-open-lesson]");
+
+    row.className = "lesson-row" + (isDone ? " done" : isCurrent ? " now" : "");
+    check.textContent = isDone ? "✓" : String(number);
+
+    if (isCurrent) {
+      if (marker) marker.remove();
+      if (!start) {
+        start = document.createElement("button");
+        start.className = "small";
+        start.type = "button";
+        start.dataset.openLesson = "";
+        start.textContent = "Start";
+        row.appendChild(start);
+      }
+      start.hidden = false;
+    } else {
+      if (start) start.hidden = true;
+      if (!marker) {
+        marker = document.createElement("em");
+        row.appendChild(marker);
+      }
+      marker.textContent = isDone ? "Done" : "Locked";
+    }
+  });
+}
+
 function showView(name) {
   $$(".view").forEach((view) => view.classList.toggle("active-view", view.id === "view-" + name));
   $$(".nav").forEach((button) => button.classList.toggle("active", button.dataset.view === name));
@@ -21,17 +80,33 @@ function showView(name) {
   $("#view-title").textContent = titles[name] || "Overview";
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
+
+function renderLesson() {
+  const data = lessonContent[state.currentLesson] || lessonContent[2];
+  $("#modal-kicker").textContent = data.kicker;
+  $("#modal-title").textContent = data.title;
+  $("#modal-lead").textContent = data.lead;
+  $("#example-code").textContent = data.example;
+  $("#prompt-title").textContent = data.prompt;
+  $("#prompt-hint").textContent = data.hint;
+  $("#code-editor").value = data.starter;
+  $("#next-lesson").textContent = state.currentLesson === 2 ? "Continue to Lesson 3 →" : "Return to learning path →";
+}
+
 function openLesson() {
   lockedScrollY = window.scrollY;
+  renderLesson();
   $("#lesson-modal").hidden = false;
   $("#next-lesson").hidden = true;
   $("#test-result").className = "";
   $("#test-result").textContent = "";
+  $("#editor-status").textContent = "Paste is disabled for this assessment.";
   document.documentElement.classList.add("modal-open");
   document.body.classList.add("modal-open");
   document.body.style.top = "-" + lockedScrollY + "px";
   $("#code-editor").focus();
 }
+
 function closeLesson() {
   $("#lesson-modal").hidden = true;
   document.documentElement.classList.remove("modal-open");
@@ -39,36 +114,66 @@ function closeLesson() {
   document.body.style.top = "";
   window.scrollTo(0, lockedScrollY);
 }
+
 function runTests() {
   const code = $("#code-editor").value;
+  const data = lessonContent[state.currentLesson] || lessonContent[2];
   const result = $("#test-result");
-  const valid = /return\s+number\s*\*\s*2/.test(code) && !/^\s*pass\s*$/m.test(code);
-  if (valid) {
+  if (data.validate(code)) {
     result.className = "success";
-    result.innerHTML = "✓ Hidden tests passed. Your function works for positive, negative and zero inputs. <b>Next: explain why it works.</b>";
+    result.innerHTML = state.currentLesson === 2
+      ? "✓ Hidden tests passed. Your function works for positive, negative and zero inputs. <b>Next: explain why it works.</b>"
+      : "✓ Hidden tests passed. Your list function works with empty, short and longer lists. <b>Nice decomposition.</b>";
     $("#next-lesson").hidden = false;
     $("#editor-status").textContent = "Development history captured · 1 attempt";
-    if (state.lessons < 2) { state.lessons = 2; state.portfolio = Math.max(2, state.portfolio); save(); updateProgress(); }
+    state.lessons = Math.max(state.lessons, state.currentLesson);
+    state.portfolio = Math.max(state.portfolio, state.currentLesson);
+    save();
+    updateProgress();
+    updateLessonRows();
   } else {
     result.className = "error";
     $("#next-lesson").hidden = true;
-    result.textContent = "Not quite yet. Hidden tests expect the function to return number multiplied by two. Replace pass with a return statement.";
+    result.textContent = state.currentLesson === 2
+      ? "Not quite yet. Hidden tests expect a lowercase return statement using number multiplied by two."
+      : "Not quite yet. Hidden tests expect a lowercase return statement using sum(scores).";
     $("#editor-status").textContent = "Attempt recorded · keep working";
+  }
+}
+
+function continueAfterPass() {
+  if (state.currentLesson === 2) {
+    state.currentLesson = 3;
+    save();
+    updateLessonRows();
+    closeLesson();
+    showView("learn");
+    setTimeout(() => {
+      const row = $(".lesson-row.now");
+      if (row) row.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 250);
+  } else {
+    closeLesson();
+    showView("learn");
   }
 }
 
 $$(".nav").forEach((button) => button.addEventListener("click", () => showView(button.dataset.view)));
 $$("[data-view-link]").forEach((button) => button.addEventListener("click", () => showView(button.dataset.viewLink)));
-$$("[data-open-lesson]").forEach((button) => button.addEventListener("click", openLesson));
+document.addEventListener("click", (event) => {
+  const lessonButton = event.target.closest("[data-open-lesson]");
+  if (lessonButton) openLesson();
+});
 $$("[data-close-modal]").forEach((node) => node.addEventListener("click", closeLesson));
 document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !$("#lesson-modal").hidden) closeLesson(); });
 $("#run-code").addEventListener("click", runTests);
-$("#next-lesson").addEventListener("click", () => { closeLesson(); showView("learn"); });
+$("#next-lesson").addEventListener("click", continueAfterPass);
 $("#code-editor").addEventListener("paste", (event) => { event.preventDefault(); $("#editor-status").textContent = "Paste is disabled. Build the solution yourself."; });
 $("#code-editor").addEventListener("drop", (event) => event.preventDefault());
 $("#code-editor").addEventListener("input", () => { $("#editor-status").textContent = "Typing captured · hidden tests ready"; });
 $("#theme-toggle").addEventListener("click", () => { state.theme = state.theme === "dark" ? "light" : "dark"; document.body.classList.toggle("dark", state.theme === "dark"); save(); });
-$("#reset-progress").addEventListener("click", () => { state = Object.assign({}, defaults); save(); updateProgress(); $("#test-result").className = ""; $("#test-result").textContent = ""; });
+$("#reset-progress").addEventListener("click", () => { state = Object.assign({}, defaults); save(); updateProgress(); updateLessonRows(); });
 $$(".filters button").forEach((button) => button.addEventListener("click", () => { $$(".filters button").forEach((item) => item.classList.remove("selected")); button.classList.add("selected"); }));
 document.body.classList.toggle("dark", state.theme === "dark");
 updateProgress();
+updateLessonRows();

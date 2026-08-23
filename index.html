@@ -52,13 +52,13 @@
     <div class="backdrop" data-close-modal></div>
     <section class="modal-panel">
       <button class="close" data-close-modal aria-label="Close lesson">×</button>
-      <label>LESSON 02 · CONCEPT + PRACTICE</label>
-      <h2>Write your first Python function</h2>
-      <p>A function is a named idea you can call again. Read the example, then write one yourself without copying it.</p>
-      <pre><span># A function receives an input and returns a useful result</span>
-<code><b>def</b> greet(name):
+      <label id="modal-kicker">LESSON 02 · CONCEPT + PRACTICE</label>
+      <h2 id="modal-title">Write your first Python function</h2>
+      <p id="modal-lead">A function is a named idea you can call again. Read the example, then write one yourself without copying it.</p>
+      <pre><span># Example</span>
+<code id="example-code"><b>def</b> greet(name):
     <b>return</b> f"Hello, {name}!"</code></pre>
-      <div class="prompt"><label>YOUR TURN</label><strong>Write <code>double(number)</code> so it returns the input multiplied by two.</strong><small>Try a small number first. Hidden examples will check your code.</small></div>
+      <div class="prompt"><label>YOUR TURN</label><strong id="prompt-title">Write double(number) so it returns the input multiplied by two.</strong><small id="prompt-hint">Try a small number first. Hidden examples will check your code.</small></div>
       <label for="code-editor" class="editor-label">Your solution</label>
       <textarea id="code-editor" spellcheck="false">def double(number):
     # write your return statement here
