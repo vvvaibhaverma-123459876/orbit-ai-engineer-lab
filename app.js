@@ -1,5 +1,21 @@
 const key = "orbit-prototype-state";
-const defaults = { lessons: 1, portfolio: 1, currentLesson: 2, theme: "light" };
+const defaults = {
+  lessons: 1,
+  currentLesson: 2,
+  theme: "light",
+  // Milestones on Portfolio project 01, tracked separately from lesson numbers.
+  milestones: 1,
+  streak: 1,
+  bestStreak: 1,
+  lastActiveDay: null
+};
+
+const TOTAL_LESSONS = 6;
+const PROJECT_MILESTONES = 4;
+
+function clampMilestones(value) {
+  return Math.min(PROJECT_MILESTONES, Math.max(1, Math.round(Number(value) || 1)));
+}
 
 // Storage is best-effort: a corrupt value or a browser that blocks localStorage
 // must never stop the rest of the app from starting.
@@ -8,7 +24,14 @@ function loadState() {
     const raw = localStorage.getItem(key);
     const stored = raw ? JSON.parse(raw) : null;
     if (!stored || typeof stored !== "object" || Array.isArray(stored)) return Object.assign({}, defaults);
-    return Object.assign({}, defaults, stored);
+    const merged = Object.assign({}, defaults, stored);
+    // Earlier builds stored a "portfolio" count that was really the lesson
+    // number. Carry it across as a milestone count and drop the old key.
+    if (typeof stored.portfolio === "number" && typeof stored.milestones !== "number") {
+      merged.milestones = clampMilestones(stored.portfolio);
+    }
+    delete merged.portfolio;
+    return merged;
   } catch (error) {
     console.warn("Orbit: saved progress could not be read, starting from defaults.", error);
     return Object.assign({}, defaults);
@@ -101,6 +124,66 @@ const lessonContent = {
   }
 };
 
+const modules = [
+  {
+    code: "00",
+    title: "AI Engineer foundations",
+    status: "IN PROGRESS",
+    meta: "In progress",
+    summary: "Build enough fluency to learn the IIT Kharagpur GenAI curriculum confidently, then turn your learning into working software.",
+    unlocked: true
+  },
+  {
+    code: "01",
+    title: "Foundations of GenAI & LLMs",
+    status: "LOCKED",
+    meta: "6 weeks · 18 live hours",
+    summary: "Deep learning essentials, transformers, embeddings and model selection.",
+    unlocked: false
+  },
+  {
+    code: "02",
+    title: "Advanced prompting & RAG",
+    status: "LOCKED",
+    meta: "6 weeks · 18 live hours",
+    summary: "Retrieval, hybrid search, reranking and evaluation you can measure.",
+    unlocked: false
+  },
+  {
+    code: "03",
+    title: "Fine-tuning & alignment",
+    status: "LOCKED",
+    meta: "6 weeks · 18 live hours",
+    summary: "Adapting a base model to a task, and keeping its behaviour predictable once you have.",
+    unlocked: false
+  },
+  {
+    code: "04",
+    title: "Multimodal & agentic AI",
+    status: "LOCKED",
+    meta: "6 weeks · 18 live hours",
+    summary: "Systems that read images and documents, call tools and carry a task across several steps.",
+    unlocked: false
+  },
+  {
+    code: "05",
+    title: "Deployment, optimization & safety",
+    status: "LOCKED",
+    meta: "8 weeks · 24 live hours",
+    summary: "Serving a model at a cost you can defend, and the safety work that has to ship with it.",
+    unlocked: false
+  }
+];
+
+const projectMilestones = [
+  "Set up the project, its folder layout and a first commit.",
+  "Record a practice session and write it to a file.",
+  "Calculate streaks from the stored sessions.",
+  "Export a weekly review and cover it with tests."
+];
+
+let selectedModule = 0;
+
 function save() {
   try {
     localStorage.setItem(key, JSON.stringify(state));
@@ -127,12 +210,70 @@ function repairLessonPointer() {
 }
 
 function updateProgress() {
-  const percent = Math.max(18, Math.round((state.lessons / 6) * 100));
+  // No floor: the figure is the real fraction of lessons completed. It was
+  // pinned at a minimum of 18% while the markup repeated "18%" in four places.
+  const percent = Math.round((state.lessons / TOTAL_LESSONS) * 100);
+  const lessonsLabel = state.lessons + " / " + TOTAL_LESSONS + " lessons";
+
   $("#mastery").innerHTML = percent + "<small>%</small>";
-  $("#detail-bar").style.width = percent + "%";
-  $("#detail-label").textContent = percent + "% complete";
-  $("#portfolio-count").textContent = String(state.portfolio).padStart(2, "0");
-  $("#portfolio-bar").style.width = Math.min(100, state.portfolio * 25) + "%";
+  $("#mastery-note").textContent = "Foundations · " + state.lessons + " of " + TOTAL_LESSONS + " lessons";
+  $("#roadmap-bar").style.width = percent + "%";
+  $("#roadmap-lessons").textContent = lessonsLabel;
+  $("#path-percent").textContent = percent + "%";
+  $("#path-status").textContent = "In progress · " + lessonsLabel;
+  $(".roadmap").style.setProperty("--road-progress", percent + "%");
+  $("#active-counter").innerHTML =
+    String(state.lessons).padStart(2, "0") + " <small>/ " + String(TOTAL_LESSONS).padStart(2, "0") + "</small>";
+  if (selectedModule === 0) {
+    $("#detail-bar").style.width = percent + "%";
+    $("#detail-label").textContent = percent + "% complete";
+  }
+
+  const done = clampMilestones(state.milestones);
+  // Artifacts in progress, which is not the same number as milestones done.
+  $("#portfolio-count").textContent = "01";
+  $("#portfolio-note").textContent = done >= PROJECT_MILESTONES ? "Artifact complete" : "Artifact in progress";
+  $("#portfolio-bar").style.width = (done / PROJECT_MILESTONES) * 100 + "%";
+  $("#mini-bar").style.width = (done / PROJECT_MILESTONES) * 100 + "%";
+  $("#milestone-label").textContent = done + " of " + PROJECT_MILESTONES + " milestones";
+  $("#mini-milestones").textContent =
+    "Artifact 01 · " + done + " " + (done === 1 ? "milestone" : "milestones") + " of " + PROJECT_MILESTONES;
+}
+
+function dayKey(date) {
+  return [date.getFullYear(), date.getMonth() + 1, date.getDate()]
+    .map((part) => String(part).padStart(2, "0"))
+    .join("-");
+}
+
+// The streak was the literal text "4 days" in the markup.
+function updateStreak() {
+  const today = dayKey(new Date());
+  if (state.lastActiveDay !== today) {
+    const yesterday = dayKey(new Date(Date.now() - 86400000));
+    state.streak = state.lastActiveDay === yesterday ? (Number(state.streak) || 0) + 1 : 1;
+    state.lastActiveDay = today;
+    state.bestStreak = Math.max(Number(state.bestStreak) || 1, state.streak);
+    save();
+  }
+  $("#streak-count").innerHTML = state.streak + " <small>" + (state.streak === 1 ? "day" : "days") + "</small>";
+  $("#streak-note").textContent = "Best run: " + state.bestStreak + (state.bestStreak === 1 ? " day" : " days");
+}
+
+// The date line and the pulse counts were written into the markup by hand and
+// would be wrong the day after they were typed.
+function updateStandingContent() {
+  const now = new Date();
+  const date = now
+    .toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" })
+    .toUpperCase();
+  const time = now.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+  $("#today-line").innerHTML = date + ' <i aria-hidden="true">\u2022</i> ' + time;
+
+  const pulseCount = $$("#pulse-list .pulse-card").length;
+  $("#pulse-count").innerHTML = String(pulseCount).padStart(2, "0") + " <small>new</small>";
+  const badge = $('.nav[data-view="pulse"] em');
+  if (badge) badge.textContent = String(pulseCount);
 }
 
 function updateDashboard() {
@@ -186,6 +327,76 @@ function updateLessonRows() {
 
 function prefersReducedMotion() {
   return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+// The module list was inert: clicking 01-05 moved neither the selection nor the
+// detail pane, which stayed on module 00 whatever was clicked.
+function selectModule(index) {
+  const module = modules[index];
+  if (!module) return;
+  selectedModule = index;
+
+  $$(".path").forEach((button, position) => {
+    const isSelected = position === index;
+    button.classList.toggle("selected", isSelected);
+    button.setAttribute("aria-pressed", String(isSelected));
+  });
+
+  $("#module-kicker").innerHTML = "MODULE " + module.code + ' <i>' + module.status + "</i>";
+  $("#module-title").textContent = module.title;
+  $("#module-summary").textContent = module.summary;
+  $("#module-progress").hidden = !module.unlocked;
+  $("#module-lessons").hidden = !module.unlocked;
+
+  let locked = $("#module-locked");
+  if (!module.unlocked) {
+    if (!locked) {
+      locked = document.createElement("p");
+      locked.id = "module-locked";
+      locked.className = "module-locked";
+      $(".module-detail").appendChild(locked);
+    }
+    locked.textContent = module.meta + ". Unlocks once you finish the foundations checkpoint.";
+    locked.hidden = false;
+  } else if (locked) {
+    locked.hidden = true;
+  }
+
+  updateProgress();
+}
+
+// Open the brief instead of leaving the button inert.
+function toggleProjectBrief() {
+  const button = $("#project-action");
+  const panel = $("#project-brief");
+  const willOpen = panel.hidden;
+
+  if (willOpen && !panel.childElementCount) {
+    const list = document.createElement("ol");
+    projectMilestones.forEach((text, index) => {
+      const item = document.createElement("li");
+      item.textContent = text;
+      item.className = index < clampMilestones(state.milestones) ? "done" : "";
+      list.appendChild(item);
+    });
+    panel.appendChild(list);
+  }
+
+  panel.hidden = !willOpen;
+  button.setAttribute("aria-expanded", String(willOpen));
+  button.textContent = willOpen ? "Hide project brief" : "Open project brief →";
+}
+
+// The filter tabs previously moved a highlight and filtered nothing.
+function filterPulse(topic) {
+  $$("#pulse-list .pulse-card").forEach((card) => {
+    card.hidden = topic !== "all" && card.dataset.topic !== topic;
+  });
+  $$(".filters button").forEach((button) => {
+    const isSelected = button.dataset.topic === topic;
+    button.classList.toggle("selected", isSelected);
+    button.setAttribute("aria-pressed", String(isSelected));
+  });
 }
 
 function showView(name) {
@@ -370,9 +581,14 @@ function runTests() {
     $("#next-lesson").hidden = false;
     $("#editor-status").textContent = "Development history captured · " + attempts + " attempt" + (attempts === 1 ? "" : "s");
     state.lessons = Math.max(state.lessons, state.currentLesson);
+    // One milestone per completed lesson, capped at the project's four — the
+    // milestone count used to be set to the lesson number outright, so passing
+    // lesson 4 reported four artifacts and a full bar.
+    state.milestones = clampMilestones(state.lessons);
     save();
     updateProgress();
     updateLessonRows();
+    refreshProjectBrief();
     return;
   }
 
@@ -384,6 +600,14 @@ function runTests() {
   const nudge = ranAtAll && outcome.failure && data.nudge ? " " + data.nudge : "";
   result.textContent = progress + outcome.detail + nudge;
   $("#editor-status").textContent = "Attempt " + attempts + " recorded · keep working";
+}
+
+function refreshProjectBrief() {
+  const panel = $("#project-brief");
+  if (!panel.childElementCount) return;
+  $$("li", panel).forEach((item, index) => {
+    item.className = index < clampMilestones(state.milestones) ? "done" : "";
+  });
 }
 
 function continueAfterPass() {
@@ -445,10 +669,34 @@ $("#theme-toggle").addEventListener("click", () => {
   applyTheme();
   save();
 });
-$("#reset-progress").addEventListener("click", () => { state = Object.assign({}, defaults); save(); updateProgress(); updateLessonRows(); });
-$$(".filters button").forEach((button) => button.addEventListener("click", () => { $$(".filters button").forEach((item) => item.classList.remove("selected")); button.classList.add("selected"); }));
+$("#reset-progress").addEventListener("click", () => {
+  if (!$("#lesson-modal").hidden) closeLesson();
+  // Keep the streak: it records days visited, which a progress reset does not
+  // undo. Everything the reset does touch is re-rendered here — the theme and
+  // the dashboard were previously left showing the pre-reset state, which put
+  // the theme toggle one click out of step with what was on screen.
+  const { streak, bestStreak, lastActiveDay, theme } = state;
+  state = Object.assign({}, defaults, { streak, bestStreak, lastActiveDay, theme });
+  save();
+  applyTheme();
+  updateProgress();
+  updateLessonRows();
+  updateDashboard();
+  selectModule(0);
+  $("#project-brief").hidden = true;
+  $("#project-brief").textContent = "";
+  $("#project-action").setAttribute("aria-expanded", "false");
+  $("#project-action").textContent = "Open project brief →";
+});
+$$(".filters button").forEach((button) => button.addEventListener("click", () => filterPulse(button.dataset.topic)));
+$$(".path").forEach((button) => button.addEventListener("click", () => selectModule(Number(button.dataset.module))));
+$("#project-action").addEventListener("click", toggleProjectBrief);
 applyTheme();
 repairLessonPointer();
+updateStandingContent();
+updateStreak();
+selectModule(0);
 updateProgress();
 updateLessonRows();
 updateDashboard();
+filterPulse("all");

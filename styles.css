@@ -1709,3 +1709,30 @@ main:focus {
     transform: none;
   }
 }
+
+/* ---- module detail, project brief ---- */
+.module-locked {
+  color: var(--meta);
+  font-size: 12px;
+  border-top: 1px solid var(--line);
+  margin: 20px 0 0;
+  padding-top: 18px;
+}
+#project-brief ol {
+  margin: 14px 0 0;
+  padding-left: 18px;
+  color: var(--soft);
+  font-size: 11px;
+  line-height: 1.7;
+}
+#project-brief li.done {
+  color: var(--teal-text);
+  font-weight: 600;
+}
+#project-brief[hidden] {
+  display: none;
+}
+/* The roadmap rail fills to the learner's real progress. */
+.road-line:before {
+  height: var(--road-progress, 0%);
+}
