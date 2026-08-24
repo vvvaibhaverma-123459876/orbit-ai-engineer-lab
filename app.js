@@ -7,7 +7,8 @@ const defaults = {
   milestones: 1,
   streak: 1,
   bestStreak: 1,
-  lastActiveDay: null
+  lastActiveDay: null,
+  topicProgress: {}
 };
 
 // The path is intentionally finite and testable: six foundations lessons plus
@@ -28,6 +29,7 @@ function loadState() {
     const stored = raw ? JSON.parse(raw) : null;
     if (!stored || typeof stored !== "object" || Array.isArray(stored)) return Object.assign({}, defaults);
     const merged = Object.assign({}, defaults, stored);
+    if (!merged.topicProgress || typeof merged.topicProgress !== "object" || Array.isArray(merged.topicProgress)) merged.topicProgress = {};
     // Earlier builds stored a "portfolio" count that was really the lesson
     // number. Carry it across as a milestone count and drop the old key.
     if (typeof stored.portfolio === "number" && typeof stored.milestones !== "number") {
@@ -356,6 +358,49 @@ const foundationsCurriculum = [
   { id: "math", number: "06", title: "Mathematics", summary: "Read a paper's method section, debug a model by reasoning about shapes and gradients, and connect equations to implementation.", topics: ["Linear algebra", "Calculus & optimization", "Probability & statistics"], competencies: ["Track matrix and tensor shapes through a computation.", "Explain backpropagation as the chain rule and choose an optimizer knowingly.", "Use probability, estimation, experimentation, and information theory to evaluate systems."], traps: ["Element-wise operations mistaken for matrix composition.", "Unstable softmax, poor scaling, and confusing correlation with causation.", "p-values treated as the probability a hypothesis is true."], exercises: ["Implement matrix multiplication, SVD/PCA, and a low-rank approximation.", "Build gradient descent, Adam, and a tiny reverse-mode autodiff engine.", "Run an A/B test with power analysis and compute entropy, cross-entropy, and KL."], materials: "Mathematics for Machine Learning · 3Blue1Brown · Strang · Statistical Rethinking" },
   { id: "data", number: "07", title: "Data handling", summary: "Build numerically stable, memory-aware, validated data workflows that can move from exploration to production.", topics: ["Numerical computing with NumPy", "Dataframes", "Cleaning & exploratory analysis", "Visualization", "Pipelines & scale"], competencies: ["Reason about shapes, broadcasting, views, dtypes, and numerical stability.", "Use pandas, Polars, SQL, and Arrow appropriately.", "Document cleaning decisions, validate contracts, and build idempotent pipelines."], traps: ["Silent copies, chained assignment, and object-dtype memory blowups.", "Imputing missing data without understanding MCAR, MAR, or MNAR.", "CSV in production, non-idempotent reruns, and misleading charts."], exercises: ["Implement stable softmax, cross-entropy, and layer norm in NumPy.", "Rewrite a pandas workflow in Polars and benchmark it.", "Clean a messy dataset with a written decision log and validation suite.", "Convert a large CSV workflow to partitioned Parquet and measure the result."], materials: "NumPy docs · Python for Data Analysis · Polars · Fundamentals of Data Engineering · Spark" }
 ];
+
+const topicLabs = [
+  ["python", "Language core", "Predict a short Python program's output, then explain identity, equality, truthiness, default arguments, closures, exceptions, and imports.", "Write a one-page reasoning note for three snippets: a mutable default, a late-bound closure, and a try/except/else/finally flow. State the output before running it.", "A prediction table with output, memory/identity reasoning, and one corrected implementation."],
+  ["python", "Data structures in practice", "Choose lists, dictionaries, sets, tuples, deque, Counter, heapq, or itertools from the access pattern and complexity—not habit.", "Take a slow membership-counting script and replace the right structure. Include expected complexity for lookup, insertion, and iteration.", "A before/after benchmark and a short structure-selection decision record."],
+  ["python", "Object-oriented Python", "Use the data model, composition, dataclasses, protocols, and descriptors to model behaviour without building an inheritance maze.", "Design a Vector or Dataset class supporting repr, equality, length, indexing, iteration, and validation. Explain why composition is preferable where it is.", "A small tested class plus a class-design note covering data model methods."],
+  ["python", "Concurrency & performance", "Choose async, threads, or processes from whether work is I/O-bound or CPU-bound, then profile before changing code.", "Run the same I/O workload sequentially, with a thread pool, and with asyncio. Record timings, bottlenecks, cancellation behaviour, and the GIL implication.", "A reproducible benchmark with a written recommendation and evidence."],
+  ["engineering", "Version control", "Reason in Git objects, refs, staging, branches, merges, rebases, reflog, and recovery instead of deleting and recloning.", "Create a detached HEAD, a bad merge, and a lost commit in a scratch repository. Recover each with reflog, reset, revert, or cherry-pick and document the state transitions.", "A recovery runbook with command output and a reviewable commit history."],
+  ["engineering", "Testing", "Design tests that are fast, isolated, repeatable, self-validating, and strong enough to catch a deliberately introduced bug.", "Write unit, integration, property-based, and nondeterministic-LLM tests for one small service. Explain what is real, fake, mocked, or asserted as a property.", "A pytest-style test matrix with one mutation that the suite catches."],
+  ["engineering", "Code quality & architecture", "Separate domain logic from I/O, refactor behind tests, and choose patterns only when they clarify change.", "Refactor a single-file script into a typed src package with configuration, service, adapter, and test layers. Record each safe refactoring step.", "A package layout, dependency diagram, and before/after design note."],
+  ["engineering", "Tooling & debugging", "Use the shell, debugger, traceback, structured logs, profiling, and correlation IDs to find causes rather than guessing.", "Diagnose a seeded failure without adding print statements. Capture the traceback, breakpoint observations, structured log fields, and the minimal fix.", "A reproducible incident note with root cause and regression test."],
+  ["algorithms", "Complexity analysis", "State tight time and space bounds, amortized costs, recursion stack, and the target complexity implied by constraints.", "Annotate five functions and rewrite one after identifying its hidden quadratic loop. Predict performance from input constraints before benchmarking.", "A complexity worksheet and a benchmark that validates the prediction."],
+  ["algorithms", "Arrays & hashing", "Use traversal, prefix sums, frequency maps, grouping, and set membership to turn repeated search into linear work.", "Solve Two Sum, Group Anagrams, and Subarray Sum Equals K. For each, explain the invariant and the memory trade-off.", "Three tested solutions with complexity annotations and edge-case tables."],
+  ["algorithms", "Two pointers & sliding window", "Maintain a window invariant while inputs move monotonically; know when sorting is allowed and when it changes the problem.", "Solve a longest-substring or minimum-window problem. Trace the left/right pointers on a duplicate-heavy input.", "A pointer trace, invariant statement, and tested implementation."],
+  ["algorithms", "Stacks & queues", "Use LIFO/FIFO structure for parsing, monotonic stacks, breadth-first search, and producer-consumer workflows.", "Build a min-stack and a queue-backed breadth-first traversal. Include underflow and empty-input behaviour.", "Two implementations with operation complexity and tests."],
+  ["algorithms", "Binary search", "Define the search space, invariant, and boundary update precisely; binary search is a proof, not a memorised loop.", "Implement lower_bound and a rotated-array search. Trace the invariant at every iteration, including no-match cases.", "A boundary table and tests for duplicates, empty input, and extremes."],
+  ["algorithms", "Linked lists", "Reason about pointers, mutation, ownership, and constant-space techniques such as fast/slow traversal.", "Implement reverse, cycle detection, and merge-two-sorted-lists. Draw the pointer state before and after each mutation.", "Pointer diagrams, implementations, and mutation-safety tests."],
+  ["algorithms", "Trees", "Use recursive structure, depth/height invariants, traversal order, and explicit stack alternatives.", "Implement preorder, inorder, level-order, and lowest-common-ancestor for a binary tree.", "Traversal traces and a tested tree utility module."],
+  ["algorithms", "Heaps", "Use heap invariants for priority queues, top-k selection, streaming medians, and scheduling.", "Build a task scheduler with tie-breaking and a top-k stream. Explain why a heap beats sorting every update.", "A priority-queue implementation with complexity and fairness notes."],
+  ["algorithms", "Graphs", "Model relationships, choose adjacency structures, and distinguish BFS, DFS, shortest paths, and topological order.", "Build a dependency resolver that detects cycles and returns a valid order when one exists.", "A graph model, cycle trace, and tests for disconnected and cyclic inputs."],
+  ["algorithms", "Backtracking", "Explore a state space with a choice, constraint, recurse, and undo discipline; prune only with a justified rule.", "Generate valid permutations or combinations and instrument how pruning changes the search tree.", "A search-tree sketch and implementation with duplicate handling."],
+  ["algorithms", "Dynamic programming", "Identify state, transition, base case, evaluation order, and whether memoization or tabulation fits.", "Solve one sequence and one grid problem top-down and bottom-up. Compare memory compression options.", "State-transition diagrams and two equivalent implementations."],
+  ["algorithms", "Greedy, intervals & math", "Prove when a local choice is safe, sort interval endpoints deliberately, and use mathematical invariants when they simplify code.", "Schedule non-overlapping intervals and defend the greedy exchange argument against a counterexample.", "A proof sketch, counterexample search, and tested scheduler."],
+  ["algorithms", "Sorting & searching internals", "Know stability, comparison lower bounds, Timsort intuition, partitioning, and when external or counting methods apply.", "Compare three sorting strategies on nearly sorted, random, and adversarial data. Explain stability and memory.", "A benchmark report with data-shape recommendations."],
+  ["systems", "Operating systems", "Explain processes, virtual memory, file descriptors, scheduling, system calls, signals, and resource limits.", "Inspect a running process, open files, memory footprint, and child process. Diagnose a seeded resource leak.", "A process/resource incident report with commands and findings."],
+  ["systems", "Networking", "Trace DNS, TCP, TLS, HTTP, timeouts, retries, connection pools, and backpressure through a real request.", "Build a resilient HTTP client with timeouts, exponential backoff, idempotency keys, and structured request logs.", "A request trace, failure matrix, and client design note."],
+  ["systems", "Distributed systems", "Reason about partial failure, consistency, replication, queues, delivery semantics, idempotency, and graceful degradation.", "Design a queue-backed service and decide its delivery guarantee, retry policy, deduplication key, and recovery path.", "A sequence diagram and failure-mode decision record."],
+  ["databases", "Relational modelling & SQL", "Model entities, constraints, cardinality, normalization, NULL semantics, joins, windows, cohorts, funnels, and migrations.", "Model a support-learning domain with at least eight entities and write analytical queries for retention, funnel conversion, and top-N per group.", "An ERD, schema migration, and query workbook."],
+  ["databases", "Database internals", "Understand pages, buffer pools, B+ trees, LSMs, query plans, joins, ACID, isolation, MVCC, WAL, and vacuum.", "Take a slow query, inspect EXPLAIN, propose indexes, then explain write amplification and transaction anomalies.", "Before/after query plans and a transaction anomaly reproduction."],
+  ["databases", "Beyond relational", "Choose Redis, document, wide-column, analytical, graph, or search storage by access pattern and operational cost.", "Design a document retrieval system with a primary store, cache, search index, TTL policy, and consistency decision.", "A polyglot persistence diagram with cost and failure trade-offs."],
+  ["math", "Linear algebra", "Track shapes, dot products, projections, norms, eigenvectors, SVD, PCA, tensors, and matrix calculus through model code.", "Implement matrix multiplication and a low-rank image approximation. Explain how the same idea motivates parameter-efficient adaptation.", "A shape worksheet, numerical implementation, and reconstruction plot."],
+  ["math", "Calculus & optimization", "Connect derivatives, gradients, Hessians, chain rule, backpropagation, optimization trajectories, and automatic differentiation.", "Implement gradient descent, momentum, and Adam on a non-convex function, then build a tiny reverse-mode autodiff engine.", "Trajectory plots, gradient checks, and optimizer trade-offs."],
+  ["math", "Probability & statistics", "Use Bayes, distributions, expectation, MLE, uncertainty, experiments, causality, entropy, cross-entropy, and KL correctly.", "Run an A/B test with power analysis, demonstrate peeking, and compute entropy and KL for two small distributions.", "An experiment report with assumptions, uncertainty, and practical significance."],
+  ["data", "Numerical computing with NumPy", "Reason about shape, dtype, strides, views, broadcasting, vectorization, einsum, and numerical stability.", "Implement stable softmax, cross-entropy, and layer norm. Benchmark vectorized and loop versions and expose overflow in the naive code.", "A benchmark notebook and a numerical-stability note."],
+  ["data", "Dataframes", "Use pandas/Polars indexing, joins, groupby, reshaping, time series, memory profiling, Arrow, and Parquet deliberately.", "Rewrite a pandas pipeline in Polars, validate row counts after joins, and measure memory and speed on a larger fixture.", "A correctness comparison and performance report."],
+  ["data", "Cleaning & exploratory analysis", "Treat missingness, outliers, duplicates, schema violations, leakage, drift, and provenance as first-class engineering concerns.", "Clean a deliberately messy dataset, record every decision, and build validation checks that catch the original defects.", "A data-quality decision log and executable validation suite."],
+  ["data", "Visualization", "Select honest charts, show uncertainty, use colour accessibly, and avoid axis or annotation choices that mislead.", "Answer one stakeholder question with a distribution, comparison, relationship, and trend view. Defend the final chart choice.", "A decision-ready figure and a critique of two misleading alternatives."],
+  ["data", "Pipelines & scale", "Design idempotent batch/streaming pipelines with partitioning, watermarks, retries, backfills, file formats, orchestration, and data contracts.", "Convert a large CSV workflow to partitioned Parquet, rerun it safely for a date range, and document the contract between producer and consumer.", "A pipeline DAG, rerun test, and storage/query benchmark."]
+].map(([section, title, theory, lab, deliverable]) => ({
+  id: section + "-" + title.toLowerCase().replace(/[^a-z0-9]+/g, "-"), section, title, theory, lab, deliverable,
+  minimum: 80
+}));
+
+const topicLabByKey = new Map(topicLabs.map((topic) => [topic.section + "::" + topic.title, topic]));
 
 // Theory is deliberately separate from the assessment questions. Learners get
 // an explanation, vocabulary, a worked mental model, and a business bridge
@@ -746,7 +791,8 @@ function renderCurriculumSections() {
     button.type = "button";
     button.className = "curriculum-tab" + (index === 0 ? " selected" : "");
     button.dataset.curriculumSection = String(index);
-    button.innerHTML = "<b>SECTION " + section.number + "</b><strong>" + section.title + "</strong><small>" + section.topics.length + " topics</small>";
+    const complete = section.topics.filter((topic) => state.topicProgress[(section.id + "-" + topic.toLowerCase().replace(/[^a-z0-9]+/g, "-"))]).length;
+    button.innerHTML = "<b>SECTION " + section.number + "</b><strong>" + section.title + "</strong><small>" + complete + " / " + section.topics.length + " labs complete</small>";
     host.appendChild(button);
   });
 }
@@ -773,15 +819,86 @@ function renderCurriculumDetail(index) {
   section.topics.forEach((topic, topicIndex) => {
     const card = document.createElement("article");
     card.className = "topic-card";
-    card.innerHTML = "<strong>" + String(topicIndex + 1).padStart(2, "0") + " · " + topic + "</strong><small>Theory, traps, implementation lab, and evidence review.</small>";
+    const lab = topicLabByKey.get(section.id + "::" + topic);
+    const complete = lab && state.topicProgress[lab.id];
+    card.innerHTML = "<strong>" + String(topicIndex + 1).padStart(2, "0") + " · " + topic + "</strong><small>" + (complete ? "Lab complete · evidence saved" : "Theory, implementation lab, and evidence review") + "</small>";
+    if (lab) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "small topic-lab-button";
+      button.dataset.topicLab = lab.id;
+      button.textContent = complete ? "Review lab" : "Open topic lab →";
+      card.appendChild(button);
+    }
     topics.appendChild(card);
   });
   $("#curriculum-materials").textContent = section.materials;
-  $$(".curriculum-tab").forEach((button) => button.classList.toggle("selected", Number(button.dataset.curriculumSection) === index));
+  $$(".curriculum-tab").forEach((button) => {
+    const selected = Number(button.dataset.curriculumSection) === index;
+    button.classList.toggle("selected", selected);
+    const current = foundationsCurriculum[Number(button.dataset.curriculumSection)];
+    const complete = current.topics.filter((topic) => {
+      const lab = topicLabByKey.get(current.id + "::" + topic);
+      return lab && state.topicProgress[lab.id];
+    }).length;
+    button.querySelector("small").textContent = complete + " / " + current.topics.length + " labs complete";
+  });
 }
 
 function selectCurriculumSection(index) {
   renderCurriculumDetail(Number(index));
+}
+
+let activeTopicLab = null;
+
+function openTopicLab(id) {
+  const lab = topicLabs.find((topic) => topic.id === id);
+  if (!lab) return;
+  activeTopicLab = lab;
+  lastTrigger = document.activeElement;
+  $("#topic-modal-kicker").textContent = "SECTION " + (foundationsCurriculum.find((section) => section.id === lab.section)?.number || "") + " · TOPIC LAB";
+  $("#topic-modal-title").textContent = lab.title;
+  $("#topic-modal-theory").textContent = lab.theory;
+  $("#topic-modal-lab").textContent = lab.lab;
+  $("#topic-modal-deliverable").textContent = lab.deliverable;
+  $("#topic-evidence").value = "";
+  $("#topic-result").className = "";
+  $("#topic-result").textContent = "";
+  $("#topic-editor-status").textContent = "Paste is disabled for this assessment.";
+  $("#topic-modal").hidden = false;
+  document.documentElement.classList.add("modal-open");
+  document.body.classList.add("modal-open");
+  $(".app-shell").inert = true;
+  $(".topic-modal-panel").focus();
+}
+
+function closeTopicLab() {
+  $("#topic-modal").hidden = true;
+  $(".app-shell").inert = false;
+  document.documentElement.classList.remove("modal-open");
+  document.body.classList.remove("modal-open");
+  if (lastTrigger && document.contains(lastTrigger)) lastTrigger.focus();
+  lastTrigger = null;
+  activeTopicLab = null;
+}
+
+function submitTopicEvidence() {
+  if (!activeTopicLab) return;
+  const evidence = $("#topic-evidence").value.trim();
+  const result = $("#topic-result");
+  if (evidence.length < activeTopicLab.minimum) {
+    result.className = "error";
+    result.textContent = "Add at least " + activeTopicLab.minimum + " characters. Include your approach, one trade-off, an edge case, and evidence a reviewer could inspect.";
+    $("#topic-editor-status").textContent = "Evidence needs more reasoning before it can be recorded.";
+    return;
+  }
+  state.topicProgress[activeTopicLab.id] = { completedAt: new Date().toISOString(), evidenceLength: evidence.length };
+  save();
+  result.className = "success";
+  result.textContent = "✓ Topic lab complete. Your evidence has been added to the learning record.";
+  $("#topic-editor-status").textContent = "Development history captured · evidence saved";
+  const sectionIndex = foundationsCurriculum.findIndex((section) => section.id === activeTopicLab.section);
+  if (sectionIndex >= 0) renderCurriculumDetail(sectionIndex);
 }
 
 function showView(name) {
@@ -1056,10 +1173,14 @@ $$("[data-view-link]").forEach((button) => button.addEventListener("click", () =
 document.addEventListener("click", (event) => {
   const lessonButton = event.target.closest("[data-open-lesson]");
   if (lessonButton) openLesson();
+  const topicButton = event.target.closest("[data-topic-lab]");
+  if (topicButton) openTopicLab(topicButton.dataset.topicLab);
 });
-$$("[data-close-modal]").forEach((node) => node.addEventListener("click", closeLesson));
+$$('[data-close-modal]').forEach((node) => node.addEventListener("click", closeLesson));
+$$('[data-close-topic]').forEach((node) => node.addEventListener("click", closeTopicLab));
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && !$("#lesson-modal").hidden) closeLesson();
+  if (event.key === "Escape" && !$("#topic-modal").hidden) closeTopicLab();
   trapFocus(event);
 });
 $("#run-code").addEventListener("click", runTests);
@@ -1068,6 +1189,9 @@ $("#check-theory").addEventListener("click", checkTheory);
 $("#code-editor").addEventListener("paste", (event) => { event.preventDefault(); $("#editor-status").textContent = "Paste is disabled. Build the solution yourself."; });
 $("#code-editor").addEventListener("drop", (event) => event.preventDefault());
 $("#code-editor").addEventListener("input", () => { $("#editor-status").textContent = "Typing captured · hidden tests ready"; });
+$("#submit-topic").addEventListener("click", submitTopicEvidence);
+$("#topic-evidence").addEventListener("paste", (event) => { event.preventDefault(); $("#topic-editor-status").textContent = "Paste is disabled. Build the evidence yourself."; });
+$("#topic-evidence").addEventListener("drop", (event) => event.preventDefault());
 function applyTheme() {
   const isDark = state.theme === "dark";
   // The class goes on the root element so html, and the overscroll area behind
@@ -1085,6 +1209,7 @@ $("#theme-toggle").addEventListener("click", () => {
 });
 $("#reset-progress").addEventListener("click", () => {
   if (!$("#lesson-modal").hidden) closeLesson();
+  if (!$("#topic-modal").hidden) closeTopicLab();
   // Keep the streak: it records days visited, which a progress reset does not
   // undo. Everything the reset does touch is re-rendered here — the theme and
   // the dashboard were previously left showing the pre-reset state, which put

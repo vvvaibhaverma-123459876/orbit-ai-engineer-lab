@@ -1672,6 +1672,52 @@ body.modal-open {
   font-size: 10px;
   margin-top: 5px;
 }
+.topic-lab-button {
+  margin-top: 10px;
+}
+.topic-modal-panel > p {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.topic-lab-brief {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  margin: 16px 0;
+  padding: 14px;
+}
+.topic-lab-brief > label {
+  color: var(--teal-text);
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  margin-bottom: 7px;
+}
+.topic-lab-brief p {
+  color: var(--soft);
+  font-size: 12px;
+  line-height: 1.65;
+  margin: 0 0 12px;
+}
+.topic-lab-brief strong {
+  color: var(--ink);
+  display: block;
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+.topic-evidence {
+  min-height: 170px !important;
+}
+#topic-result {
+  font-size: 11px;
+  margin-top: 12px;
+}
+#topic-result.success,
+#topic-result.error {
+  border-radius: 7px;
+  padding: 10px;
+}
 .curriculum-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -60,6 +60,21 @@
     </main>
   </div>
 
+  <div id="topic-modal" class="modal" hidden>
+    <div class="backdrop" aria-hidden="true"></div>
+    <section class="modal-panel topic-modal-panel" role="dialog" aria-modal="true" aria-labelledby="topic-modal-title" tabindex="-1">
+      <button class="close" data-close-topic aria-label="Close topic lab">×</button>
+      <label id="topic-modal-kicker">FOUNDATIONS · TOPIC LAB</label>
+      <h2 id="topic-modal-title">Python language core</h2>
+      <p id="topic-modal-theory"></p>
+      <div class="topic-lab-brief"><label>YOUR LAB</label><p id="topic-modal-lab"></p><strong>Evidence to submit</strong><p id="topic-modal-deliverable"></p></div>
+      <label for="topic-evidence" class="editor-label">Your reasoning and evidence</label>
+      <textarea id="topic-evidence" class="topic-evidence" spellcheck="true" placeholder="Explain your approach, a trade-off, one edge case, and what evidence you would show a reviewer."></textarea>
+      <div class="editor-foot"><span id="topic-editor-status">Paste is disabled for this assessment.</span><button class="primary" id="submit-topic" type="button">Submit topic evidence →</button></div>
+      <div id="topic-result" aria-live="polite"></div>
+    </section>
+  </div>
+
   <div id="lesson-modal" class="modal" hidden>
     <div class="backdrop" aria-hidden="true"></div>
     <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
