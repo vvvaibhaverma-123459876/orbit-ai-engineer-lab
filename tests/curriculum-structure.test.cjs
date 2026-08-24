@@ -20,6 +20,8 @@ test("the curriculum has the target 35-section and 197-topic structure", () => {
   assert.equal(manifest.sectionCount, 35);
   assert.equal(manifest.topicCount, 197);
   assert.equal(manifest.status, "in-progress");
+  assert.equal(manifest.extraction.status, "human-approved");
+  assert.equal(manifest.authoring.conceptsIndexed, 806);
 });
 
 test("Parts II through VI are represented in the same curriculum model", () => {

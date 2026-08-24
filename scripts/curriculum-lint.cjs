@@ -58,6 +58,7 @@ const manifestIds = new Set(manifestTopics.map((topic) => topic.id));
 if (manifestIds.size !== manifestTopics.length) errors.push("manifest contains duplicate topic IDs");
 
 const strict = process.argv.includes("--strict");
+const approvedConcepts = manifestTopics.flatMap((topic) => topic.concepts || []).filter((concept) => concept.review === "human-approved");
 const conceptGaps = manifestTopics.filter((topic) => !topic.concepts.length);
 const lessonGaps = manifestTopics.filter((topic) => !topic.lessons.length);
 const drillGaps = manifestTopics.filter((topic) => !topic.drills.length);
@@ -70,6 +71,7 @@ console.log(`Sections: ${foundationsCurriculum.length}`);
 console.log(`Topics: ${topicKeys.size}`);
 console.log(`Topic labs: ${topicLabs.length}`);
 console.log(`Concepts indexed: ${manifest.authoring.conceptsIndexed}`);
+console.log(`Human-approved concepts: ${approvedConcepts.length}`);
 console.log(`Lessons authored: ${manifest.authoring.lessonsAuthored}`);
 console.log(`Drills authored: ${manifest.authoring.drillsAuthored}`);
 console.log(`Builds authored: ${manifest.authoring.buildsAuthored}`);

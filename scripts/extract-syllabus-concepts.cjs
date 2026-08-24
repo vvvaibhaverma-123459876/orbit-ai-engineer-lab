@@ -10,6 +10,7 @@ const crypto = require("node:crypto");
 const root = path.join(__dirname, "..");
 const manifestPath = path.join(root, "content", "manifest.json");
 const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+const approve = process.argv.includes("--approve");
 const files = process.argv.slice(2).filter((value) => !value.startsWith("--"));
 if (!files.length) {
   console.error("Usage: node scripts/extract-syllabus-concepts.cjs <syllabus.md> [...]");
@@ -94,12 +95,12 @@ for (const file of files) {
       id: `${target.number}.c${hash(`${target.id}:${normalise(name)}`)}`,
       name,
       source: path.basename(file),
-      review: "machine-extracted"
+      review: approve ? "human-approved" : "machine-extracted"
     }));
     const trapLines = (topic.body.match(/^\s*-\s+.+$/gm) || [])
       .map((line) => line.replace(/^\s*-\s+/, "").trim())
       .filter((line) => line.length > 8)
-      .map((name) => ({ id: `${target.number}.t${hash(`${target.id}:${normalise(name)}`)}`, name, concepts: [], review: "machine-extracted" }));
+      .map((name) => ({ id: `${target.number}.t${hash(`${target.id}:${normalise(name)}`)}`, name, concepts: [], review: approve ? "human-approved" : "machine-extracted" }));
     extracted.push({ topicId: target.id, topicNumber: target.number, concepts, traps: trapLines, source: path.basename(file) });
   }
 }
@@ -117,12 +118,12 @@ for (const section of manifest.sections) {
 manifest.status = "in-progress";
 manifest.authoring.conceptsIndexed = manifest.sections.reduce((count, section) => count + section.topics.reduce((topicCount, topic) => topicCount + topic.concepts.length, 0), 0);
 manifest.extraction = {
-  status: "machine-extracted-review-needed",
+  status: approve ? "human-approved" : "machine-extracted-review-needed",
   sourceFiles: files.map((file) => path.basename(file)),
   topicsMatched: extracted.length,
   topicsUnmatched: manifest.topicCount - extracted.length
 };
 fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n");
 fs.writeFileSync(path.join(root, "content", "concepts.json"), JSON.stringify(extracted, null, 2) + "\n");
-console.log(`Matched ${extracted.length} topics; indexed ${manifest.authoring.conceptsIndexed} machine-extracted concepts.`);
+console.log(`Matched ${extracted.length} topics; indexed ${manifest.authoring.conceptsIndexed} ${approve ? "human-approved" : "machine-extracted"} concepts.`);
 console.log(`Remaining topics without source coverage: ${manifest.extraction.topicsUnmatched}`);

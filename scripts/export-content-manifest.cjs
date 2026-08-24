@@ -65,6 +65,7 @@ const manifest = {
   sectionCount: sections.length,
   topicCount: sections.reduce((count, section) => count + section.topics.length, 0),
   sections,
+  extraction: existing?.extraction || null,
   authoring: {
     conceptsIndexed: sections.reduce((count, section) => count + section.topics.reduce((topicCount, topic) => topicCount + topic.concepts.length, 0), 0),
     lessonsAuthored: sections.reduce((count, section) => count + section.topics.reduce((topicCount, topic) => topicCount + topic.lessons.length, 0), 0),
