@@ -347,6 +347,16 @@ const lessonContent = {
   }
 };
 
+const foundationsCurriculum = [
+  { id: "python", number: "01", title: "Python", summary: "Understand the language deeply enough to reason about correctness, memory, performance, and the data model behind AI tooling.", topics: ["Language core", "Data structures in practice", "Object-oriented Python", "Concurrency & performance"], competencies: ["Predict unfamiliar code without running it.", "Choose structures by access pattern and complexity.", "Design classes, protocols, and composition that survive change.", "Choose correctly between async, threads, and processes."], traps: ["Mutable default arguments and late-bound closures.", "Quadratic list operations and accidental copies.", "Deep inheritance and shared mutable class state.", "Blocking calls inside async code and optimizing before profiling."], exercises: ["Implement zip, enumerate, map, and filter as generators.", "Build an O(1) LRU cache and a retry decorator.", "Create a constant-memory generator pipeline for a very large file.", "Compare sequential, threaded, and async I/O with measurements."], materials: "Fluent Python 2e · Effective Python · Python Language Reference · High Performance Python" },
+  { id: "engineering", number: "02", title: "Software engineering practice", summary: "Make work reviewable, testable, maintainable, and recoverable—the habits that turn notebooks into production software.", topics: ["Version control", "Testing", "Code quality & architecture", "Tooling & debugging"], competencies: ["Recover from any Git state and produce a reviewable history.", "Write regression tests, property tests, and tests for nondeterministic LLM output.", "Refactor behind tests and structure a project for a new contributor.", "Debug with a debugger, inspect traces, and use structured logs."], traps: ["Rebasing shared history without understanding the risk.", "Mocking the name definition instead of the name used.", "Chasing 100% coverage instead of meaningful failures.", "Logging secrets, swallowing exceptions, and using print as observability."], exercises: ["Recover a detached HEAD and a lost commit with reflog.", "Use Hypothesis to find a real edge case.", "Turn a single-file script into a typed, tested package.", "Instrument a multi-layer service with correlation IDs."], materials: "Pro Git · pytest and Hypothesis docs · Architecture Patterns with Python · Missing Semester" },
+  { id: "algorithms", number: "03", title: "Data structures & algorithms", summary: "Solve from constraints, state complexity before coding, and revisit problems until the pattern is durable.", topics: ["Complexity analysis", "Arrays & hashing", "Two pointers & sliding window", "Stacks & queues", "Binary search", "Linked lists", "Trees", "Heaps", "Graphs", "Backtracking", "Dynamic programming", "Greedy, intervals & math", "Sorting & searching internals"], competencies: ["State time and space complexity before implementation.", "Recognize the target pattern from constraints.", "Implement and explain canonical structures rather than memorizing answers."], traps: ["Using a list for repeated membership checks.", "Missing boundary cases in windows and binary search.", "Recursion depth, duplicate states, and hidden quadratic work."], exercises: ["Implement an open-addressing hash table with resize.", "Build an LRU cache with a doubly-linked list.", "Solve canonical array, graph, tree, heap, and DP problems with spaced revisits."], materials: "NeetCode patterns · CLRS selected chapters · CPython complexity notes" },
+  { id: "systems", number: "04", title: "Systems", summary: "Understand the machine and network underneath AI applications so you can make reliable trade-offs instead of treating infrastructure as magic.", topics: ["Operating systems", "Networking", "Distributed systems"], competencies: ["Explain processes, memory, files, scheduling, and system calls.", "Trace an HTTP request, design reliable retries, and understand TLS.", "Reason about partial failure, consistency, replication, and idempotency."], traps: ["Confusing a process with a thread or a coroutine.", "Retry storms, missing timeouts, and assuming exactly-once delivery.", "Quoting CAP theorem without naming the failure model."], exercises: ["Inspect a running process and diagnose memory or file-descriptor pressure.", "Build an HTTP client with timeouts, backoff, and idempotency keys.", "Design a queue-backed service and document its consistency guarantees."], materials: "OSTEP · Computer Networking: A Top-Down Approach · Designing Data-Intensive Applications" },
+  { id: "databases", number: "05", title: "Databases", summary: "Model data for change, write analytical SQL, understand indexes and transactions, and choose storage by access pattern.", topics: ["Relational modelling & SQL", "Database internals", "Beyond relational"], competencies: ["Design schemas that survive requirement changes.", "Write joins, window functions, cohorts, funnels, and sessionization queries.", "Read query plans and choose relational, document, key-value, search, or analytical stores deliberately."], traps: ["NULL and three-valued logic silently changing query results.", "Row explosions from duplicate join keys.", "Indexes with low selectivity, replication lag, and cache invalidation."], exercises: ["Model eight related entities and write 25 analytical queries.", "Rewrite and benchmark a slow query using EXPLAIN.", "Compare cache-aside, write-through, and search-index designs."], materials: "CMU 15-445 · Database Internals · PostgreSQL docs · DDIA" },
+  { id: "math", number: "06", title: "Mathematics", summary: "Read a paper's method section, debug a model by reasoning about shapes and gradients, and connect equations to implementation.", topics: ["Linear algebra", "Calculus & optimization", "Probability & statistics"], competencies: ["Track matrix and tensor shapes through a computation.", "Explain backpropagation as the chain rule and choose an optimizer knowingly.", "Use probability, estimation, experimentation, and information theory to evaluate systems."], traps: ["Element-wise operations mistaken for matrix composition.", "Unstable softmax, poor scaling, and confusing correlation with causation.", "p-values treated as the probability a hypothesis is true."], exercises: ["Implement matrix multiplication, SVD/PCA, and a low-rank approximation.", "Build gradient descent, Adam, and a tiny reverse-mode autodiff engine.", "Run an A/B test with power analysis and compute entropy, cross-entropy, and KL."], materials: "Mathematics for Machine Learning · 3Blue1Brown · Strang · Statistical Rethinking" },
+  { id: "data", number: "07", title: "Data handling", summary: "Build numerically stable, memory-aware, validated data workflows that can move from exploration to production.", topics: ["Numerical computing with NumPy", "Dataframes", "Cleaning & exploratory analysis", "Visualization", "Pipelines & scale"], competencies: ["Reason about shapes, broadcasting, views, dtypes, and numerical stability.", "Use pandas, Polars, SQL, and Arrow appropriately.", "Document cleaning decisions, validate contracts, and build idempotent pipelines."], traps: ["Silent copies, chained assignment, and object-dtype memory blowups.", "Imputing missing data without understanding MCAR, MAR, or MNAR.", "CSV in production, non-idempotent reruns, and misleading charts."], exercises: ["Implement stable softmax, cross-entropy, and layer norm in NumPy.", "Rewrite a pandas workflow in Polars and benchmark it.", "Clean a messy dataset with a written decision log and validation suite.", "Convert a large CSV workflow to partitioned Parquet and measure the result."], materials: "NumPy docs · Python for Data Analysis · Polars · Fundamentals of Data Engineering · Spark" }
+];
+
 // Theory is deliberately separate from the assessment questions. Learners get
 // an explanation, vocabulary, a worked mental model, and a business bridge
 // before they are asked to prove anything with code.
@@ -728,6 +738,52 @@ function filterPulse(topic) {
   });
 }
 
+function renderCurriculumSections() {
+  const host = $("#curriculum-sections");
+  if (!host || host.childElementCount) return;
+  foundationsCurriculum.forEach((section, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "curriculum-tab" + (index === 0 ? " selected" : "");
+    button.dataset.curriculumSection = String(index);
+    button.innerHTML = "<b>SECTION " + section.number + "</b><strong>" + section.title + "</strong><small>" + section.topics.length + " topics</small>";
+    host.appendChild(button);
+  });
+}
+
+function renderCurriculumDetail(index) {
+  const section = foundationsCurriculum[index] || foundationsCurriculum[0];
+  $("#curriculum-kicker").textContent = "SECTION " + section.number;
+  $("#curriculum-title").textContent = section.title;
+  $("#curriculum-summary").textContent = section.summary;
+  $("#curriculum-topic-count").textContent = section.topics.length;
+  $("#curriculum-exercise-count").textContent = section.exercises.length;
+  $("#curriculum-material-count").textContent = section.materials.split(" · ").length;
+  ["competencies", "traps", "exercises"].forEach((field) => {
+    const host = $("#curriculum-" + field);
+    host.textContent = "";
+    section[field].forEach((text) => {
+      const item = document.createElement("li");
+      item.textContent = text;
+      host.appendChild(item);
+    });
+  });
+  const topics = $("#curriculum-topics");
+  topics.textContent = "";
+  section.topics.forEach((topic, topicIndex) => {
+    const card = document.createElement("article");
+    card.className = "topic-card";
+    card.innerHTML = "<strong>" + String(topicIndex + 1).padStart(2, "0") + " · " + topic + "</strong><small>Theory, traps, implementation lab, and evidence review.</small>";
+    topics.appendChild(card);
+  });
+  $("#curriculum-materials").textContent = section.materials;
+  $$(".curriculum-tab").forEach((button) => button.classList.toggle("selected", Number(button.dataset.curriculumSection) === index));
+}
+
+function selectCurriculumSection(index) {
+  renderCurriculumDetail(Number(index));
+}
+
 function showView(name) {
   $$(".view").forEach((view) => view.classList.toggle("active-view", view.id === "view-" + name));
   $$(".nav").forEach((button) => {
@@ -736,7 +792,7 @@ function showView(name) {
     if (isActive) button.setAttribute("aria-current", "page");
     else button.removeAttribute("aria-current");
   });
-  const titles = { overview: "Overview", learn: "Learning path", portfolio: "Portfolio", pulse: "AI pulse" };
+  const titles = { overview: "Overview", learn: "Learning path", curriculum: "Foundations syllabus", portfolio: "Portfolio", pulse: "AI pulse" };
   $("#view-title").textContent = titles[name] || "Overview";
   window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? "auto" : "smooth" });
 }
@@ -1048,6 +1104,10 @@ $("#reset-progress").addEventListener("click", () => {
 });
 $$(".filters button").forEach((button) => button.addEventListener("click", () => filterPulse(button.dataset.topic)));
 $$(".path").forEach((button) => button.addEventListener("click", () => selectModule(Number(button.dataset.module))));
+document.addEventListener("click", (event) => {
+  const curriculumButton = event.target.closest("[data-curriculum-section]");
+  if (curriculumButton) selectCurriculumSection(Number(curriculumButton.dataset.curriculumSection));
+});
 $("#project-action").addEventListener("click", toggleProjectBrief);
 applyTheme();
 repairLessonPointer();
@@ -1058,3 +1118,5 @@ updateProgress();
 updateLessonRows();
 updateDashboard();
 filterPulse("all");
+renderCurriculumSections();
+renderCurriculumDetail(0);
