@@ -17,6 +17,7 @@ Covers the exercise checker in `python-lite.js`. Node 18 or newer; no dependenci
 - Responsive learner dashboard and navigation
 - Six sequential modules and 16 gated lessons covering foundations, GenAI/LLMs, RAG, alignment, agents, deployment and safety
 - A syllabus browser for Part I Foundations: 7 sections, 35 topics, competencies, traps, exercises, and reference shelves
+- Individual topic labs for all 35 foundations topics, with paste-resistant evidence submission and local completion history
 - Adaptive progress, remediation nudges, module unlocks and a final release checkpoint
 - Interactive Python exercise with paste/drop prevention
 - Hidden tests that actually run the submitted code against real cases, via a
