@@ -476,68 +476,36 @@ const theoryGuides = {
   16: { title: "Release readiness: quality and safety are conjunctive", explanation: "A release is ready only when the quality evidence and safety review both pass. This is a deliberately simple AND gate for a much larger launch checklist: evaluation, privacy, security, monitoring, rollback, and ownership.", points: ["One strong demo cannot compensate for an unsafe failure.", "Release criteria should be written before the launch.", "Rollback is part of the design, not an admission of defeat."], terms: "release gate · rollback · safety review · sign-off", business: "A hospital assistant should not ship because it is accurate if its access controls and escalation path are untested.", reflection: "Who owns the decision to pause a release?" }
 };
 
-const modules = [
-  {
-    code: "00",
-    title: "AI Engineer foundations",
-    status: "IN PROGRESS",
-    meta: "In progress",
-    summary: "Build enough fluency to learn the IIT Kharagpur GenAI curriculum confidently, then turn your learning into working software.",
-    unlocked: true,
-    lessonIds: [1, 2, 3, 4, 5, 6],
-    unlockAfter: 0
-  },
-  {
-    code: "01",
-    title: "Foundations of GenAI & LLMs",
-    status: "LOCKED",
-    meta: "6 weeks · 18 live hours",
-    summary: "Deep learning essentials, transformers, embeddings and model selection.",
-    unlocked: false,
-    lessonIds: [7, 8],
-    unlockAfter: 6
-  },
-  {
-    code: "02",
-    title: "Advanced prompting & RAG",
-    status: "LOCKED",
-    meta: "6 weeks · 18 live hours",
-    summary: "Retrieval, hybrid search, reranking and evaluation you can measure.",
-    unlocked: false,
-    lessonIds: [9, 10],
-    unlockAfter: 8
-  },
-  {
-    code: "03",
-    title: "Fine-tuning & alignment",
-    status: "LOCKED",
-    meta: "6 weeks · 18 live hours",
-    summary: "Adapting a base model to a task, and keeping its behaviour predictable once you have.",
-    unlocked: false,
-    lessonIds: [11, 12],
-    unlockAfter: 10
-  },
-  {
-    code: "04",
-    title: "Multimodal & agentic AI",
-    status: "LOCKED",
-    meta: "6 weeks · 18 live hours",
-    summary: "Systems that read images and documents, call tools and carry a task across several steps.",
-    unlocked: false,
-    lessonIds: [13, 14],
-    unlockAfter: 12
-  },
-  {
-    code: "05",
-    title: "Deployment, optimization & safety",
-    status: "LOCKED",
-    meta: "8 weeks · 24 live hours",
-    summary: "Serving a model at a cost you can defend, and the safety work that has to ship with it.",
-    unlocked: false,
-    lessonIds: [15, 16],
-    unlockAfter: 14
-  }
+// The learning path is derived from the same curriculum records used by the
+// syllabus browser. This prevents the two views from slowly drifting apart as
+// new programme parts are added.
+const partDefinitions = [
+  { key: "PART I · FOUNDATIONS", code: "I", title: "Foundations & core engineering", summary: "Python, software engineering, algorithms, systems, databases, mathematics, and data handling." },
+  { key: "PART II · MACHINE LEARNING", code: "II", title: "Machine learning", summary: "Classical ML, deep learning, and the NLP foundations that lead into modern language models." },
+  { key: "PART III · TRANSFORMERS & LLMs", code: "III", title: "Transformers & LLMs", summary: "Attention, tokenization, scaling, adaptation, and efficient inference." },
+  { key: "PART IV · AI ENGINEERING", code: "IV", title: "AI engineering", summary: "Model integration, retrieval, agents, evaluation, safety, and guardrails." },
+  { key: "PART V · PRODUCTION", code: "V", title: "Production", summary: "Serving, MLOps, observability, cost engineering, and AI system design." },
+  { key: "PART VI · OPTIONAL DEPTH", code: "VI", title: "Optional depth", summary: "Computer vision, speech, multimodal systems, reinforcement learning, recommenders, graphs, forecasting, and performance." }
 ];
+
+const modules = partDefinitions.map((part, index) => {
+  const sections = foundationsCurriculum.filter((section) => (section.part || "PART I · FOUNDATIONS").toLowerCase() === part.key.toLowerCase());
+  const topicLabIds = sections.flatMap((section) => section.topics.map((topic) => section.id + "-" + topic.toLowerCase().replace(/[^a-z0-9]+/g, "-")));
+  return {
+    code: String(index).padStart(2, "0"),
+    partCode: part.code,
+    partLabel: part.key,
+    title: part.title,
+    status: index === 0 ? "IN PROGRESS" : "LOCKED",
+    meta: sections.length + " sections · " + topicLabIds.length + " topic labs",
+    summary: part.summary,
+    unlocked: index === 0,
+    lessonIds: index === 0 ? [1, 2, 3, 4, 5, 6] : [],
+    sectionIds: sections.map((section) => section.id),
+    topicLabIds,
+    unlockAfter: index === 0 ? 0 : null
+  };
+});
 
 const projectMilestones = [
   "Set up the project, its folder layout and a first commit.",
@@ -575,14 +543,26 @@ function moduleForLesson(number) {
   return modules.find((module) => module.lessonIds.includes(Number(number))) || modules[0];
 }
 
+function moduleStats(module) {
+  if (!module) return { done: 0, total: 0, percent: 0, codingDone: 0, topicDone: 0 };
+  const codingDone = module.lessonIds.filter((number) => number <= state.lessons).length;
+  const topicDone = module.topicLabIds.filter((id) => state.topicProgress[id]).length;
+  const total = module.lessonIds.length + module.topicLabIds.length;
+  const done = codingDone + topicDone;
+  return { done, total, percent: total ? Math.round((done / total) * 100) : 0, codingDone, topicDone };
+}
+
 function isModuleUnlocked(module) {
-  return Boolean(module && state.lessons >= module.unlockAfter);
+  const index = modules.indexOf(module);
+  if (!module || index < 0) return false;
+  if (index === 0) return true;
+  // Browsing the syllabus is always allowed; the gated path unlocks each
+  // subsequent part after the preceding part's evidence is complete.
+  return moduleStats(modules[index - 1]).percent === 100;
 }
 
 function modulePercent(module) {
-  if (!module || !module.lessonIds.length) return 0;
-  const done = module.lessonIds.filter((number) => number <= state.lessons).length;
-  return Math.round((done / module.lessonIds.length) * 100);
+  return moduleStats(module).percent;
 }
 
 function moduleStatus(module) {
@@ -606,28 +586,56 @@ function updateProgress() {
   // No floor: the figure is the real fraction of lessons completed. It was
   // pinned at a minimum of 18% while the markup repeated "18%" in four places.
   const percent = Math.round((state.lessons / TOTAL_LESSONS) * 100);
-  const lessonsLabel = state.lessons + " / " + TOTAL_LESSONS + " lessons";
+  const firstStats = moduleStats(modules[0]);
 
   $("#mastery").innerHTML = percent + "<small>%</small>";
   $("#mastery-note").textContent = state.lessons >= TOTAL_LESSONS ? "All modules · path complete" : "All modules · " + state.lessons + " of " + TOTAL_LESSONS + " lessons";
-  $("#roadmap-bar").style.width = percent + "%";
-  $("#roadmap-lessons").textContent = lessonsLabel;
-  $("#path-percent").textContent = percent + "%";
-  $("#path-status").textContent = moduleStatus(modules[0]).toLowerCase() + " · " + modules[0].lessonIds.filter((number) => number <= state.lessons).length + " / " + modules[0].lessonIds.length + " lessons";
-  $(".roadmap").style.setProperty("--road-progress", percent + "%");
+  $("#roadmap-bar").style.width = firstStats.percent + "%";
+  $("#roadmap-lessons").textContent = firstStats.done + " / " + firstStats.total + " checkpoints";
+  $("#path-percent").textContent = firstStats.percent + "%";
+  $("#path-status").textContent = moduleStatus(modules[0]).toLowerCase() + " · " + firstStats.done + " / " + firstStats.total + " checkpoints";
+  $(".roadmap").style.setProperty("--road-progress", firstStats.percent + "%");
   $("#active-counter").innerHTML =
     String(state.lessons).padStart(2, "0") + " <small>/ " + String(TOTAL_LESSONS).padStart(2, "0") + "</small>";
-  $("#path-percent").textContent = modulePercent(modules[0]) + "%";
   modules.forEach((module, index) => {
     const button = $(".path[data-module='" + index + "']");
     if (!button) return;
     const unlocked = isModuleUnlocked(module);
-    const percentForModule = modulePercent(module);
+    const stats = moduleStats(module);
+    const percentForModule = stats.percent;
+    const code = button.querySelector("b");
+    const title = button.querySelector("strong");
+    if (code) code.textContent = module.code;
+    if (title) title.textContent = module.title;
     button.classList.toggle("locked", !unlocked);
     button.querySelector("em").textContent = unlocked ? percentForModule + "%" : "⌑";
     const small = button.querySelector("small");
-    if (small) small.textContent = unlocked ? moduleStatus(module).toLowerCase() + " · " + module.lessonIds.filter((number) => number <= state.lessons).length + " / " + module.lessonIds.length + " lessons" : module.meta;
+    if (small) small.textContent = unlocked ? moduleStatus(module).toLowerCase() + " · " + stats.done + " / " + stats.total + " checkpoints" : module.meta;
   });
+  $$(".roadmap .road").forEach((card, index) => {
+    const module = modules[index];
+    if (!module) return;
+    const stats = moduleStats(module);
+    const unlocked = isModuleUnlocked(module);
+    const heading = card.querySelector("h3");
+    const label = card.querySelector("h3 i");
+    const summary = card.querySelector("p");
+    const marker = card.querySelector("b");
+    if (marker) marker.textContent = module.code;
+    if (heading) {
+      heading.firstChild.textContent = module.title + " ";
+      if (label) label.textContent = moduleStatus(module);
+    }
+    if (summary) summary.textContent = module.summary;
+    card.classList.toggle("current", index === 0);
+    card.classList.toggle("locked", !unlocked);
+    const arrow = card.querySelector("button");
+    if (arrow) arrow.setAttribute("aria-label", "Open " + module.title + " module");
+    const mini = card.querySelector("small");
+    if (mini) mini.textContent = unlocked ? stats.done + " / " + stats.total + " checkpoints" : module.meta;
+  });
+  const roadMore = $(".road-more");
+  if (roadMore) roadMore.textContent = "+ " + Math.max(0, modules.length - 3) + " further syllabus parts mapped to your programme";
   $("#detail-bar").style.width = modulePercent(modules[selectedModule]) + "%";
   $("#detail-label").textContent = modulePercent(modules[selectedModule]) + "% complete";
 
@@ -710,6 +718,10 @@ function renderModuleRows() {
   const module = modules[selectedModule] || modules[0];
   const host = $("#module-lessons");
   host.textContent = "";
+
+  // Keep the original executable foundation lessons visible, then show the
+  // syllabus sections that make up this part. Every row opens the same topic
+  // lab or lesson used elsewhere in the app.
   module.lessonIds.forEach((number) => {
     const data = lessonContent[number];
     const row = document.createElement("div");
@@ -737,6 +749,30 @@ function renderModuleRows() {
       status.textContent = isDone ? "Done" : "Locked";
       row.appendChild(status);
     }
+    host.appendChild(row);
+  });
+
+  module.sectionIds.forEach((sectionId) => {
+    const section = foundationsCurriculum.find((item) => item.id === sectionId);
+    if (!section) return;
+    const row = document.createElement("div");
+    row.className = "lesson-row syllabus-row";
+    const marker = document.createElement("b");
+    marker.textContent = section.number;
+    const info = document.createElement("span");
+    const title = document.createElement("strong");
+    title.textContent = section.title;
+    const completed = section.topics.filter((topic) => state.topicProgress[section.id + "-" + topic.toLowerCase().replace(/[^a-z0-9]+/g, "-")]).length;
+    const meta = document.createElement("small");
+    meta.textContent = completed + " / " + section.topics.length + " topic labs complete";
+    info.append(title, meta);
+    row.append(marker, info);
+    const open = document.createElement("button");
+    open.className = "small";
+    open.type = "button";
+    open.dataset.openCurriculumSection = String(foundationsCurriculum.indexOf(section));
+    open.textContent = completed === section.topics.length ? "Review syllabus" : "Open syllabus";
+    row.appendChild(open);
     host.appendChild(row);
   });
 }
@@ -767,8 +803,11 @@ function selectModule(index) {
   $("#module-kicker").innerHTML = "MODULE " + module.code + ' <i>' + module.status + "</i>";
   $("#module-title").textContent = module.title;
   $("#module-summary").textContent = module.summary;
-  $("#module-progress").hidden = !module.unlocked;
-  $("#module-lessons").hidden = !module.unlocked;
+  // Locked parts remain inspectable so the learning path and syllabus never
+  // appear to disagree. Only the gated executable lesson is locked; the
+  // learner can preview the mapped sections and open their syllabus labs.
+  $("#module-progress").hidden = false;
+  $("#module-lessons").hidden = false;
   renderModuleRows();
 
   let locked = $("#module-locked");
@@ -780,7 +819,7 @@ function selectModule(index) {
       $(".module-detail").appendChild(locked);
     }
     const prerequisite = modules[index - 1] ? modules[index - 1].title : "the previous module";
-    locked.textContent = module.meta + ". Unlocks once you finish " + prerequisite + ".";
+    locked.textContent = module.meta + ". Preview available; gated progression unlocks once you finish " + prerequisite + ".";
     locked.hidden = false;
   } else if (locked) {
     locked.hidden = true;
@@ -950,6 +989,8 @@ function submitTopicEvidence() {
   result.className = "success";
   result.textContent = "✓ Topic lab complete. Your evidence has been added to the learning record.";
   $("#topic-editor-status").textContent = "Development history captured · evidence saved";
+  updateProgress();
+  renderModuleRows();
   const sectionIndex = foundationsCurriculum.findIndex((section) => section.id === activeTopicLab.section);
   if (sectionIndex >= 0) renderCurriculumDetail(sectionIndex);
 }
@@ -962,7 +1003,7 @@ function showView(name) {
     if (isActive) button.setAttribute("aria-current", "page");
     else button.removeAttribute("aria-current");
   });
-  const titles = { overview: "Overview", learn: "Learning path", curriculum: "Foundations syllabus", portfolio: "Portfolio", pulse: "AI pulse" };
+  const titles = { overview: "Overview", learn: "Learning path", curriculum: "Full AI syllabus", portfolio: "Portfolio", pulse: "AI pulse" };
   $("#view-title").textContent = titles[name] || "Overview";
   window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? "auto" : "smooth" });
 }
@@ -1285,6 +1326,11 @@ $$(".path").forEach((button) => button.addEventListener("click", () => selectMod
 document.addEventListener("click", (event) => {
   const curriculumButton = event.target.closest("[data-curriculum-section]");
   if (curriculumButton) selectCurriculumSection(Number(curriculumButton.dataset.curriculumSection));
+  const openSyllabus = event.target.closest("[data-open-curriculum-section]");
+  if (openSyllabus) {
+    showView("curriculum");
+    selectCurriculumSection(Number(openSyllabus.dataset.openCurriculumSection));
+  }
 });
 $("#project-action").addEventListener("click", toggleProjectBrief);
 applyTheme();

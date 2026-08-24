@@ -23,6 +23,13 @@ test("Parts II through VI are represented in the same curriculum model", () => {
   assert.match(app, /advancedCurriculum\.forEach/);
 });
 
+test("the learning path is derived from the syllabus sections", () => {
+  assert.match(app, /const partDefinitions = \[/);
+  assert.match(app, /const modules = partDefinitions\.map/);
+  assert.match(app, /sectionIds: sections\.map/);
+  assert.match(app, /data-open-curriculum-section/);
+});
+
 test("lesson and topic modal backdrops cannot dismiss the dialog", () => {
   assert.doesNotMatch(html, /<div class="backdrop" data-close-modal/);
   assert.doesNotMatch(html, /<div class="backdrop" data-close-topic/);
