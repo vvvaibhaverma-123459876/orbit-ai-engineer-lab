@@ -2,15 +2,20 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
+const childProcess = require("node:child_process");
 
 const app = fs.readFileSync(path.join(__dirname, "..", "app.js"), "utf8");
 const html = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
 
-test("the foundations syllabus has all seven sections and 35 topic labs", () => {
+test("the curriculum has the target 35-section and 197-topic structure", () => {
   assert.match(app, /const foundationsCurriculum = \[/);
   assert.equal((app.match(/\["(?:python|engineering|algorithms|systems|databases|math|data)", "[^"]+", "[^"]+", "[^"]+", "[^"]+"\]/g) || []).length, 35);
   assert.match(html, /id="view-curriculum"/);
   assert.match(html, /id="topic-modal"/);
+  const report = childProcess.execFileSync(process.execPath, [path.join(__dirname, "..", "scripts", "curriculum-lint.cjs")], { encoding: "utf8" });
+  assert.match(report, /Sections: 35/);
+  assert.match(report, /Topics: 197/);
+  assert.match(report, /Topic labs: 197/);
 });
 
 test("Parts II through VI are represented in the same curriculum model", () => {
@@ -20,7 +25,9 @@ test("Parts II through VI are represented in the same curriculum model", () => {
   assert.match(app, /PART IV · AI ENGINEERING/);
   assert.match(app, /PART V · PRODUCTION/);
   assert.match(app, /PART VI · OPTIONAL DEPTH/);
-  assert.match(app, /advancedCurriculum\.forEach/);
+  assert.match(app, /PART 0 · CLASSICAL AI/);
+  assert.match(app, /PART VII · STAYING CURRENT/);
+  assert.match(app, /foundationsCurriculum\.forEach/);
 });
 
 test("the learning path is derived from the syllabus sections", () => {

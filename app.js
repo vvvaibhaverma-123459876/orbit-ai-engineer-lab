@@ -8,6 +8,8 @@ const defaults = {
   streak: 1,
   bestStreak: 1,
   lastActiveDay: null,
+  practiceDays: [],
+  gates: {},
   topicProgress: {}
 };
 
@@ -16,6 +18,7 @@ const defaults = {
 // an exercise, and hidden cases, so every mapped module has a playable endpoint.
 const TOTAL_LESSONS = 16;
 const PROJECT_MILESTONES = 4;
+const TOTAL_GATES = 10;
 
 function clampMilestones(value) {
   return Math.min(PROJECT_MILESTONES, Math.max(1, Math.round(Number(value) || 1)));
@@ -30,6 +33,8 @@ function loadState() {
     if (!stored || typeof stored !== "object" || Array.isArray(stored)) return Object.assign({}, defaults);
     const merged = Object.assign({}, defaults, stored);
     if (!merged.topicProgress || typeof merged.topicProgress !== "object" || Array.isArray(merged.topicProgress)) merged.topicProgress = {};
+    if (!Array.isArray(merged.practiceDays)) merged.practiceDays = [];
+    if (!merged.gates || typeof merged.gates !== "object" || Array.isArray(merged.gates)) merged.gates = {};
     // Earlier builds stored a "portfolio" count that was really the lesson
     // number. Carry it across as a milestone count and drop the old key.
     if (typeof stored.portfolio === "number" && typeof stored.milestones !== "number") {
@@ -350,12 +355,13 @@ const lessonContent = {
 };
 
 const foundationsCurriculum = [
+  { id: "classical-ai", part: "PART 0 · CLASSICAL AI", number: "00", title: "Classical AI", summary: "Build the symbolic and search-based mental models that make modern learning systems easier to reason about.", topics: ["Problem formulation & state spaces", "Search & heuristics", "Constraint satisfaction", "Planning & decision making", "Knowledge representation", "Game playing & MCTS"], competencies: ["Translate a real problem into states, actions, goals, and costs.", "Choose uninformed or informed search from guarantees and constraints.", "Represent rules, constraints, plans, and uncertainty explicitly.", "Explain where symbolic methods complement statistical models."], traps: ["Optimising a search algorithm before defining the state space.", "Using a heuristic that is not admissible when optimality matters.", "Calling a rule system intelligent without testing coverage and brittleness.", "Treating MCTS rollouts as a substitute for a useful policy or value estimate."], exercises: ["Model a route-planning problem and compare BFS, uniform-cost, and A*.", "Build a constraint solver for a small scheduling problem.", "Represent a business policy as rules and identify ambiguous cases.", "Implement MCTS with UCT and explain every term in the selection score."], materials: "Artificial Intelligence: A Modern Approach · classical planning notes · MCTS literature" },
   { id: "python", number: "01", title: "Python", summary: "Understand the language deeply enough to reason about correctness, memory, performance, and the data model behind AI tooling.", topics: ["Language core", "Data structures in practice", "Object-oriented Python", "Concurrency & performance"], competencies: ["Predict unfamiliar code without running it.", "Choose structures by access pattern and complexity.", "Design classes, protocols, and composition that survive change.", "Choose correctly between async, threads, and processes."], traps: ["Mutable default arguments and late-bound closures.", "Quadratic list operations and accidental copies.", "Deep inheritance and shared mutable class state.", "Blocking calls inside async code and optimizing before profiling."], exercises: ["Implement zip, enumerate, map, and filter as generators.", "Build an O(1) LRU cache and a retry decorator.", "Create a constant-memory generator pipeline for a very large file.", "Compare sequential, threaded, and async I/O with measurements."], materials: "Fluent Python 2e · Effective Python · Python Language Reference · High Performance Python" },
-  { id: "engineering", number: "02", title: "Software engineering practice", summary: "Make work reviewable, testable, maintainable, and recoverable—the habits that turn notebooks into production software.", topics: ["Version control", "Testing", "Code quality & architecture", "Tooling & debugging"], competencies: ["Recover from any Git state and produce a reviewable history.", "Write regression tests, property tests, and tests for nondeterministic LLM output.", "Refactor behind tests and structure a project for a new contributor.", "Debug with a debugger, inspect traces, and use structured logs."], traps: ["Rebasing shared history without understanding the risk.", "Mocking the name definition instead of the name used.", "Chasing 100% coverage instead of meaningful failures.", "Logging secrets, swallowing exceptions, and using print as observability."], exercises: ["Recover a detached HEAD and a lost commit with reflog.", "Use Hypothesis to find a real edge case.", "Turn a single-file script into a typed, tested package.", "Instrument a multi-layer service with correlation IDs."], materials: "Pro Git · pytest and Hypothesis docs · Architecture Patterns with Python · Missing Semester" },
+  { id: "engineering", number: "02", title: "Software engineering practice", summary: "Make work reviewable, testable, maintainable, and recoverable—the habits that turn notebooks into production software.", topics: ["Version control", "Testing", "Code quality & architecture", "Tooling & debugging", "Packaging & environments", "Security & secrets"], competencies: ["Recover from any Git state and produce a reviewable history.", "Write regression tests, property tests, and tests for nondeterministic LLM output.", "Refactor behind tests and structure a project for a new contributor.", "Debug with a debugger, inspect traces, and use structured logs.", "Package a project with reproducible environments and explicit dependencies.", "Protect credentials, dependencies, and user data throughout the development lifecycle."], traps: ["Rebasing shared history without understanding the risk.", "Mocking the name definition instead of the name used.", "Chasing 100% coverage instead of meaningful failures.", "Logging secrets, swallowing exceptions, and using print as observability.", "It works on my machine because the environment is undocumented.", "Committing API keys or treating dependency updates as automatically safe."], exercises: ["Recover a detached HEAD and a lost commit with reflog.", "Use Hypothesis to find a real edge case.", "Turn a single-file script into a typed, tested package.", "Instrument a multi-layer service with correlation IDs.", "Build and publish a small package from a clean environment.", "Threat-model a learning app and rotate a deliberately exposed secret."], materials: "Pro Git · pytest and Hypothesis docs · Architecture Patterns with Python · Missing Semester · Python Packaging Guide · OWASP" },
   { id: "algorithms", number: "03", title: "Data structures & algorithms", summary: "Solve from constraints, state complexity before coding, and revisit problems until the pattern is durable.", topics: ["Complexity analysis", "Arrays & hashing", "Two pointers & sliding window", "Stacks & queues", "Binary search", "Linked lists", "Trees", "Heaps", "Graphs", "Backtracking", "Dynamic programming", "Greedy, intervals & math", "Sorting & searching internals"], competencies: ["State time and space complexity before implementation.", "Recognize the target pattern from constraints.", "Implement and explain canonical structures rather than memorizing answers."], traps: ["Using a list for repeated membership checks.", "Missing boundary cases in windows and binary search.", "Recursion depth, duplicate states, and hidden quadratic work."], exercises: ["Implement an open-addressing hash table with resize.", "Build an LRU cache with a doubly-linked list.", "Solve canonical array, graph, tree, heap, and DP problems with spaced revisits."], materials: "NeetCode patterns · CLRS selected chapters · CPython complexity notes" },
-  { id: "systems", number: "04", title: "Systems", summary: "Understand the machine and network underneath AI applications so you can make reliable trade-offs instead of treating infrastructure as magic.", topics: ["Operating systems", "Networking", "Distributed systems"], competencies: ["Explain processes, memory, files, scheduling, and system calls.", "Trace an HTTP request, design reliable retries, and understand TLS.", "Reason about partial failure, consistency, replication, and idempotency."], traps: ["Confusing a process with a thread or a coroutine.", "Retry storms, missing timeouts, and assuming exactly-once delivery.", "Quoting CAP theorem without naming the failure model."], exercises: ["Inspect a running process and diagnose memory or file-descriptor pressure.", "Build an HTTP client with timeouts, backoff, and idempotency keys.", "Design a queue-backed service and document its consistency guarantees."], materials: "OSTEP · Computer Networking: A Top-Down Approach · Designing Data-Intensive Applications" },
-  { id: "databases", number: "05", title: "Databases", summary: "Model data for change, write analytical SQL, understand indexes and transactions, and choose storage by access pattern.", topics: ["Relational modelling & SQL", "Database internals", "Beyond relational"], competencies: ["Design schemas that survive requirement changes.", "Write joins, window functions, cohorts, funnels, and sessionization queries.", "Read query plans and choose relational, document, key-value, search, or analytical stores deliberately."], traps: ["NULL and three-valued logic silently changing query results.", "Row explosions from duplicate join keys.", "Indexes with low selectivity, replication lag, and cache invalidation."], exercises: ["Model eight related entities and write 25 analytical queries.", "Rewrite and benchmark a slow query using EXPLAIN.", "Compare cache-aside, write-through, and search-index designs."], materials: "CMU 15-445 · Database Internals · PostgreSQL docs · DDIA" },
-  { id: "math", number: "06", title: "Mathematics", summary: "Read a paper's method section, debug a model by reasoning about shapes and gradients, and connect equations to implementation.", topics: ["Linear algebra", "Calculus & optimization", "Probability & statistics"], competencies: ["Track matrix and tensor shapes through a computation.", "Explain backpropagation as the chain rule and choose an optimizer knowingly.", "Use probability, estimation, experimentation, and information theory to evaluate systems."], traps: ["Element-wise operations mistaken for matrix composition.", "Unstable softmax, poor scaling, and confusing correlation with causation.", "p-values treated as the probability a hypothesis is true."], exercises: ["Implement matrix multiplication, SVD/PCA, and a low-rank approximation.", "Build gradient descent, Adam, and a tiny reverse-mode autodiff engine.", "Run an A/B test with power analysis and compute entropy, cross-entropy, and KL."], materials: "Mathematics for Machine Learning · 3Blue1Brown · Strang · Statistical Rethinking" },
+  { id: "systems", number: "04", title: "Systems", summary: "Understand the machine and network underneath AI applications so you can make reliable trade-offs instead of treating infrastructure as magic.", topics: ["Operating systems", "Networking", "Distributed systems", "Concurrency & parallelism", "Cloud primitives", "Reliability engineering", "Security boundaries"], competencies: ["Explain processes, memory, files, scheduling, and system calls.", "Trace an HTTP request, design reliable retries, and understand TLS.", "Reason about partial failure, consistency, replication, and idempotency.", "Choose concurrency primitives from workload and failure behaviour.", "Map an AI service onto compute, storage, queues, and identity primitives.", "Define SLOs, error budgets, incident response, and graceful degradation.", "Place trust boundaries, least privilege, and isolation around a service."], traps: ["Confusing a process with a thread or a coroutine.", "Retry storms, missing timeouts, and assuming exactly-once delivery.", "Quoting CAP theorem without naming the failure model.", "Using concurrency to hide an unbounded queue or a shared-state race.", "Treating cloud services as magic boxes with no cost or failure mode.", "Optimising availability while ignoring recovery and data integrity.", "Trusting a network boundary or client-supplied identity without validation."], exercises: ["Inspect a running process and diagnose memory or file-descriptor pressure.", "Build an HTTP client with timeouts, backoff, and idempotency keys.", "Design a queue-backed service and document its consistency guarantees.", "Compare async, threads, and processes on a bounded workload.", "Draw a cloud reference architecture with identity and failure zones.", "Write an SLO and incident runbook for a model-backed endpoint.", "Threat-model a service boundary and specify least-privilege permissions."], materials: "OSTEP · Computer Networking: A Top-Down Approach · Designing Data-Intensive Applications · Site Reliability Engineering · cloud provider architecture guides" },
+  { id: "databases", number: "05", title: "Databases", summary: "Model data for change, write analytical SQL, understand indexes and transactions, and choose storage by access pattern.", topics: ["Relational modelling & SQL", "Database internals", "Beyond relational", "Transactions & concurrency", "Analytics & warehousing", "Data access patterns"], competencies: ["Design schemas that survive requirement changes.", "Write joins, window functions, cohorts, funnels, and sessionization queries.", "Read query plans and choose relational, document, key-value, search, or analytical stores deliberately.", "Explain isolation, locking, MVCC, and safe migration strategies.", "Design facts, dimensions, partitions, and incremental analytical models.", "Select storage and caching from access patterns, latency, consistency, and cost."], traps: ["NULL and three-valued logic silently changing query results.", "Row explosions from duplicate join keys.", "Indexes with low selectivity, replication lag, and cache invalidation.", "Assuming a transaction protects work it never locked or validated.", "Treating a warehouse as a dump instead of a model with ownership.", "Choosing a database by fashion rather than workload and recovery needs."], exercises: ["Model eight related entities and write 25 analytical queries.", "Rewrite and benchmark a slow query using EXPLAIN.", "Compare cache-aside, write-through, and search-index designs.", "Reproduce a transaction anomaly and fix it with the right isolation or lock.", "Build a small star schema with an incremental transformation.", "Choose storage for three AI workloads and defend the decision with numbers."], materials: "CMU 15-445 · Database Internals · PostgreSQL docs · DDIA · Designing Data-Intensive Applications" },
+  { id: "math", number: "06", title: "Mathematics", summary: "Read a paper's method section, debug a model by reasoning about shapes and gradients, and connect equations to implementation.", topics: ["Linear algebra", "Calculus & optimization", "Probability & statistics", "Multivariable calculus", "Numerical methods", "Information theory", "Estimation & inference", "Experimental design", "Causal reasoning", "Geometry & representations", "Mathematical communication"], competencies: ["Track matrix and tensor shapes through a computation.", "Explain backpropagation as the chain rule and choose an optimizer knowingly.", "Use probability, estimation, experimentation, and information theory to evaluate systems.", "Differentiate vector and matrix functions and reason about Jacobians.", "Recognize numerical instability and select a stable formulation.", "Use entropy, cross-entropy, KL, and mutual information precisely.", "Separate sampling error, uncertainty, and model error.", "Design an experiment with power, controls, and a decision rule.", "Name when a causal claim is not identified by an observational result.", "Relate distances, projections, and low-dimensional structure to representations.", "Write a derivation that another engineer can audit."], traps: ["Element-wise operations mistaken for matrix composition.", "Unstable softmax, poor scaling, and confusing correlation with causation.", "p-values treated as the probability a hypothesis is true.", "Dropping a transpose or broadcasting a gradient silently.", "Relying on a numerically unstable formula because it is algebraically shorter.", "Using an information metric without checking its support and units.", "Reporting a point estimate without uncertainty or sensitivity.", "Peeking at an experiment until the desired answer appears.", "Calling a prediction causal because it correlates with an outcome.", "Treating embedding distance as meaning without validating the geometry.", "Writing symbols without defining dimensions or assumptions."], exercises: ["Implement matrix multiplication, SVD/PCA, and a low-rank approximation.", "Build gradient descent, Adam, and a tiny reverse-mode autodiff engine.", "Run an A/B test with power analysis and compute entropy, cross-entropy, and KL.", "Derive a Jacobian for a two-layer network and verify it numerically.", "Compare stable and unstable formulations on extreme values.", "Construct a coding and compression example using entropy and KL.", "Estimate a parameter with bootstrap intervals and a sensitivity analysis.", "Design an experiment and calculate sample size before collecting data.", "Use a causal graph to identify a confounder and a valid adjustment set.", "Compare Euclidean, cosine, and Mahalanobis geometry on representations.", "Rewrite a model derivation with explicit shapes and assumptions."], materials: "Mathematics for Machine Learning · 3Blue1Brown · Strang · Statistical Rethinking · Numerical Recipes" },
   { id: "data", number: "07", title: "Data handling", summary: "Build numerically stable, memory-aware, validated data workflows that can move from exploration to production.", topics: ["Numerical computing with NumPy", "Dataframes", "Cleaning & exploratory analysis", "Visualization", "Pipelines & scale"], competencies: ["Reason about shapes, broadcasting, views, dtypes, and numerical stability.", "Use pandas, Polars, SQL, and Arrow appropriately.", "Document cleaning decisions, validate contracts, and build idempotent pipelines."], traps: ["Silent copies, chained assignment, and object-dtype memory blowups.", "Imputing missing data without understanding MCAR, MAR, or MNAR.", "CSV in production, non-idempotent reruns, and misleading charts."], exercises: ["Implement stable softmax, cross-entropy, and layer norm in NumPy.", "Rewrite a pandas workflow in Polars and benchmark it.", "Clean a messy dataset with a written decision log and validation suite.", "Convert a large CSV workflow to partitioned Parquet and measure the result."], materials: "NumPy docs · Python for Data Analysis · Polars · Fundamentals of Data Engineering · Spark" }
 ];
 
@@ -370,31 +376,33 @@ function makeAdvancedSection(id, part, number, title, topics, summary, materials
 }
 
 const advancedCurriculum = [
-  makeAdvancedSection("ml-classical", "PART II · MACHINE LEARNING", "08", "Classical machine learning", ["Framing the problem", "Supervised learning", "Unsupervised learning", "Evaluation", "Feature engineering", "Interpretability"], "Turn a vague business request into a measurable prediction or discovery problem, then build an honest baseline.", "Hands-On Machine Learning · ISLR · scikit-learn user guide"),
-  makeAdvancedSection("ml-deep", "PART II · MACHINE LEARNING", "09", "Deep learning", ["Neural network fundamentals", "Training dynamics", "PyTorch", "Architectures", "Transfer learning", "Scaling & distributed training"], "Build neural networks from first principles, train them reliably, and understand the memory and compute behind modern models.", "Deep Learning · Dive into Deep Learning · PyTorch docs"),
+  makeAdvancedSection("ml-classical", "PART II · MACHINE LEARNING", "08", "Classical machine learning", ["Framing the problem", "Supervised learning", "Unsupervised learning", "Evaluation", "Feature engineering", "Interpretability", "Data splitting & leakage", "Linear models", "Trees & ensembles", "Imbalanced learning", "Uncertainty & calibration"], "Turn a vague business request into a measurable prediction or discovery problem, then build an honest baseline.", "Hands-On Machine Learning · ISLR · scikit-learn user guide"),
+  makeAdvancedSection("ml-deep", "PART II · MACHINE LEARNING", "09", "Deep learning", ["Neural network fundamentals", "Training dynamics", "PyTorch", "Architectures", "Transfer learning", "Scaling & distributed training", "Regularization & normalization", "Debugging broken training", "Representation learning", "Responsible model development"], "Build neural networks from first principles, train them reliably, and understand the memory and compute behind modern models.", "Deep Learning · Dive into Deep Learning · PyTorch docs"),
   makeAdvancedSection("ml-nlp", "PART II · MACHINE LEARNING", "10", "NLP before transformers", ["Text processing", "Statistical language models", "Word representations", "Sequence tasks & models", "Evaluation"], "Understand the representations and sequence models that made modern language systems possible.", "Jurafsky & Martin · Speech and Language Processing · Gensim and spaCy docs"),
   makeAdvancedSection("llm-transformer", "PART III · TRANSFORMERS & LLMs", "11", "The transformer", ["Attention", "The transformer block & architecture", "Positional information", "Attention variants & efficiency"], "Implement the transformer rather than treating it as a black box: shapes, residuals, normalization, position, and memory.", "Attention Is All You Need · annotated transformer · FlashAttention"),
-  makeAdvancedSection("llm-tokenization", "PART III · TRANSFORMERS & LLMs", "12", "Tokenization", ["Tokenization"], "Understand how text becomes token IDs, why tokenization changes cost and capability, and how budgets fail at boundaries.", "BPE paper · tokenizer implementations · model tokenizer documentation"),
+  makeAdvancedSection("llm-tokenization", "PART III · TRANSFORMERS & LLMs", "12", "Tokenization", ["Tokenization", "Token budgets & pathological text"], "Understand how text becomes token IDs, why tokenization changes cost and capability, and how budgets fail at boundaries.", "BPE paper · tokenizer implementations · model tokenizer documentation"),
   makeAdvancedSection("llm-scale", "PART III · TRANSFORMERS & LLMs", "13", "Language models at scale", ["Pretraining", "The model landscape", "Capabilities & limits"], "Connect data, compute, scaling laws, model cards, benchmarks, and reproducible failure analysis.", "Chinchilla · model cards · HELM and benchmark methodology"),
-  makeAdvancedSection("llm-adapting", "PART III · TRANSFORMERS & LLMs", "14", "Adapting models", ["The decision framework", "Fine-tuning", "Alignment", "Compression"], "Choose between prompting, retrieval, fine-tuning, preference optimisation, distillation, quantization, and cascades.", "LoRA · DPO · QLoRA · model compression literature"),
-  makeAdvancedSection("llm-inference", "PART III · TRANSFORMERS & LLMs", "15", "Inference", ["The mechanics", "Serving"], "Reason about KV cache, sampling, batching, throughput, latency, memory arithmetic, and the economics of serving.", "vLLM docs · PagedAttention · inference systems papers"),
-  makeAdvancedSection("ai-models", "PART IV · AI ENGINEERING", "16", "Working with models", ["APIs & integration", "Structured output", "Prompt engineering"], "Build reliable model boundaries with streaming, retries, schemas, validation, versioned prompts, and cost ceilings.", "Provider API docs · Pydantic · prompt evaluation patterns"),
-  makeAdvancedSection("ai-rag", "PART IV · AI ENGINEERING", "17", "Retrieval & RAG", ["Embeddings", "Chunking & ingestion", "Indexing & search", "Query handling & generation", "Advanced patterns"], "Build retrieval from first principles, measure recall and faithfulness, then add hybrid search, permissions, and multi-turn handling.", "RAG papers · BM25 · vector database docs · retrieval evaluation"),
+  makeAdvancedSection("llm-adapting", "PART III · TRANSFORMERS & LLMs", "14", "Adapting models", ["The decision framework", "Fine-tuning", "Alignment", "Compression", "Preference optimisation", "Data quality for adaptation"], "Choose between prompting, retrieval, fine-tuning, preference optimisation, distillation, quantization, and cascades.", "LoRA · DPO · QLoRA · model compression literature"),
+  makeAdvancedSection("llm-inference", "PART III · TRANSFORMERS & LLMs", "15", "Inference", ["The mechanics", "Serving", "Decoding & sampling", "Latency, throughput & memory"], "Reason about KV cache, sampling, batching, throughput, latency, memory arithmetic, and the economics of serving.", "vLLM docs · PagedAttention · inference systems papers"),
+  makeAdvancedSection("llm-synthetic", "PART III · TRANSFORMERS & LLMs", "28", "Synthetic data", ["Generating training data", "Filtering and validating synthetic data"], "Use model-generated data without mistaking volume for quality: define the target, filter failures, and measure whether synthetic examples transfer.", "Synthetic data research · data curation literature"),
+  makeAdvancedSection("llm-interpretability", "PART III · TRANSFORMERS & LLMs", "31", "Interpretability", ["Mechanistic and behavioural probes", "Attribution and explanation limits"], "Investigate what a model uses and how explanations can mislead, then connect interpretability evidence to a concrete engineering decision.", "Interpretability research · model auditing references"),
+  makeAdvancedSection("llm-edge", "PART III · TRANSFORMERS & LLMs", "32", "Small models & edge", ["Distillation and quantization", "On-device constraints"], "Choose and adapt small models for latency, privacy, and cost while measuring the quality trade-off against a larger baseline.", "Distillation · quantization · edge inference documentation"),
+  makeAdvancedSection("ai-models", "PART IV · AI ENGINEERING", "16", "Working with models", ["APIs & integration", "Structured output", "Prompt engineering", "Streaming, retries & fallbacks"], "Build reliable model boundaries with streaming, retries, schemas, validation, versioned prompts, and cost ceilings.", "Provider API docs · Pydantic · prompt evaluation patterns"),
+  makeAdvancedSection("ai-rag", "PART IV · AI ENGINEERING", "17", "Retrieval & RAG", ["Embeddings", "Chunking & ingestion", "Indexing & search", "Query handling & generation", "Advanced patterns", "Permissions & multi-tenancy", "Multi-turn retrieval"], "Build retrieval from first principles, measure recall and faithfulness, then add hybrid search, permissions, and multi-turn handling.", "RAG papers · BM25 · vector database docs · retrieval evaluation"),
   makeAdvancedSection("ai-agents", "PART IV · AI ENGINEERING", "18", "Agents", ["Foundations", "Tools", "Planning & reasoning", "Memory", "Multi-agent", "Reliability"], "Build controlled tool-using loops with explicit state, budgets, retries, termination, memory, and trajectory evaluation.", "ReAct · tool-use papers · agent framework docs"),
-  makeAdvancedSection("ai-evaluation", "PART IV · AI ENGINEERING", "19", "Evaluation", ["Foundations", "Datasets", "Methods", "System-specific evaluation", "Operationalizing"], "Create eval sets, metrics, judges, regression gates, and a flywheel that turns production failures into learning.", "LLM-as-judge research · RAG metrics · experiment design"),
-  makeAdvancedSection("ai-safety", "PART IV · AI ENGINEERING", "20", "Safety & guardrails", ["Adversarial input", "Guardrails", "Privacy, ethics & governance"], "Threat-model model applications, layer controls, measure false positives and negatives, and protect privacy and agency.", "OWASP LLM guidance · NIST AI RMF · privacy and safety case studies"),
-  makeAdvancedSection("prod-serving", "PART V · PRODUCTION", "21", "Serving & deployment", ["Building the service", "Containers & infrastructure"], "Ship a streaming, observable service with timeouts, circuit breakers, fallbacks, health checks, autoscaling, and graceful shutdown.", "FastAPI · Docker · Kubernetes · cloud deployment documentation"),
+  makeAdvancedSection("ai-evaluation", "PART IV · AI ENGINEERING", "19", "Evaluation", ["Foundations", "Datasets", "Methods", "System-specific evaluation", "Operationalizing", "Human feedback & review"], "Create eval sets, metrics, judges, regression gates, and a flywheel that turns production failures into learning.", "LLM-as-judge research · RAG metrics · experiment design"),
+  makeAdvancedSection("ai-safety", "PART IV · AI ENGINEERING", "20", "Safety & guardrails", ["Adversarial input", "Guardrails", "Privacy, ethics & governance", "Abuse, misuse & incident response"], "Threat-model model applications, layer controls, measure false positives and negatives, and protect privacy and agency.", "OWASP LLM guidance · NIST AI RMF · privacy and safety case studies"),
+  makeAdvancedSection("ai-ir", "PART IV · AI ENGINEERING", "26", "Information retrieval", ["Classical retrieval", "Sparse and dense retrieval", "Reranking", "Retrieval evaluation"], "Understand retrieval independently of generation so you can diagnose recall, ranking, freshness, and relevance before adding an LLM.", "Information retrieval texts · BM25 · ranking literature"),
+  makeAdvancedSection("ai-structured", "PART IV · AI ENGINEERING", "27", "Structured data & LLMs", ["Tables and schemas", "Text-to-SQL", "Data validation", "Grounded analytical answers"], "Connect language interfaces to structured data with schemas, validation, permissions, and evidence-backed analytical answers.", "Text-to-SQL research · SQL documentation · data contracts"),
+  makeAdvancedSection("ai-optimization", "PART IV · AI ENGINEERING", "29", "Prompt & pipeline optimization", ["Prompt search and versioning", "Pipeline optimization"], "Improve an AI workflow systematically with baselines, controlled changes, cost limits, and regression evidence.", "Prompt optimisation research · experiment design"),
+  makeAdvancedSection("ai-benchmarks", "PART IV · AI ENGINEERING", "30", "Benchmark literacy", ["Benchmark design", "Reading benchmark claims"], "Read benchmark numbers with context: task construction, contamination, variance, saturation, and transfer to the product you actually own.", "HELM · benchmark methodology · evaluation papers"),
+  makeAdvancedSection("prod-serving", "PART V · PRODUCTION", "21", "Serving & deployment", ["Building the service", "Containers & infrastructure", "Release strategies", "Autoscaling & resilience"], "Ship a streaming, observable service with timeouts, circuit breakers, fallbacks, health checks, autoscaling, and graceful shutdown.", "FastAPI · Docker · Kubernetes · cloud deployment documentation"),
   makeAdvancedSection("prod-mlops", "PART V · PRODUCTION", "22", "MLOps", ["Experiment tracking & reproducibility", "Versioning", "Pipelines & CI/CD", "Data & model operations"], "Make experiments reproducible and releases reversible by versioning data, code, prompts, models, and evals together.", "MLflow · DVC · CI/CD docs · feature and model stores"),
-  makeAdvancedSection("prod-observability", "PART V · PRODUCTION", "23", "Observability & cost", ["Observability", "Cost engineering"], "Trace every stage, attribute cost, measure latency and quality, and build budgets and caches that do not hide incorrect answers.", "OpenTelemetry · Prometheus · cost attribution patterns"),
-  makeAdvancedSection("prod-design", "PART V · PRODUCTION", "24", "System design for AI", ["Method", "The reference architecture", "Canonical problems", "Classical ML system design"], "Whiteboard AI systems with explicit scale numbers, bottlenecks, failure modes, cost, and ownership.", "DDIA · system design interviews · production architecture reviews"),
-  makeAdvancedSection("optional-vision", "PART VI · OPTIONAL DEPTH", "A", "Computer vision", ["Image formation & representations", "CNNs and vision transformers", "Detection and segmentation", "Vision evaluation"], "Extend the engineering toolkit to image representation, spatial inductive bias, multimodal inputs, and honest visual evaluation.", "CS231n · vision transformer papers · torchvision"),
-  makeAdvancedSection("optional-speech", "PART VI · OPTIONAL DEPTH", "B", "Speech & audio", ["Audio signals", "Speech recognition", "Speech synthesis", "Audio evaluation"], "Work with waveforms, spectrograms, recognition, synthesis, latency, and noisy real-world audio.", "Speech and Signal Processing texts · Whisper · audio model docs"),
-  makeAdvancedSection("optional-multimodal", "PART VI · OPTIONAL DEPTH", "C", "Multimodal", ["Vision-language models", "Document intelligence", "Multimodal agents"], "Combine text, image, document, and tool signals into systems with explicit grounding and evaluation.", "Multimodal model papers · document AI references"),
-  makeAdvancedSection("optional-rl", "PART VI · OPTIONAL DEPTH", "D", "Reinforcement learning", ["MDPs and value functions", "Policy optimisation", "Offline and preference learning"], "Reason about sequential decisions, reward design, exploration, and the safety risks of learning from feedback.", "Sutton & Barto · policy optimisation papers"),
-  makeAdvancedSection("optional-recommenders", "PART VI · OPTIONAL DEPTH", "E", "Recommender systems", ["Candidate generation", "Ranking", "Exploration and experimentation"], "Design recommenders that balance relevance, novelty, diversity, feedback loops, and business outcomes.", "Recommender systems literature · experimentation references"),
-  makeAdvancedSection("optional-graph", "PART VI · OPTIONAL DEPTH", "F", "Graph machine learning", ["Graph representations", "Message passing", "Graph retrieval and evaluation"], "Model relational structure and understand where graph assumptions help or fail.", "Graph neural network papers · network science references"),
-  makeAdvancedSection("optional-timeseries", "PART VI · OPTIONAL DEPTH", "G", "Time series & forecasting", ["Temporal validation", "Forecasting models", "Uncertainty and drift"], "Build forecasts without leakage, compare baselines, and communicate uncertainty under drift.", "Forecasting texts · temporal cross-validation references"),
-  makeAdvancedSection("optional-performance", "PART VI · OPTIONAL DEPTH", "H", "Performance engineering", ["Profiling", "Memory and kernels", "Serving efficiency"], "Find the real bottleneck, reason about hardware, and improve throughput without sacrificing correctness.", "High Performance Python · systems profiling docs")
+  makeAdvancedSection("prod-observability", "PART V · PRODUCTION", "23", "Observability & cost", ["Observability", "Cost engineering", "Quality and drift monitoring", "Capacity and budgets"], "Trace every stage, attribute cost, measure latency and quality, and build budgets and caches that do not hide incorrect answers.", "OpenTelemetry · Prometheus · cost attribution patterns"),
+  makeAdvancedSection("prod-design", "PART V · PRODUCTION", "24", "System design for AI", ["Method", "The reference architecture", "Canonical problems", "Classical ML system design", "LLM system design", "Failure, ownership & trade-offs"], "Whiteboard AI systems with explicit scale numbers, bottlenecks, failure modes, cost, and ownership.", "DDIA · system design interviews · production architecture reviews"),
+  makeAdvancedSection("prod-product", "PART V · PRODUCTION", "33", "Product & business", ["Problem framing", "Business cases", "Product metrics", "Adoption and change"], "Turn AI capability into a useful product by defining the user problem, value metric, workflow change, risks, and a defensible investment case.", "Product discovery · AI business case patterns · product analytics"),
+  makeAdvancedSection("optional-depth", "PART VI · OPTIONAL DEPTH", "VI", "Optional depth · choose one track", ["Computer vision", "Speech & audio", "Multimodal", "Reinforcement learning", "Recommender systems", "Graph machine learning", "Time series & forecasting", "Performance engineering", "Vision lab", "Speech lab", "Multimodal lab", "RL lab", "Recommender lab", "Graph lab", "Forecasting lab", "Performance lab", "Cross-modal evaluation", "On-device multimodal", "Offline RL evaluation", "Ranking experimentation", "Temporal data systems", "GPU profiling", "Model compression lab", "Privacy-preserving sensing", "Capstone proposal", "Elective defence"], "Choose one depth track after Gate 7. The other tracks remain available for reference, but they are not required for the spine.", "CS231n · Sutton & Barto · recommender and graph ML literature · forecasting · systems profiling"),
+  makeAdvancedSection("current", "PART VII · STAYING CURRENT", "34", "Staying current", ["Research and release triage"], "Use AI Pulse to turn fast-moving research and releases into a dated, source-backed decision about what deserves your attention.", "Primary papers · model cards · release notes · AI Pulse")
 ];
 foundationsCurriculum.push(...advancedCurriculum);
 
@@ -439,8 +447,9 @@ const topicLabs = [
   minimum: 80
 }));
 
-advancedCurriculum.forEach((section) => {
+foundationsCurriculum.forEach((section) => {
   section.topics.forEach((title) => {
+    if (topicLabs.some((topic) => topic.section === section.id && topic.title === title)) return;
     topicLabs.push({
       id: section.id + "-" + title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
       section: section.id,
@@ -480,12 +489,14 @@ const theoryGuides = {
 // syllabus browser. This prevents the two views from slowly drifting apart as
 // new programme parts are added.
 const partDefinitions = [
-  { key: "PART I · FOUNDATIONS", code: "I", title: "Foundations & core engineering", summary: "Python, software engineering, algorithms, systems, databases, mathematics, and data handling." },
-  { key: "PART II · MACHINE LEARNING", code: "II", title: "Machine learning", summary: "Classical ML, deep learning, and the NLP foundations that lead into modern language models." },
-  { key: "PART III · TRANSFORMERS & LLMs", code: "III", title: "Transformers & LLMs", summary: "Attention, tokenization, scaling, adaptation, and efficient inference." },
-  { key: "PART IV · AI ENGINEERING", code: "IV", title: "AI engineering", summary: "Model integration, retrieval, agents, evaluation, safety, and guardrails." },
-  { key: "PART V · PRODUCTION", code: "V", title: "Production", summary: "Serving, MLOps, observability, cost engineering, and AI system design." },
-  { key: "PART VI · OPTIONAL DEPTH", code: "VI", title: "Optional depth", summary: "Computer vision, speech, multimodal systems, reinforcement learning, recommenders, graphs, forecasting, and performance." }
+  { key: "PART 0 · CLASSICAL AI", code: "00", title: "Classical AI", summary: "Search, heuristics, constraints, planning, knowledge representation, and game-playing foundations." },
+  { key: "PART I · FOUNDATIONS", code: "01", title: "Foundations & core engineering", summary: "Python, software engineering, algorithms, systems, databases, mathematics, and data handling." },
+  { key: "PART II · MACHINE LEARNING", code: "02", title: "Machine learning", summary: "Classical ML, deep learning, and the NLP foundations that lead into modern language models." },
+  { key: "PART III · TRANSFORMERS & LLMs", code: "03", title: "Transformers & LLMs", summary: "Attention, tokenization, scaling, adaptation, synthetic data, interpretability, edge models, and inference." },
+  { key: "PART IV · AI ENGINEERING", code: "04", title: "AI engineering", summary: "Model integration, retrieval, agents, evaluation, safety, structured data, optimization, and benchmarks." },
+  { key: "PART V · PRODUCTION", code: "05", title: "Production", summary: "Serving, MLOps, observability, cost engineering, system design, and product/business decisions." },
+  { key: "PART VI · OPTIONAL DEPTH", code: "06", title: "Optional depth · choose one", summary: "Eight elective tracks: vision, speech, multimodal, RL, recommenders, graphs, forecasting, and performance." },
+  { key: "PART VII · STAYING CURRENT", code: "07", title: "Staying current", summary: "A weekly, source-backed research and release triage loop through AI Pulse." }
 ];
 
 const modules = partDefinitions.map((part, index) => {
@@ -500,7 +511,9 @@ const modules = partDefinitions.map((part, index) => {
     meta: sections.length + " sections · " + topicLabIds.length + " topic labs",
     summary: part.summary,
     unlocked: index === 0,
-    lessonIds: index === 0 ? [1, 2, 3, 4, 5, 6] : [],
+    // The six existing lessons are the completed orientation bridge into
+    // Part I, rather than pretending they teach all of Classical AI.
+    lessonIds: index === 1 ? [1, 2, 3, 4, 5, 6] : [],
     sectionIds: sections.map((section) => section.id),
     topicLabIds,
     unlockAfter: index === 0 ? 0 : null
@@ -524,7 +537,7 @@ const businessCase = {
   ]
 };
 
-let selectedModule = 0;
+let selectedModule = 1;
 
 function save() {
   try {
@@ -555,7 +568,7 @@ function moduleStats(module) {
 function isModuleUnlocked(module) {
   const index = modules.indexOf(module);
   if (!module || index < 0) return false;
-  if (index === 0) return true;
+  if (index === 0 || index === 1 || index === 6 || index === 7) return true;
   // Browsing the syllabus is always allowed; the gated path unlocks each
   // subsequent part after the preceding part's evidence is complete.
   return moduleStats(modules[index - 1]).percent === 100;
@@ -567,7 +580,28 @@ function modulePercent(module) {
 
 function moduleStatus(module) {
   if (!isModuleUnlocked(module)) return "LOCKED";
+  const index = modules.indexOf(module);
+  if (index === 6) return "ELECTIVE";
+  if (index === 7) return "ONGOING";
   return modulePercent(module) === 100 ? "COMPLETE" : "IN PROGRESS";
+}
+
+function gatesPassed() {
+  return Object.values(state.gates || {}).filter(Boolean).length;
+}
+
+function ensurePathButtons() {
+  const host = $(".path-list");
+  if (!host) return;
+  modules.forEach((module, index) => {
+    if ($(".path[data-module='" + index + "']", host)) return;
+    const button = document.createElement("button");
+    button.className = "path";
+    button.type = "button";
+    button.dataset.module = String(index);
+    button.innerHTML = "<b>" + module.code + "</b><span><strong>" + module.title + "</strong><small>" + module.meta + "</small></span><em>⌑</em>";
+    host.appendChild(button);
+  });
 }
 
 // If the stored pointer names a lesson that does not exist, move it to the first
@@ -587,9 +621,11 @@ function updateProgress() {
   // pinned at a minimum of 18% while the markup repeated "18%" in four places.
   const percent = Math.round((state.lessons / TOTAL_LESSONS) * 100);
   const firstStats = moduleStats(modules[0]);
+  ensurePathButtons();
 
-  $("#mastery").innerHTML = percent + "<small>%</small>";
-  $("#mastery-note").textContent = state.lessons >= TOTAL_LESSONS ? "All modules · path complete" : "All modules · " + state.lessons + " of " + TOTAL_LESSONS + " lessons";
+  const passed = gatesPassed();
+  $("#mastery").innerHTML = passed + "<small>/ " + TOTAL_GATES + "</small>";
+  $("#mastery-note").textContent = passed ? passed + " gate" + (passed === 1 ? "" : "s") + " passed" : "No gates passed yet";
   $("#roadmap-bar").style.width = firstStats.percent + "%";
   $("#roadmap-lessons").textContent = firstStats.done + " / " + firstStats.total + " checkpoints";
   $("#path-percent").textContent = firstStats.percent + "%";
@@ -658,7 +694,7 @@ function updateProgress() {
     const note = projectTwo.querySelector("small");
     if (label) label.innerHTML = "PROJECT 02 <i>" + (unlocked ? "READY" : "LOCKED") + "</i>";
     if (copy) copy.textContent = unlocked ? "A document intelligence system with retrieval evidence, evaluation cases and an explicit refusal path." : "Unlocks after your foundations checkpoint. Your first bridge into the IIT RAG module.";
-    if (note) note.textContent = unlocked ? "Brief ready · define the business metric" : "Complete Module 00 to unlock";
+    if (note) note.textContent = unlocked ? "Brief ready · define the business metric" : "Complete Part I foundations to unlock";
   }
 }
 
@@ -671,15 +707,19 @@ function dayKey(date) {
 // The streak was the literal text "4 days" in the markup.
 function updateStreak() {
   const today = dayKey(new Date());
-  if (state.lastActiveDay !== today) {
-    const yesterday = dayKey(new Date(Date.now() - 86400000));
-    state.streak = state.lastActiveDay === yesterday ? (Number(state.streak) || 0) + 1 : 1;
-    state.lastActiveDay = today;
-    state.bestStreak = Math.max(Number(state.bestStreak) || 1, state.streak);
-    save();
-  }
-  $("#streak-count").innerHTML = state.streak + " <small>" + (state.streak === 1 ? "day" : "days") + "</small>";
-  $("#streak-note").textContent = "Best run: " + state.bestStreak + (state.bestStreak === 1 ? " day" : " days");
+  const cutoff = Date.now() - 29 * 86400000;
+  const before = Array.isArray(state.practiceDays) ? state.practiceDays : [];
+  const recent = before.filter((day) => {
+    const parsed = new Date(day + "T00:00:00").getTime();
+    return Number.isFinite(parsed) && parsed >= cutoff;
+  });
+  if (!recent.includes(today)) recent.push(today);
+  state.practiceDays = Array.from(new Set(recent)).sort();
+  state.lastActiveDay = today;
+  save();
+  const count = state.practiceDays.length;
+  $("#streak-count").innerHTML = count + " <small>" + (count === 1 ? "day" : "days") + "</small>";
+  $("#streak-note").textContent = "Last 30 days · practise days recorded";
 }
 
 // The date line and the pulse counts were written into the markup by hand and
@@ -800,7 +840,7 @@ function selectModule(index) {
     button.setAttribute("aria-pressed", String(isSelected));
   });
 
-  $("#module-kicker").innerHTML = "MODULE " + module.code + ' <i>' + module.status + "</i>";
+  $("#module-kicker").innerHTML = "PART " + module.code + ' <i>' + module.status + "</i>";
   $("#module-title").textContent = module.title;
   $("#module-summary").textContent = module.summary;
   // Locked parts remain inspectable so the learning path and syllabus never
@@ -1304,26 +1344,27 @@ $("#theme-toggle").addEventListener("click", () => {
 $("#reset-progress").addEventListener("click", () => {
   if (!$("#lesson-modal").hidden) closeLesson();
   if (!$("#topic-modal").hidden) closeTopicLab();
-  // Keep the streak: it records days visited, which a progress reset does not
-  // undo. Everything the reset does touch is re-rendered here — the theme and
+  // Keep practice history: it records days visited, which a progress reset does
+  // not undo. Everything the reset does touch is re-rendered here — the theme and
   // the dashboard were previously left showing the pre-reset state, which put
   // the theme toggle one click out of step with what was on screen.
-  const { streak, bestStreak, lastActiveDay, theme } = state;
-  state = Object.assign({}, defaults, { streak, bestStreak, lastActiveDay, theme });
+  const { streak, bestStreak, lastActiveDay, practiceDays, theme } = state;
+  state = Object.assign({}, defaults, { streak, bestStreak, lastActiveDay, practiceDays, theme });
   save();
   applyTheme();
   updateProgress();
   updateLessonRows();
   updateDashboard();
-  selectModule(0);
+  selectModule(1);
   $("#project-brief").hidden = true;
   $("#project-brief").textContent = "";
   $("#project-action").setAttribute("aria-expanded", "false");
   $("#project-action").textContent = "Open project brief →";
 });
 $$(".filters button").forEach((button) => button.addEventListener("click", () => filterPulse(button.dataset.topic)));
-$$(".path").forEach((button) => button.addEventListener("click", () => selectModule(Number(button.dataset.module))));
 document.addEventListener("click", (event) => {
+  const pathButton = event.target.closest(".path");
+  if (pathButton) selectModule(Number(pathButton.dataset.module));
   const curriculumButton = event.target.closest("[data-curriculum-section]");
   if (curriculumButton) selectCurriculumSection(Number(curriculumButton.dataset.curriculumSection));
   const openSyllabus = event.target.closest("[data-open-curriculum-section]");
@@ -1337,7 +1378,7 @@ applyTheme();
 repairLessonPointer();
 updateStandingContent();
 updateStreak();
-selectModule(0);
+selectModule(1);
 updateProgress();
 updateLessonRows();
 updateDashboard();
@@ -1345,5 +1386,6 @@ filterPulse("all");
 renderCurriculumSections();
 renderCurriculumDetail(0);
 const curriculumTopicTotal = foundationsCurriculum.reduce((total, section) => total + section.topics.length, 0);
-$("#view-curriculum .page-intro h1").textContent = "AI engineer syllabus · Parts I–VI";
-$("#view-curriculum .page-intro p").textContent = "Six parts, " + curriculumTopicTotal + " topics, and the competencies that make later AI work durable. Read the theory, practise the pattern, and attach evidence to your portfolio.";
+$("#view-curriculum .page-intro label").textContent = "PARTS 0–VII · FULL PROGRAMME";
+$("#view-curriculum .page-intro h1").textContent = "AI engineer syllabus · Parts 0–VII";
+$("#view-curriculum .page-intro p").textContent = "35 sections, " + curriculumTopicTotal + " topics, and the competencies that make later AI work durable. Read the theory, practise the pattern, and attach evidence to your portfolio.";

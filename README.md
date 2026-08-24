@@ -8,22 +8,23 @@ Open index.html in a modern browser. There is no build step or package installat
 
 ## Run the tests
 
-    node --test tests/python-lite.test.cjs
+    node --test tests/*.test.cjs
+    node scripts/curriculum-lint.cjs
 
 Covers the exercise checker in `python-lite.js`. Node 18 or newer; no dependencies.
 
 ## Included
 
 - Responsive learner dashboard and navigation
-- Six sequential modules and 16 gated lessons covering foundations, GenAI/LLMs, RAG, alignment, agents, deployment and safety
-- A syllabus browser for Part I Foundations: 7 sections, 35 topics, competencies, traps, exercises, and reference shelves
-- Individual topic labs for all 35 foundations topics, with paste-resistant evidence submission and local completion history
+- A shared Parts 0–VII curriculum model: 35 sections and 197 topic labs
+- A learning path derived from that same model, with Part 0 Classical AI, Part I Foundations, Parts II–V spine, a Part VI elective, and Part VII Staying Current
+- Individual topic labs with paste-resistant evidence submission and local completion history
 - Adaptive progress, remediation nudges, module unlocks and a final release checkpoint
 - Interactive Python exercise with paste/drop prevention
 - Hidden tests that actually run the submitted code against real cases, via a
   small Python-subset interpreter (`python-lite.js`) rather than pattern matching
 - A theory checkpoint that shuffles its options and gates the coding test
-- Local progress persistence through localStorage, with a streak counter
+- Local progress persistence through localStorage, with days-practised (last 30) and gate-count tracking
 - Portfolio milestone tracking, a business case brief and an expandable defence checklist
 - AI Pulse section for research and practice notes, with working filters
 - Light/dark theme toggle, applied before first paint
@@ -35,4 +36,4 @@ background, decorative glyphs are hidden from assistive tech, there is a skip
 link, and text meets WCAG AA contrast in both themes. `prefers-reduced-motion`
 is respected.
 
-The hosted build is deliberately browser-first: progress is stored in `localStorage`, and the Python checker is a constrained interpreter designed for safe educational exercises. A production deployment still needs a backend for accounts, cross-device sync, server-side sandboxing, live research ingestion, course-file ingestion, AI-generated feedback, and identity/proctoring controls. Those integrations are kept outside the static path so the complete curriculum remains usable without API keys.
+The hosted build is deliberately browser-first: progress is stored in `localStorage`, and the Python checker is a constrained interpreter designed for safe educational exercises. The structural curriculum linter is the first migration step toward the plan's concept-linked content repository; the ~6,000 named concept inventory, route-based course player, IndexedDB event log, Pyodide worker, and full gate authoring remain staged work. A production deployment still needs a backend for accounts, cross-device sync, server-side sandboxing, live research ingestion, course-file ingestion, AI-generated feedback, and identity/proctoring controls.
