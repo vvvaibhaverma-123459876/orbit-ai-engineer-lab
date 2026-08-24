@@ -17,6 +17,7 @@ Covers the exercise checker in `python-lite.js`. Node 18 or newer; no dependenci
 
 - Responsive learner dashboard and navigation
 - A shared Parts 0–VII curriculum model: 35 sections and 197 topic labs
+- A generated `content/manifest.json` plus schema and export/lint scripts for concept-linked authoring
 - A learning path derived from that same model, with Part 0 Classical AI, Part I Foundations, Parts II–V spine, a Part VI elective, and Part VII Staying Current
 - Individual topic labs with paste-resistant evidence submission and local completion history
 - Adaptive progress, remediation nudges, module unlocks and a final release checkpoint

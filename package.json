@@ -5,7 +5,10 @@
   "description": "Browser-first adaptive AI engineering curriculum",
   "scripts": {
     "test": "node --test tests/*.test.cjs",
-    "check": "node --check app.js"
+    "check": "node --check app.js",
+    "content:export": "node scripts/export-content-manifest.cjs",
+    "content:lint": "node scripts/curriculum-lint.cjs",
+    "content:lint:strict": "node scripts/curriculum-lint.cjs --strict"
   },
   "engines": {
     "node": ">=18"

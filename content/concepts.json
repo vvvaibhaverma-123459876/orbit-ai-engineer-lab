@@ -1,0 +1,6223 @@
+[
+  {
+    "topicId": "python-language-core",
+    "topicNumber": "01.01",
+    "concepts": [
+      {
+        "id": "01.01.cc59b4647",
+        "name": "is",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.ce49371b5",
+        "name": "==",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c7973872e",
+        "name": "id()",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c38a678f9",
+        "name": "__bool__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.ce6834b8c",
+        "name": "None",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.cfe86e0b5",
+        "name": "for",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c2dccd01f",
+        "name": "else",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.ce648f5d7",
+        "name": "while",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.cfeca63c5",
+        "name": "match",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.cad142ae3",
+        "name": "*args",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c9b1c2613",
+        "name": "**kwargs",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.cdb1da2bf",
+        "name": "lambda",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c17ced352",
+        "name": "nonlocal",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c2ce45251",
+        "name": "global",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c883a466c",
+        "name": "functools.partial",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c579fdb31",
+        "name": "yield",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.ca334e0a0",
+        "name": "yield from",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c320f284f",
+        "name": "__iter__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c7f1bdeb9",
+        "name": "__next__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c1e4447ce",
+        "name": "StopIteration",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c4951bccb",
+        "name": "functools.wraps",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.cbde5feab",
+        "name": "functools.lru_cache",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.cdfb74ba2",
+        "name": "cache",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c5cc7e97d",
+        "name": "with",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.ccb226622",
+        "name": "__enter__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c3dd83e34",
+        "name": "__exit__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c4efce046",
+        "name": "contextlib.contextmanager",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c18054155",
+        "name": "ExitStack",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c6184ccbf",
+        "name": "try",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c74706863",
+        "name": "except",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c6a5a4a98",
+        "name": "finally",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c8c8962c1",
+        "name": "raise ... from",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.cf9bcb446",
+        "name": "return",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c08e064f6",
+        "name": "sys.path",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c62adc9a0",
+        "name": "__init__.py",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c4edd2d33",
+        "name": "__main__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.cbb842746",
+        "name": "importlib",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c020b8cd0",
+        "name": "Types and the object model",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c6cdfb343",
+        "name": "Control flow",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.cc4abdc86",
+        "name": "Functions",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.caf37a0a8",
+        "name": "Comprehensions and generators",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c7aa729ba",
+        "name": "Iteration protocol",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c7ddc7e4f",
+        "name": "Decorators",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.cc26a8565",
+        "name": "Context managers",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.cd90b1f49",
+        "name": "Exceptions",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.c75f44f39",
+        "name": "Modules and packages",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "01.01.tc03c6aa7",
+        "name": "Predict the output of unfamiliar code without running it",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.tc30b259e",
+        "name": "Explain why a piece of code is slow or memory-heavy by reasoning about the language, not by guessing",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.t4719e10d",
+        "name": "Read the CPython standard library and understand what you're looking at",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.tf17613d9",
+        "name": "Mutable default arguments (`def f(x=[])`) — the classic, and it still bites people in production",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.t8ed28683",
+        "name": "Late binding in closures inside loops",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.tcf379d1b",
+        "name": "Modifying a list while iterating over it",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.tee0a8f4d",
+        "name": "`is` vs `==` on small integers and interned strings appearing to work, then not",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.01.tff1bbd85",
+        "name": "Shallow vs deep copy on nested structures",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "python-data-structures-in-practice",
+    "topicNumber": "01.02",
+    "concepts": [
+      {
+        "id": "01.02.c8996c740",
+        "name": "sort()",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.ca368f9a5",
+        "name": "sorted()",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.ce582b6c1",
+        "name": "key",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c67d193f0",
+        "name": "operator.itemgetter",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c0f763735",
+        "name": "bisect",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.ce6f40b3e",
+        "name": "__hash__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c995188f8",
+        "name": "__eq__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.cf8fcc606",
+        "name": "dict.get",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.cc7b44c82",
+        "name": "setdefault",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c272235f1",
+        "name": "frozenset",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.cd2dbc55c",
+        "name": "defaultdict",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.cd0c529fe",
+        "name": "Counter",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.cc6767b9b",
+        "name": "most_common",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c58836c4b",
+        "name": "deque",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c335d8fc6",
+        "name": "ChainMap",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c70b2a410",
+        "name": "OrderedDict",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c53aeefad",
+        "name": "chain",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.cf16bba44",
+        "name": "islice",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c386cc057",
+        "name": "groupby",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.cdeaad8e1",
+        "name": "product",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.cd0a75046",
+        "name": "combinations",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c40877065",
+        "name": "permutations",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.ca90c8ce9",
+        "name": "cycle",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c1fb32222",
+        "name": "accumulate",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c3a7078d1",
+        "name": "tee",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c40af9cd9",
+        "name": "zip_longest",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c7678113c",
+        "name": "batched",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.cd64001c6",
+        "name": "nlargest",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c86b3e77e",
+        "name": "nsmallest",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c8c5a2549",
+        "name": "Lists",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c24e8fa73",
+        "name": "Dicts",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c6c577b2d",
+        "name": "Sets",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.cd2f63426",
+        "name": "Tuples",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c6945f669",
+        "name": "collections",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c00de2c48",
+        "name": "itertools",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.c71165499",
+        "name": "heapq and queue",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.cb1f1ed7d",
+        "name": "array, bytes, memoryview",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "01.02.t94298b38",
+        "name": "Choose the right built-in structure by reasoning about access pattern and complexity",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.t77277a22",
+        "name": "Explain how dicts and sets achieve O(1) average lookup, and when they degrade",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.t3de18ef4",
+        "name": "`list.insert(0, x)` in a loop — quadratic behaviour hidden in innocent code",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.t178a538e",
+        "name": "`in` on a list inside a loop instead of converting to a set",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.t6ebba899",
+        "name": "`itertools.groupby` on unsorted input silently producing wrong groups",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.02.tf84e297c",
+        "name": "Defining `__eq__` without `__hash__` and losing hashability",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "python-object-oriented-python",
+    "topicNumber": "01.03",
+    "concepts": [
+      {
+        "id": "01.03.c25fe3964",
+        "name": "__init__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.ca92f7407",
+        "name": "__new__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c3ba8f8ad",
+        "name": "self",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.ca12cd28a",
+        "name": "super()",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c4d371118",
+        "name": "abc",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.ca8e5460d",
+        "name": "__repr__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c380f6950",
+        "name": "__str__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c3fe7430e",
+        "name": "__eq__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c359b5fd8",
+        "name": "__hash__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.cfe6ce9f0",
+        "name": "__lt__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.cb2778a86",
+        "name": "functools.total_ordering",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c30b0b31a",
+        "name": "__len__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c8ad037a1",
+        "name": "__getitem__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c3fa21193",
+        "name": "__contains__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.ccfe0b17e",
+        "name": "__iter__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c4fcecd9e",
+        "name": "__call__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c0b502b38",
+        "name": "__enter__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.ca05e8f5a",
+        "name": "__exit__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.cd43f81ff",
+        "name": "__getattr__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c92dc93d4",
+        "name": "__getattribute__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c5ab57b46",
+        "name": "__slots__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c534d22dc",
+        "name": "@property",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.ca27159c6",
+        "name": "classmethod",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c75a59e65",
+        "name": "staticmethod",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c11a99309",
+        "name": "@dataclass",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.caf52e378",
+        "name": "field",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.cb07d02b9",
+        "name": "default_factory",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c0438f7a9",
+        "name": "frozen",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c6e3c70bf",
+        "name": "order",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c9a7f7b72",
+        "name": "__post_init__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c844aaa66",
+        "name": "NamedTuple",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c134e08e6",
+        "name": "TypedDict",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c57dbd523",
+        "name": "typing.Protocol",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c747a8ebf",
+        "name": "TypeVar",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.ccf056297",
+        "name": "Literal",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c8dd00266",
+        "name": "Final",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.cdb5ce873",
+        "name": "overload",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c3c4ba65f",
+        "name": "type",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.cca771aae",
+        "name": "__init_subclass__",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.cd6a38d27",
+        "name": "Classes",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c92012928",
+        "name": "Inheritance",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.ca97a43b4",
+        "name": "The data model",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.cf47719c9",
+        "name": "Properties and descriptors",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.cbc91b139",
+        "name": "Dataclasses",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.c3eea0a7f",
+        "name": "Protocols and typing",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.cc5eea4dc",
+        "name": "Metaclasses",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "01.03.t3442279f",
+        "name": "Design a class hierarchy that doesn't need rewriting when requirements change",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.tb5366895",
+        "name": "Know when a function, a dataclass, or a module is the better answer than a class",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.t4c012ce2",
+        "name": "Mutable class attributes shared across all instances",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.t7429aab2",
+        "name": "Deep inheritance hierarchies that make behaviour untraceable",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.t76defe93",
+        "name": "Using inheritance for code reuse rather than for an is-a relationship",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.03.teb8d308c",
+        "name": "Forgetting `super().__init__()` in a subclass",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "python-concurrency-performance",
+    "topicNumber": "01.04",
+    "concepts": [
+      {
+        "id": "01.04.c5da71e9f",
+        "name": "await",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.cf078be50",
+        "name": "gather",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.c07ceca91",
+        "name": "as_completed",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.ce2b45e53",
+        "name": "TaskGroup",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.cdb89635a",
+        "name": "run_in_executor",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.c1a922039",
+        "name": "Thread",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.c79080624",
+        "name": "ThreadPoolExecutor",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.ca54e1158",
+        "name": "Process",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.c3e4da5fc",
+        "name": "ProcessPoolExecutor",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.ca32e4a93",
+        "name": "fork",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.cefd50aab",
+        "name": "spawn",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.caac75d32",
+        "name": "timeit",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.c76a5dbd3",
+        "name": "cProfile",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.cbf7ae046",
+        "name": "pstats",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.c88cade6f",
+        "name": "line_profiler",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.c3e43c95e",
+        "name": "memory_profiler",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.c34fa3ed4",
+        "name": "tracemalloc",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.c9adb6f9a",
+        "name": "py-spy",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.c30b14fd7",
+        "name": "The GIL",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.c4ebf4d9e",
+        "name": "asyncio",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.c1cc7bdf7",
+        "name": "Threading",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.cf549a94a",
+        "name": "Multiprocessing",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.c68ce6eec",
+        "name": "Performance",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "01.04.te6927eba",
+        "name": "Choose correctly between async, threads, and processes for a given workload",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "01.04.ta22ed4ad",
+        "name": "Profile before optimizing, every time",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "engineering-version-control",
+    "topicNumber": "02.01",
+    "concepts": [
+      {
+        "id": "02.01.c55a5b3f8",
+        "name": "add",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.cf4d5bfb6",
+        "name": "commit",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.cc2eae1da",
+        "name": "status",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.cd28f7920",
+        "name": "diff",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.cbb4f984e",
+        "name": "log",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.cd39faca4",
+        "name": "show",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.cb2a5105a",
+        "name": ".gitignore",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.c27abc635",
+        "name": ".gitattributes",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.c1a5d20aa",
+        "name": "rebase",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.cd9bb13bc",
+        "name": "cherry-pick",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.c8cdad0a2",
+        "name": "reflog",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.c9e2d24f2",
+        "name": "reset",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.c56a15ce6",
+        "name": "revert",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.ca2382b2f",
+        "name": "restore",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.cacdaca2f",
+        "name": "stash",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.cfb5cef1f",
+        "name": "stash pop",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.c847f1950",
+        "name": "bisect",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.ca8cabb1b",
+        "name": "Model",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.c686218c1",
+        "name": "Daily operations",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.cca04d436",
+        "name": "Branching",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.c9606352e",
+        "name": "Recovery",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.cda45a276",
+        "name": "Collaboration",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "02.01.tfe930d1e",
+        "name": "Recover from any Git state without deleting the repo and re-cloning",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.01.tb3745c97",
+        "name": "Produce a commit history a reviewer can follow",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "engineering-testing",
+    "topicNumber": "02.02",
+    "concepts": [
+      {
+        "id": "02.02.c5b6ea478",
+        "name": "yield",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c83daf7dc",
+        "name": "conftest.py",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c4978022e",
+        "name": "parametrize",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c1de3d953",
+        "name": "pytest.raises",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c3e664b00",
+        "name": "pytest.warns",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.cfb00bd32",
+        "name": "approx",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c11ae5590",
+        "name": "pytest-cov",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c94a26169",
+        "name": "pytest-xdist",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.cf66b2881",
+        "name": "pytest-mock",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c54192902",
+        "name": "pytest-asyncio",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c54c0d35a",
+        "name": "unittest.mock",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c1efb5418",
+        "name": "Mock",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c994074fb",
+        "name": "MagicMock",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c1d0fc86d",
+        "name": "patch",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c0823b919",
+        "name": "patch.object",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.ccc4dfc45",
+        "name": "side_effect",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c4c6ab4da",
+        "name": "return_value",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c4a018915",
+        "name": "autospec",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.cf6704741",
+        "name": "@given",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c8e09afcf",
+        "name": "tmp_path",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.ce6b5a2e2",
+        "name": "Non-deterministic LLM output",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c914c0f76",
+        "name": "Fundamentals",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c378a53bc",
+        "name": "pytest",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c7481b1cc",
+        "name": "Test doubles",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c03060f5b",
+        "name": "Test types",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c7dddb773",
+        "name": "Coverage",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.c24c29984",
+        "name": "Property-based testing",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.cb630e57a",
+        "name": "Testing the hard things",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "02.02.t405f8664",
+        "name": "Write a test suite that catches regressions rather than one that inflates coverage",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.02.t0659ed78",
+        "name": "Test code whose output is non-deterministic — mandatory for LLM work",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "engineering-code-quality-architecture",
+    "topicNumber": "02.03",
+    "concepts": [
+      {
+        "id": "02.03.c91de1a95",
+        "name": "src/",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.03.cb58af2e1",
+        "name": "pyproject.toml",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.03.ccd4e7f70",
+        "name": "ruff",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.03.c1f688c24",
+        "name": "mypy",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.03.c8daad9d0",
+        "name": "pyright",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.03.c29b50ebb",
+        "name": "pre-commit",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.03.cdcb34b7c",
+        "name": "Clean code",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.03.ccce862b8",
+        "name": "Principles",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.03.ca62ef708",
+        "name": "Patterns worth knowing",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.03.c14ae6cb8",
+        "name": "Architecture",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.03.cc02b9fc6",
+        "name": "Refactoring",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.03.ca7caa21d",
+        "name": "Project structure",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.03.c98408872",
+        "name": "Tooling",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "02.03.tf110b079",
+        "name": "Structure a project so a new contributor is productive in a day",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.03.t3a25925c",
+        "name": "Refactor safely, behind tests",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "engineering-tooling-debugging",
+    "topicNumber": "02.04",
+    "concepts": [
+      {
+        "id": "02.04.c10a96e8a",
+        "name": "grep",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c19316eb9",
+        "name": "ripgrep",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c26ba2360",
+        "name": "find",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c5d5567ba",
+        "name": "fd",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.ce3a3b85b",
+        "name": "sed",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c66032ed3",
+        "name": "awk",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c878799ef",
+        "name": "xargs",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.caabc4ae9",
+        "name": "cut",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c556d9078",
+        "name": "sort",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c041b9d44",
+        "name": "uniq",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.cb832820a",
+        "name": "wc",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c775ee7e8",
+        "name": "ps",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.ce674ba27",
+        "name": "top",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c69465efb",
+        "name": "htop",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c24b6da20",
+        "name": "kill",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c7801b7b5",
+        "name": "jobs",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c78840b6c",
+        "name": "nohup",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.cc88cb11f",
+        "name": "ssh",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c3e3c6b5c",
+        "name": "scp",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.cb518839e",
+        "name": "rsync",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c64a9a7bc",
+        "name": "curl",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c50c1ff6d",
+        "name": "jq",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c4f275a8f",
+        "name": "set -euo pipefail",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c71131678",
+        "name": "tmux",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c162621e8",
+        "name": "pdb",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c28c26ff7",
+        "name": "ipdb",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c0a0c1c98",
+        "name": "breakpoint()",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.cbfc6ceb4",
+        "name": "logging",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c7e3c0905",
+        "name": "structlog",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c7071f88f",
+        "name": "Shell",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.c3dd03842",
+        "name": "Debugging",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.ce56723b6",
+        "name": "Profiling",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "02.04.t92b54f70",
+        "name": "Debug with a debugger, not print statements",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "02.04.t8c613683",
+        "name": "Be effective on the command line without looking things up constantly",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "algorithms-complexity-analysis",
+    "topicNumber": "03.01",
+    "concepts": [],
+    "traps": [
+      {
+        "id": "03.01.t51fefb41",
+        "name": "State time and space complexity for any code you write, without running it",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "03.01.t9c3be657",
+        "name": "Recognize the target complexity from the constraints before you start coding",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "algorithms-arrays-hashing",
+    "topicNumber": "03.02",
+    "concepts": [
+      {
+        "id": "03.02.c265e4701",
+        "name": "Canonical problems",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "algorithms-two-pointers-sliding-window",
+    "topicNumber": "03.03",
+    "concepts": [
+      {
+        "id": "03.03.c5168a6c0",
+        "name": "Canonical problems",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "algorithms-stacks-queues",
+    "topicNumber": "03.04",
+    "concepts": [
+      {
+        "id": "03.04.cdedaf8ea",
+        "name": "Canonical problems",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "algorithms-binary-search",
+    "topicNumber": "03.05",
+    "concepts": [
+      {
+        "id": "03.05.cc84256fa",
+        "name": "bisect",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "03.05.c778ec208",
+        "name": "Binary search on the answer space",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "03.05.c69166a4f",
+        "name": "Canonical problems",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "algorithms-linked-lists",
+    "topicNumber": "03.06",
+    "concepts": [
+      {
+        "id": "03.06.c1a90f132",
+        "name": "Canonical problems",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "algorithms-trees",
+    "topicNumber": "03.07",
+    "concepts": [
+      {
+        "id": "03.07.cc90f9f23",
+        "name": "Canonical problems",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "algorithms-heaps",
+    "topicNumber": "03.08",
+    "concepts": [
+      {
+        "id": "03.08.ca326a476",
+        "name": "Canonical problems",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "algorithms-graphs",
+    "topicNumber": "03.09",
+    "concepts": [
+      {
+        "id": "03.09.c58458ecc",
+        "name": "Canonical problems",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "algorithms-backtracking",
+    "topicNumber": "03.10",
+    "concepts": [
+      {
+        "id": "03.10.c5f0a3060",
+        "name": "Canonical problems",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "algorithms-dynamic-programming",
+    "topicNumber": "03.11",
+    "concepts": [
+      {
+        "id": "03.11.c8ebc8746",
+        "name": "state design",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "03.11.c5b5a175b",
+        "name": "Canonical problems",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "algorithms-greedy-intervals-math",
+    "topicNumber": "03.12",
+    "concepts": [
+      {
+        "id": "03.12.cbc3261a7",
+        "name": "n & (n-1)",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "03.12.c6bcc4877",
+        "name": "Canonical problems",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "algorithms-sorting-searching-internals",
+    "topicNumber": "03.13",
+    "concepts": [
+      {
+        "id": "03.13.c0c60465b",
+        "name": "Implement from scratch:",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "03.13.cb38813c0",
+        "name": "Materials:",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "systems-operating-systems",
+    "topicNumber": "04.01",
+    "concepts": [
+      {
+        "id": "04.01.cf51e5fff",
+        "name": "fork",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.01.cbf1624ba",
+        "name": "exec",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.01.c7829f6b1",
+        "name": "wait",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.01.c560a960f",
+        "name": "mmap",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.01.c2743d371",
+        "name": "select",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.01.c4f16368f",
+        "name": "poll",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.01.c9b731a52",
+        "name": "epoll",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.01.c61aaac70",
+        "name": "Processes",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.01.ce15d952a",
+        "name": "Scheduling",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.01.c28b51901",
+        "name": "Memory",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.01.c55af1eb1",
+        "name": "Cache",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.01.c6ea668ca",
+        "name": "Concurrency",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.01.c7d6c97f6",
+        "name": "I/O",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.01.c25c41aa6",
+        "name": "Filesystems",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "04.01.t311110af",
+        "name": "Explain why a training job is slow by reasoning about memory, I/O, and CPU rather than guessing",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.01.t8080c7f5",
+        "name": "Choose a concurrency model from workload characteristics",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "systems-networking",
+    "topicNumber": "04.02",
+    "concepts": [
+      {
+        "id": "04.02.c71ba7663",
+        "name": "Layers",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.02.cf37682f7",
+        "name": "Transport",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.02.c3deda5ce",
+        "name": "Application",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.02.c54c855c9",
+        "name": "API design",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.02.cd6969695",
+        "name": "Authentication",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.02.c36bcbbdb",
+        "name": "Reliability",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.02.ccbf1fa4d",
+        "name": "Performance",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "04.02.t0e44c447",
+        "name": "Debug a failing API call by reasoning about the network layer, not by retrying",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "04.02.t3687be35",
+        "name": "Explain where p99 latency in your service actually comes from",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "systems-distributed-systems",
+    "topicNumber": "04.03",
+    "concepts": [
+      {
+        "id": "04.03.c228f8030",
+        "name": "Materials:",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "databases-relational-modelling-sql",
+    "topicNumber": "05.01",
+    "concepts": [
+      {
+        "id": "05.01.c1c44b3e1",
+        "name": "ROW_NUMBER",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.01.ccf545b46",
+        "name": "RANK",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.01.c65147c9e",
+        "name": "DENSE_RANK",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.01.ce97dc9de",
+        "name": "NTILE",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.01.c038b96a0",
+        "name": "LAG",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.01.cd62302ba",
+        "name": "LEAD",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.01.c63845372",
+        "name": "FIRST_VALUE",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.01.c1b752b50",
+        "name": "LAST_VALUE",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.01.c4a20bfc9",
+        "name": "ROWS",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.01.c3bacb1cd",
+        "name": "RANGE",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.01.caaaa526f",
+        "name": "Window functions",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.01.c4196c114",
+        "name": "Modelling",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.01.cbf9a9131",
+        "name": "SQL — core",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.01.c19f9b9c0",
+        "name": "SQL — advanced",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.01.c78ffd683",
+        "name": "Analytical patterns",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.01.c201036f3",
+        "name": "DDL and constraints",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "05.01.td6835e11",
+        "name": "Design a schema that survives requirement changes",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.01.tf37ea223",
+        "name": "Write any analytical query without reaching for a tutorial",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "databases-database-internals",
+    "topicNumber": "05.02",
+    "concepts": [
+      {
+        "id": "05.02.c247cada3",
+        "name": "Indexes",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.02.c5c670b51",
+        "name": "Transactions",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "05.02.cd7fa5184",
+        "name": "Materials:",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "databases-beyond-relational",
+    "topicNumber": "05.03",
+    "concepts": [
+      {
+        "id": "05.03.cbe2faa5a",
+        "name": "Materials:",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "math-linear-algebra",
+    "topicNumber": "06.01",
+    "concepts": [
+      {
+        "id": "06.01.c22803d4c",
+        "name": "Eigenvalues and eigenvectors",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.01.c1e4c94b3",
+        "name": "SVD",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.01.c25d1584a",
+        "name": "This is the mathematical basis for LoRA",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.01.c4a8e039c",
+        "name": "Vectors",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.01.cd4875a47",
+        "name": "Matrices",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.01.c28157b28",
+        "name": "Systems and decompositions",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.01.c84b1735a",
+        "name": "Applied",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "06.01.ta703ebf3",
+        "name": "Read matrix notation in a paper and know the shapes without being told",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.01.t60cfd4bf",
+        "name": "Explain an embedding, a projection, and a linear layer in the same vocabulary",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "math-calculus-optimization",
+    "topicNumber": "06.02",
+    "concepts": [
+      {
+        "id": "06.02.c8e4fb0e2",
+        "name": "chain rule",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.02.c67fe5b4d",
+        "name": "this is backpropagation",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.02.c6b0174cd",
+        "name": "Single variable",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.02.cd34f2812",
+        "name": "Multivariable",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.02.c4630f708",
+        "name": "Optimization",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.02.cf51fc49e",
+        "name": "Automatic differentiation",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "math-probability-statistics",
+    "topicNumber": "06.03",
+    "concepts": [
+      {
+        "id": "06.03.c2cd1d421",
+        "name": "Bayes' theorem",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.03.c1c268cd4",
+        "name": "Maximum likelihood",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.03.c8d9de774",
+        "name": "Entropy",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.03.c31499a18",
+        "name": "Cross-entropy",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.03.cfb7add43",
+        "name": "KL divergence",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.03.cd07773c2",
+        "name": "Probability",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.03.cd2212006",
+        "name": "Distributions",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.03.cb8129456",
+        "name": "Limit theorems",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.03.ca443ec37",
+        "name": "Estimation",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.03.c928935f8",
+        "name": "Inference",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.03.c737eee2c",
+        "name": "Experimentation",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.03.c24875d24",
+        "name": "Causality",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "06.03.c26eccefb",
+        "name": "Information theory",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "data-numerical-computing-with-numpy",
+    "topicNumber": "07.01",
+    "concepts": [
+      {
+        "id": "07.01.ce9dec8f6",
+        "name": "np.where",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.c787c93fb",
+        "name": "np.take",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.ce03cf19e",
+        "name": "np.put",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.cb0733a44",
+        "name": "newaxis",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.cdb3941a1",
+        "name": "expand_dims",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.c82fa1467",
+        "name": "axis",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.cdf4754b8",
+        "name": "keepdims",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.c262bd539",
+        "name": "argmax",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.cae3f20f9",
+        "name": "argmin",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.c4d553b3a",
+        "name": "argsort",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.ce8965c5f",
+        "name": "np.einsum",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.c1f9a411d",
+        "name": "Generator",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.c9d51e494",
+        "name": "np.memmap",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.c94e32977",
+        "name": "Arrays",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.cfb1bece3",
+        "name": "Indexing",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.c46471e37",
+        "name": "Broadcasting",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.c7e2d1b36",
+        "name": "Operations",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.cbbd600df",
+        "name": "Performance",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.c412a9a4c",
+        "name": "Numerical stability",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "07.01.t8a13e299",
+        "name": "Write vectorized code by default and recognize when a loop has crept in",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.01.t3e7fcb99",
+        "name": "Debug shape errors by reasoning about broadcasting rather than by trial and error",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "data-dataframes",
+    "topicNumber": "07.02",
+    "concepts": [
+      {
+        "id": "07.02.c7d584770",
+        "name": "loc",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c280d4365",
+        "name": "iloc",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.cc649dced",
+        "name": "[]",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c639f4ee5",
+        "name": "query",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.cdd2fbae6",
+        "name": "apply",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c639ad60e",
+        "name": "map",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c4233de32",
+        "name": "replace",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c4796e9a5",
+        "name": "where",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c73f7f72a",
+        "name": "isna",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c32881df9",
+        "name": "fillna",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.cb04780d9",
+        "name": "dropna",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c6d400d1e",
+        "name": "interpolate",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.ca14b2172",
+        "name": "groupby",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.cb2306358",
+        "name": "transform",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.cc9ac95b1",
+        "name": "agg",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c1685cd13",
+        "name": "pivot",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c90145012",
+        "name": "pivot_table",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c5b506e99",
+        "name": "melt",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c932e790f",
+        "name": "stack",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.cfeb863e9",
+        "name": "unstack",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c719d56a1",
+        "name": "crosstab",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.cfc6cd91e",
+        "name": "merge",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c535ce915",
+        "name": "concat",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.cf1040317",
+        "name": "join",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c0c8dd773",
+        "name": "DatetimeIndex",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.cc39d238a",
+        "name": "SettingWithCopyWarning",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.cb1c7e648",
+        "name": "Polars",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c3c7fa523",
+        "name": "pandas",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.ca966a20c",
+        "name": "Aggregation and reshaping",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c22b3aea1",
+        "name": "Combining",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.ca486d6b0",
+        "name": "Time series",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.02.c64df0335",
+        "name": "Performance and alternatives",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "data-cleaning-exploratory-analysis",
+    "topicNumber": "07.03",
+    "concepts": [
+      {
+        "id": "07.03.cb1a46bed",
+        "name": "Missing data",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.03.c63e01c04",
+        "name": "Outliers",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.03.ca0a79cdd",
+        "name": "Quality issues",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.03.c69f87fb3",
+        "name": "Validation",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.03.cd94308b3",
+        "name": "EDA",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.03.c0f180d4a",
+        "name": "Documentation",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "data-visualization",
+    "topicNumber": "07.04",
+    "concepts": [
+      {
+        "id": "07.04.c0c02de88",
+        "name": "pyplot",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "data-pipelines-scale",
+    "topicNumber": "07.05",
+    "concepts": [
+      {
+        "id": "07.05.cd5899f6c",
+        "name": "Distributed processing",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.05.c0ed71601",
+        "name": "Materials:",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "07.05.c9729f5d7",
+        "name": "Part II — Machine Learning (sections 8–10) follows in the next document",
+        "source": "1-syllabus-part1-foundations.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "1-syllabus-part1-foundations.md"
+  },
+  {
+    "topicId": "ml-classical-framing-the-problem",
+    "topicNumber": "08.01",
+    "concepts": [
+      {
+        "id": "08.01.c7f6040c5",
+        "name": "Learning paradigms",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.01.c7335ca21",
+        "name": "Task types",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.01.c8a9b6f76",
+        "name": "Problem formulation",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.01.cd90faa9c",
+        "name": "When not to use ML",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.01.c5c3a6cb8",
+        "name": "Baselines",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "08.01.t33a130cc",
+        "name": "Turn a vague business request into a well-posed learning problem, or correctly refuse to",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.01.t8dda5be9",
+        "name": "Recognize when ML is the wrong tool",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.01.tee887e11",
+        "name": "Optimizing a metric that has no relationship to the decision being made",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.01.t70fe1f0f",
+        "name": "Building a model where a `GROUP BY` would answer the question",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.01.tde2172db",
+        "name": "Defining the target after seeing the data",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "3-syllabus-part2-machine-learning.md"
+  },
+  {
+    "topicId": "ml-classical-supervised-learning",
+    "topicNumber": "08.02",
+    "concepts": [
+      {
+        "id": "08.02.c859d7576",
+        "name": "Bagging",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.c90adb785",
+        "name": "Random forests",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.c2a98300b",
+        "name": "Boosting",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.c67165396",
+        "name": "Gradient boosting",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.c0e544fc6",
+        "name": "Stacking",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.cdb069445",
+        "name": "The kernel trick",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.c1d302c4b",
+        "name": "Linear regression",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.c62af913f",
+        "name": "Regularization",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.c19593f5f",
+        "name": "Logistic regression",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.cd466ea2c",
+        "name": "Decision trees",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.cbef030f0",
+        "name": "Ensembles",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.c42569e86",
+        "name": "SVM",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.ce5422070",
+        "name": "Instance-based",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.cbf3d0805",
+        "name": "Naive Bayes",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.c6226dbe8",
+        "name": "Generalized linear models",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "08.02.t816cf9ff",
+        "name": "Derive linear and logistic regression from first principles",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.t31a96abc",
+        "name": "Choose an algorithm from data characteristics rather than familiarity",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.tba04ab19",
+        "name": "Not scaling features before regularization, k-NN, or SVM",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.tedd517a7",
+        "name": "Treating random forest feature importance as causal",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.ta0d7da7d",
+        "name": "Tuning XGBoost hyperparameters before fixing the features",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.02.t46610d3a",
+        "name": "Using accuracy on imbalanced data and declaring success",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "3-syllabus-part2-machine-learning.md"
+  },
+  {
+    "topicId": "ml-classical-unsupervised-learning",
+    "topicNumber": "08.03",
+    "concepts": [
+      {
+        "id": "08.03.c4333e998",
+        "name": "PCA",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.03.cf8833df2",
+        "name": "t-SNE",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.03.c927b3bf8",
+        "name": "UMAP",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.03.c5b2255f0",
+        "name": "Clustering",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.03.c4a2b3e01",
+        "name": "Dimensionality reduction",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.03.c224624ac",
+        "name": "Matrix factorization",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.03.c1dcec16e",
+        "name": "Anomaly detection",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "08.03.t89933f9e",
+        "name": "Reading cluster distances off a t-SNE plot as if they meant something",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.03.t4621f53a",
+        "name": "Running PCA without standardizing when features are on different scales",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.03.t0d292680",
+        "name": "Choosing k by whichever value produces the story you wanted",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "3-syllabus-part2-machine-learning.md"
+  },
+  {
+    "topicId": "ml-classical-evaluation",
+    "topicNumber": "08.04",
+    "concepts": [
+      {
+        "id": "08.04.c24d52943",
+        "name": "Temporal splits",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.c87d6a925",
+        "name": "Time-series CV",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.c4fd966e1",
+        "name": "Precision-recall curve and PR-AUC",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.c8c3959c2",
+        "name": "MRR",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.c081a0a17",
+        "name": "NDCG",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.ceac3b690",
+        "name": "Data leakage.",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.c76115ece",
+        "name": "Detection",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.cb815d846",
+        "name": "Splitting",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.c2e1e2a5d",
+        "name": "Cross-validation",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.c33c328bc",
+        "name": "Classification metrics",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.c6b1cd1f4",
+        "name": "Regression metrics",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.c00928a71",
+        "name": "Ranking metrics",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.ca583d3ca",
+        "name": "Calibration",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.cdb75e8b8",
+        "name": "Class imbalance",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.c78257a7b",
+        "name": "Comparison",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "08.04.t91ddbd6e",
+        "name": "Detect data leakage in someone else's pipeline",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.tb4a9404a",
+        "name": "Choose a metric that reflects the actual cost of each error type",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.te42f2b3b",
+        "name": "Fitting a scaler on the full dataset before splitting — the single most common leak",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.tca4d864b",
+        "name": "Selecting features using the full dataset then cross-validating the model only",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.04.tda52cadc",
+        "name": "Reporting the best CV score as the expected production performance",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "3-syllabus-part2-machine-learning.md"
+  },
+  {
+    "topicId": "ml-classical-feature-engineering",
+    "topicNumber": "08.05",
+    "concepts": [
+      {
+        "id": "08.05.c3e27e81e",
+        "name": "Pipeline",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.05.cacd1d0f6",
+        "name": "ColumnTransformer",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.05.c6a8b8e06",
+        "name": "Target/mean encoding",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.05.c68ceabb9",
+        "name": "Point-in-time correctness",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.05.c5eec7d1a",
+        "name": "Feature stores",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.05.c43302065",
+        "name": "Numerical",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.05.c603a686c",
+        "name": "Categorical",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.05.cc738defe",
+        "name": "Temporal",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.05.c25bc0da4",
+        "name": "Text",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.05.cb5a4d6b9",
+        "name": "Aggregations",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.05.c919530a2",
+        "name": "Selection",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.05.c88e5f00c",
+        "name": "Pipelines",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "3-syllabus-part2-machine-learning.md"
+  },
+  {
+    "topicId": "ml-classical-interpretability",
+    "topicNumber": "08.06",
+    "concepts": [
+      {
+        "id": "08.06.c12c8a2f0",
+        "name": "SHAP",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.06.c81660ac9",
+        "name": "LIME",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "08.06.c2b1df931",
+        "name": "Materials for section 8:",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "3-syllabus-part2-machine-learning.md"
+  },
+  {
+    "topicId": "ml-deep-neural-network-fundamentals",
+    "topicNumber": "09.01",
+    "concepts": [
+      {
+        "id": "09.01.c1a771d6b",
+        "name": "ReLU",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.01.c3c538cfb",
+        "name": "GELU",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.01.cf362e9cd",
+        "name": "SwiGLU",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.01.cd3e2493f",
+        "name": "Binary and categorical cross-entropy",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.01.c67f71da3",
+        "name": "Backpropagation as the chain rule applied in reverse topological order.",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.01.c9cce3e2b",
+        "name": "Building blocks",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.01.c743bb679",
+        "name": "Activations",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.01.c56c3f984",
+        "name": "Loss functions",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.01.cc978ecd9",
+        "name": "Forward and backward",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.01.c785674cb",
+        "name": "Automatic differentiation",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "09.01.t174a6045",
+        "name": "Implement a complete network with backpropagation in numpy from memory",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.01.t68a934a8",
+        "name": "Explain every line of a training loop",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "3-syllabus-part2-machine-learning.md"
+  },
+  {
+    "topicId": "ml-deep-training-dynamics",
+    "topicNumber": "09.02",
+    "concepts": [
+      {
+        "id": "09.02.ca4fe806d",
+        "name": "Momentum",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.c0cd46ab2",
+        "name": "Adam",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.ca2730dc3",
+        "name": "AdamW",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.c1a12cc49",
+        "name": "Warmup",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.cf9cb5454",
+        "name": "Xavier/Glorot",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.cdacd2b81",
+        "name": "He/Kaiming",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.cec591b97",
+        "name": "BatchNorm",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.c83577ea2",
+        "name": "LayerNorm",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.cf84ee506",
+        "name": "RMSNorm",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.cad0ba507",
+        "name": "Pre-LN vs post-LN",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.c7f0f6a51",
+        "name": "Dropout",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.cf0fc7cf2",
+        "name": "Vanishing gradients",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.c605f16e8",
+        "name": "Exploding gradients",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.c0d903ac8",
+        "name": "Optimizers",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.cc0eb0ed1",
+        "name": "Learning rate",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.c758ed98e",
+        "name": "Initialization",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.cf69dbd6d",
+        "name": "Normalization",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.c35017d7a",
+        "name": "Regularization",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.cbefa24dd",
+        "name": "Gradient problems",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.ceb106a0d",
+        "name": "Batch size",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.c448822b8",
+        "name": "Precision",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.02.c3f434054",
+        "name": "Debugging a training run",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "3-syllabus-part2-machine-learning.md"
+  },
+  {
+    "topicId": "ml-deep-pytorch",
+    "topicNumber": "09.03",
+    "concepts": [
+      {
+        "id": "09.03.c3cc31e31",
+        "name": "view",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c007cd9c0",
+        "name": "reshape",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.ca44beb77",
+        "name": "permute",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c48e1e611",
+        "name": "transpose",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c9dcf58a7",
+        "name": "squeeze",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c1367650f",
+        "name": "unsqueeze",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c260a52c6",
+        "name": "expand",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c3d00e167",
+        "name": "repeat",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c6e7048a8",
+        "name": "gather",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c70e8b745",
+        "name": "scatter",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.cd900dba1",
+        "name": "requires_grad",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c7258eac8",
+        "name": "backward()",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c094bceda",
+        "name": ".grad",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.cac66e8bd",
+        "name": "zero_grad()",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c013e57ee",
+        "name": "detach()",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.cc7e60143",
+        "name": "torch.no_grad()",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.cbab2f0aa",
+        "name": "retain_graph",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c13e7699c",
+        "name": "autograd.Function",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c0e1c0c2f",
+        "name": "nn.Module",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.cf4ccca84",
+        "name": "__init__",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.cecf4a3e1",
+        "name": "forward",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c747aa62f",
+        "name": "state_dict",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c18152891",
+        "name": "train()",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.cb578ed78",
+        "name": "eval()",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c0fed49d6",
+        "name": "nn.Sequential",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.cf7a3a227",
+        "name": "ModuleList",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c7c46479b",
+        "name": "ModuleDict",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.cfea33d62",
+        "name": "Dataset",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.ce55be236",
+        "name": "IterableDataset",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c430e8a24",
+        "name": "DataLoader",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c672904ca",
+        "name": "num_workers",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.cd99b1b4e",
+        "name": "pin_memory",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c08a147b7",
+        "name": "collate_fn",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c6edc3a74",
+        "name": "drop_last",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c68d84b6a",
+        "name": "step",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c8aa0b126",
+        "name": "no_grad",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.cb1ba57d0",
+        "name": ".to(device)",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c60feff8e",
+        "name": "torch.cuda.empty_cache()",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.cbc3e12fc",
+        "name": "nvidia-smi",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c1af69b95",
+        "name": "torch.amp",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c7faa2306",
+        "name": "autocast",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.cbc4f1289",
+        "name": "GradScaler",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c749e490f",
+        "name": "torch.compile",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.cfcdc5106",
+        "name": "transformers",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c80229819",
+        "name": "datasets",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c63ee66cc",
+        "name": "accelerate",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.cb76ffb8d",
+        "name": "Tensors",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c857ad4cb",
+        "name": "Autograd",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c215fafed",
+        "name": "Modules",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c6b06092d",
+        "name": "Data",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.cfd93d91a",
+        "name": "Training loop",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.c04be90b0",
+        "name": "GPU",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.03.caa5daa82",
+        "name": "Ecosystem",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "3-syllabus-part2-machine-learning.md"
+  },
+  {
+    "topicId": "ml-deep-architectures",
+    "topicNumber": "09.04",
+    "concepts": [
+      {
+        "id": "09.04.c54a46e25",
+        "name": "ResNet",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.04.c83e0e5a3",
+        "name": "LSTM",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.04.c0cc16b9e",
+        "name": "GRU",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.04.cdc3efdd9",
+        "name": "and attention as the fix",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.04.c1f89c3a5",
+        "name": "VAE",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.04.c6d6795a8",
+        "name": "GANs",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.04.c085c5595",
+        "name": "Diffusion",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.04.c8f9c02bd",
+        "name": "Convolutional networks",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.04.c125e1ad3",
+        "name": "Recurrent networks",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.04.ce438b8e5",
+        "name": "Embeddings",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.04.c7f2fdf80",
+        "name": "Generative",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.04.c861d8c8a",
+        "name": "Other",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "3-syllabus-part2-machine-learning.md"
+  },
+  {
+    "topicId": "ml-deep-transfer-learning",
+    "topicNumber": "09.05",
+    "concepts": [],
+    "traps": [],
+    "source": "3-syllabus-part2-machine-learning.md"
+  },
+  {
+    "topicId": "ml-deep-scaling-distributed-training",
+    "topicNumber": "09.06",
+    "concepts": [
+      {
+        "id": "09.06.c085de7be",
+        "name": "Data parallelism",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.06.c2ef515b7",
+        "name": "Model parallelism",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.06.c74315360",
+        "name": "ZeRO/FSDP",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "09.06.c24e15d85",
+        "name": "Materials:",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "3-syllabus-part2-machine-learning.md"
+  },
+  {
+    "topicId": "ml-nlp-text-processing",
+    "topicNumber": "10.01",
+    "concepts": [],
+    "traps": [],
+    "source": "3-syllabus-part2-machine-learning.md"
+  },
+  {
+    "topicId": "ml-nlp-statistical-language-models",
+    "topicNumber": "10.02",
+    "concepts": [
+      {
+        "id": "10.02.cc3fa9065",
+        "name": "Perplexity",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "3-syllabus-part2-machine-learning.md"
+  },
+  {
+    "topicId": "ml-nlp-word-representations",
+    "topicNumber": "10.03",
+    "concepts": [
+      {
+        "id": "10.03.c3f4e1818",
+        "name": "Word2Vec",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "10.03.cf7c46df5",
+        "name": "GloVe",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "10.03.c1950b0fe",
+        "name": "FastText",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "3-syllabus-part2-machine-learning.md"
+  },
+  {
+    "topicId": "ml-nlp-sequence-tasks-models",
+    "topicNumber": "10.04",
+    "concepts": [
+      {
+        "id": "10.04.cbac4c90f",
+        "name": "named entity recognition",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "3-syllabus-part2-machine-learning.md"
+  },
+  {
+    "topicId": "ml-nlp-evaluation",
+    "topicNumber": "10.05",
+    "concepts": [
+      {
+        "id": "10.05.c3308875f",
+        "name": "BLEU",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "10.05.cacef1482",
+        "name": "ROUGE",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "10.05.c53e1e1ac",
+        "name": "BERTScore",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "10.05.ca1d5d749",
+        "name": "Materials for section 10:",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "10.05.c967438d7",
+        "name": "Part III — Transformers & LLMs (sections 11–15) follows",
+        "source": "3-syllabus-part2-machine-learning.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "3-syllabus-part2-machine-learning.md"
+  },
+  {
+    "topicId": "llm-transformer-attention",
+    "topicNumber": "11.01",
+    "concepts": [
+      {
+        "id": "11.01.cb3d078a9",
+        "name": "softmax(QKᵀ/√d_k)V",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.01.cfdd68d79",
+        "name": "Why the √d_k scaling exists",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.01.c01610b32",
+        "name": "Causal/look-ahead masks",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.01.c86f4caf6",
+        "name": "Motivation",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.01.c17a39533",
+        "name": "Scaled dot-product attention",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.01.c3a8baca5",
+        "name": "Self vs cross attention",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.01.c29842234",
+        "name": "Masking",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.01.ca5deef8e",
+        "name": "Multi-head attention",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.01.cf492936c",
+        "name": "Complexity",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "11.01.t8ff4dde6",
+        "name": "Write scaled dot-product and multi-head attention from memory on a whiteboard",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.01.t2ae5100d",
+        "name": "Explain the shape of every intermediate tensor without being prompted",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.01.t10981536",
+        "name": "Confusing d_model with d_k",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.01.t24b15d53",
+        "name": "Applying the mask after softmax",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.01.t04b2ce74",
+        "name": "Forgetting to scale, and wondering why gradients vanish",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.01.t7cce669a",
+        "name": "Getting the transpose wrong in the QKᵀ product and silently computing nonsense",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "2-syllabus-part3-transformers-llms.md"
+  },
+  {
+    "topicId": "llm-transformer-the-transformer-block-architecture",
+    "topicNumber": "11.02",
+    "concepts": [
+      {
+        "id": "11.02.c8338ac46",
+        "name": "Post-LN",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.02.c5cc91ae3",
+        "name": "Pre-LN",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.02.c8736110d",
+        "name": "Encoder-only",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.02.cab09d7db",
+        "name": "Decoder-only",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.02.c16bf12bc",
+        "name": "Encoder-decoder",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.02.ce1cb58c9",
+        "name": "The block",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.02.c48941816",
+        "name": "Residual connections",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.02.c87a5abf4",
+        "name": "Normalization placement",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.02.cd18050aa",
+        "name": "Full architectures",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.02.ceda52d44",
+        "name": "Embeddings and output",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.02.cacdb6b78",
+        "name": "Hyperparameters",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "2-syllabus-part3-transformers-llms.md"
+  },
+  {
+    "topicId": "llm-transformer-positional-information",
+    "topicNumber": "11.03",
+    "concepts": [
+      {
+        "id": "11.03.c4935d85a",
+        "name": "RoPE (Rotary Position Embedding).",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.03.cd72fd113",
+        "name": "The problem",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.03.cdf839b06",
+        "name": "Absolute encodings",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.03.c5accbc33",
+        "name": "Relative encodings",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.03.c55b4452c",
+        "name": "ALiBi",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.03.c9071c114",
+        "name": "Long context",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "2-syllabus-part3-transformers-llms.md"
+  },
+  {
+    "topicId": "llm-transformer-attention-variants-efficiency",
+    "topicNumber": "11.04",
+    "concepts": [
+      {
+        "id": "11.04.c083446aa",
+        "name": "MHA → MQA → GQA.",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.04.ce1870689",
+        "name": "FlashAttention",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.04.c03f81176",
+        "name": "KV memory reduction",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.04.cb62cf4dd",
+        "name": "IO-aware attention",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.04.c1c1f456d",
+        "name": "Sparse and structured attention",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.04.c62a32a1d",
+        "name": "Linear attention",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "11.04.c0c0df034",
+        "name": "Mixture of Experts",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "2-syllabus-part3-transformers-llms.md"
+  },
+  {
+    "topicId": "llm-tokenization-tokenization",
+    "topicNumber": "12.01",
+    "concepts": [
+      {
+        "id": "12.01.c91923714",
+        "name": "Subword",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "12.01.c715161dc",
+        "name": "BPE",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "12.01.c4738bfde",
+        "name": "WordPiece",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "12.01.cf2795613",
+        "name": "Unigram/SentencePiece",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "12.01.c84c2cb7f",
+        "name": "Approaches",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "12.01.c62b571cf",
+        "name": "Algorithms",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "12.01.c61e0756c",
+        "name": "Design decisions",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "12.01.cf4ef25b2",
+        "name": "Downstream consequences",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "12.01.c048cf7f3",
+        "name": "Practical",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "12.01.t8d61be09",
+        "name": "Implement BPE from scratch",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "12.01.tff5c900d",
+        "name": "Diagnose a model failure as a tokenization artifact rather than a reasoning failure",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "2-syllabus-part3-transformers-llms.md"
+  },
+  {
+    "topicId": "llm-scale-pretraining",
+    "topicNumber": "13.01",
+    "concepts": [
+      {
+        "id": "13.01.c03f2e223",
+        "name": "Deduplication",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "13.01.cc5a5d705",
+        "name": "Chinchilla",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "13.01.cba8b8bb9",
+        "name": "Objectives",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "13.01.caa86fe2a",
+        "name": "Data",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "13.01.c5f03e1d1",
+        "name": "Mechanics",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "13.01.cb5f7e328",
+        "name": "Scaling laws",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "2-syllabus-part3-transformers-llms.md"
+  },
+  {
+    "topicId": "llm-scale-the-model-landscape",
+    "topicNumber": "13.02",
+    "concepts": [],
+    "traps": [],
+    "source": "2-syllabus-part3-transformers-llms.md"
+  },
+  {
+    "topicId": "llm-scale-capabilities-limits",
+    "topicNumber": "13.03",
+    "concepts": [
+      {
+        "id": "13.03.c70f5db9f",
+        "name": "Hallucination",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "13.03.cc9b7095a",
+        "name": "Materials:",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "2-syllabus-part3-transformers-llms.md"
+  },
+  {
+    "topicId": "llm-adapting-the-decision-framework",
+    "topicNumber": "14.01",
+    "concepts": [
+      {
+        "id": "14.01.c0262a46c",
+        "name": "Exercise:",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "2-syllabus-part3-transformers-llms.md"
+  },
+  {
+    "topicId": "llm-adapting-fine-tuning",
+    "topicNumber": "14.02",
+    "concepts": [
+      {
+        "id": "14.02.c07d41628",
+        "name": "LoRA",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "14.02.cb901ac29",
+        "name": "QLoRA",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "14.02.c23c4fc3e",
+        "name": "Supervised fine-tuning",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "14.02.c298f6692",
+        "name": "Parameter-efficient fine-tuning",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "14.02.ca709636c",
+        "name": "Problems",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "2-syllabus-part3-transformers-llms.md"
+  },
+  {
+    "topicId": "llm-adapting-alignment",
+    "topicNumber": "14.03",
+    "concepts": [
+      {
+        "id": "14.03.c8b87f0da",
+        "name": "The pipeline",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "14.03.cad58d947",
+        "name": "RLHF",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "14.03.c1473f6a3",
+        "name": "DPO",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "14.03.cdda2cb78",
+        "name": "Variants",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "14.03.c183162a6",
+        "name": "Constitutional AI / RLAIF",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "14.03.c7e8827ad",
+        "name": "Data",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "2-syllabus-part3-transformers-llms.md"
+  },
+  {
+    "topicId": "llm-adapting-compression",
+    "topicNumber": "14.04",
+    "concepts": [
+      {
+        "id": "14.04.c309f556a",
+        "name": "Post-training quantization",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "14.04.cdaba51c0",
+        "name": "quantization-aware training",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "14.04.cd486a627",
+        "name": "Quantization",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "14.04.c75533207",
+        "name": "Distillation",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "14.04.c829c35a9",
+        "name": "Pruning",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "14.04.ca7775c21",
+        "name": "Speculative approaches",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "2-syllabus-part3-transformers-llms.md"
+  },
+  {
+    "topicId": "llm-inference-the-mechanics",
+    "topicNumber": "15.01",
+    "concepts": [
+      {
+        "id": "15.01.c83d2bfe5",
+        "name": "Prefill",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "15.01.c9a7b6eab",
+        "name": "Decode",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "15.01.c2ce5fbe5",
+        "name": "KV cache.",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "15.01.c68e08a43",
+        "name": "PagedAttention",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "15.01.c0125e521",
+        "name": "Continuous/in-flight batching",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "15.01.cfbe1ec6d",
+        "name": "Constrained decoding",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "15.01.c0d653a3d",
+        "name": "Two phases",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "15.01.c03a1d597",
+        "name": "Batching",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "15.01.cef92a155",
+        "name": "Speculative decoding",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "15.01.c55fa1368",
+        "name": "Sampling",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "15.01.c7b4f3a50",
+        "name": "Streaming",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "15.01.t7216eaee",
+        "name": "Explain where every millisecond and every rupee of an LLM call goes",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "15.01.t25652a6f",
+        "name": "Choose a serving configuration from a latency and throughput requirement",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "2-syllabus-part3-transformers-llms.md"
+  },
+  {
+    "topicId": "llm-inference-serving",
+    "topicNumber": "15.02",
+    "concepts": [
+      {
+        "id": "15.02.c3df781b6",
+        "name": "vLLM",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "15.02.cb4cef486",
+        "name": "Materials:",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "15.02.cffcb9653",
+        "name": "Part IV — AI Engineering (sections 16–20) follows",
+        "source": "2-syllabus-part3-transformers-llms.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "2-syllabus-part3-transformers-llms.md"
+  },
+  {
+    "topicId": "ai-models-apis-integration",
+    "topicNumber": "16.01",
+    "concepts": [
+      {
+        "id": "16.01.c81666024",
+        "name": "temperature",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.01.c04c995d5",
+        "name": "top_p",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.01.cbcef1768",
+        "name": "max_tokens",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.01.c8b0b9367",
+        "name": "stop",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.01.c073067c5",
+        "name": "seed",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.01.c0e3e6296",
+        "name": "logprobs",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.01.cc48d0c7c",
+        "name": "Fallback chains",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.01.c3ff68cfd",
+        "name": "Prompt caching",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.01.cf74c7520",
+        "name": "The request/response cycle",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.01.cd647d823",
+        "name": "Parameters",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.01.caf001e63",
+        "name": "Streaming",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.01.c92b7da8a",
+        "name": "Reliability",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.01.c7a68287a",
+        "name": "Cost and throughput",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.01.cf567ee27",
+        "name": "Abstraction",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "16.01.t778fec2c",
+        "name": "Build a production integration that degrades gracefully under every failure mode",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.01.te43e7f70",
+        "name": "Estimate cost and latency for a design before writing it",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-models-structured-output",
+    "topicNumber": "16.02",
+    "concepts": [
+      {
+        "id": "16.02.cc304d03b",
+        "name": "Function/tool calling",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-models-prompt-engineering",
+    "topicNumber": "16.03",
+    "concepts": [
+      {
+        "id": "16.03.ccdc62a60",
+        "name": "Few-shot",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.03.cfcf20513",
+        "name": "Chain-of-thought",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.03.c25993cb0",
+        "name": "Fundamentals",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.03.ca7abd3c1",
+        "name": "Techniques",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.03.c3d1ca430",
+        "name": "Context engineering",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.03.cb335a258",
+        "name": "Engineering discipline",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "16.03.c4d93bb78",
+        "name": "Anti-patterns",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-rag-embeddings",
+    "topicNumber": "17.01",
+    "concepts": [],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-rag-chunking-ingestion",
+    "topicNumber": "17.02",
+    "concepts": [
+      {
+        "id": "17.02.cc336c1b0",
+        "name": "parent-document retrieval",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.02.c847e90d0",
+        "name": "Contextual retrieval",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.02.c011229d9",
+        "name": "Parsing",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.02.cb2c22403",
+        "name": "Ingestion pipeline",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-rag-indexing-search",
+    "topicNumber": "17.03",
+    "concepts": [
+      {
+        "id": "17.03.ca393f24e",
+        "name": "nprobe",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.03.c7a7f9410",
+        "name": "efConstruction",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.03.cc82cc8d4",
+        "name": "efSearch",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.03.c82e5ed1c",
+        "name": "IVF",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.03.c870d32e4",
+        "name": "HNSW",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.03.c61b965c9",
+        "name": "BM25",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.03.cf82f88f3",
+        "name": "Hybrid search.",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.03.c5ad197f9",
+        "name": "Reciprocal rank fusion",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.03.c0bdb066b",
+        "name": "Vector indexes",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.03.c0c87b87f",
+        "name": "Vector databases",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.03.c08b9e312",
+        "name": "Sparse retrieval",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.03.c4b1eb12e",
+        "name": "Reranking",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-rag-query-handling-generation",
+    "topicNumber": "17.04",
+    "concepts": [
+      {
+        "id": "17.04.cd60ae98e",
+        "name": "Query rewriting",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.04.c886bea74",
+        "name": "HyDE",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.04.c7a3ac884",
+        "name": "Citation and attribution",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.04.c06736986",
+        "name": "Context assembly",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.04.c276eac79",
+        "name": "Generation",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.04.ca8923d71",
+        "name": "Access control",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-rag-advanced-patterns",
+    "topicNumber": "17.05",
+    "concepts": [
+      {
+        "id": "17.05.c9027d40d",
+        "name": "Build RAG from absolute zero",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "17.05.ceda6f541",
+        "name": "Materials:",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-agents-foundations",
+    "topicNumber": "18.01",
+    "concepts": [
+      {
+        "id": "18.01.cce0db9eb",
+        "name": "Anthropic's distinction between workflows (predetermined paths) and agents (model-directed control flow)",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "18.01.c0b861e47",
+        "name": "Definition",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "18.01.cc6a8a654",
+        "name": "When not to use an agent",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "18.01.cab343af8",
+        "name": "The loop",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "18.01.tb580bcbf",
+        "name": "Build an agent loop from scratch before reaching for a framework",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "18.01.tf7b6b733",
+        "name": "Recognize when an agent is the wrong architecture — which is often",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-agents-tools",
+    "topicNumber": "18.02",
+    "concepts": [
+      {
+        "id": "18.02.c05649f83",
+        "name": "Tool selection at scale",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "18.02.cb4de7598",
+        "name": "MCP (Model Context Protocol)",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-agents-planning-reasoning",
+    "topicNumber": "18.03",
+    "concepts": [
+      {
+        "id": "18.03.c16173a26",
+        "name": "ReAct",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "18.03.c06e8da84",
+        "name": "Tree of Thoughts",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "18.03.c219018d7",
+        "name": "Reflexion",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-agents-memory",
+    "topicNumber": "18.04",
+    "concepts": [],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-agents-multi-agent",
+    "topicNumber": "18.05",
+    "concepts": [],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-agents-reliability",
+    "topicNumber": "18.06",
+    "concepts": [
+      {
+        "id": "18.06.c6afd410d",
+        "name": "Failure modes",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "18.06.c31d0e443",
+        "name": "Controls",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "18.06.c33b51d14",
+        "name": "The argument for building your own loop first",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "18.06.cf87a19d5",
+        "name": "Build an agent loop from scratch",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "18.06.cc960f5c5",
+        "name": "Materials:",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "18.06.cdbb2bd16",
+        "name": "Frameworks",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-evaluation-foundations",
+    "topicNumber": "19.01",
+    "concepts": [
+      {
+        "id": "19.01.c6b3e605d",
+        "name": "Most eval work fails because it starts with metrics instead of with looking at data.",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.01.c6b17cadd",
+        "name": "Why this is hard",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.01.c34b0b791",
+        "name": "The hierarchy",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.01.c27385521",
+        "name": "Error analysis first",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "19.01.t9e956095",
+        "name": "Design an eval for a task nobody has evaluated before",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.01.te9ab748b",
+        "name": "Explain why a metric that looks good is not measuring what matters",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-evaluation-datasets",
+    "topicNumber": "19.02",
+    "concepts": [
+      {
+        "id": "19.02.c27631d60",
+        "name": "inter-annotator agreement",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.02.cc480b4af",
+        "name": "Contamination",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-evaluation-methods",
+    "topicNumber": "19.03",
+    "concepts": [
+      {
+        "id": "19.03.c9962d187",
+        "name": "LLM-as-judge.",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.03.cbb6cb28e",
+        "name": "Pairwise comparison",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.03.cea45f6de",
+        "name": "pointwise scoring",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.03.ca85c000d",
+        "name": "Bias taxonomy and mitigation",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.03.cdb0f0d9e",
+        "name": "Validating the judge",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.03.cd53dfeb6",
+        "name": "Deterministic checks",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.03.cd9d8e26f",
+        "name": "Reference-based",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.03.c6f130cc9",
+        "name": "Human evaluation",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-evaluation-system-specific-evaluation",
+    "topicNumber": "19.04",
+    "concepts": [
+      {
+        "id": "19.04.c9e6d0f08",
+        "name": "Retrieval",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.04.cfbc8b43f",
+        "name": "Generation",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.04.cca3c8a0a",
+        "name": "RAG",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.04.c1a5d576b",
+        "name": "Agents",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.04.c0bedf342",
+        "name": "Classification and extraction",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.04.c638b7543",
+        "name": "Safety",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.04.c78f3ed90",
+        "name": "Conversation",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-evaluation-operationalizing",
+    "topicNumber": "19.05",
+    "concepts": [
+      {
+        "id": "19.05.ca458a97a",
+        "name": "Evals in CI",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.05.cce75c316",
+        "name": "Online metrics",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.05.c76aa7907",
+        "name": "The data flywheel",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.05.cd36005b8",
+        "name": "Build a complete eval harness",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.05.c6fe3dd73",
+        "name": "Materials:",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "19.05.c0b1afa1c",
+        "name": "Hamel Husain's writing on evals",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-safety-adversarial-input",
+    "topicNumber": "20.01",
+    "concepts": [
+      {
+        "id": "20.01.c51f4185d",
+        "name": "Prompt injection.",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "20.01.cae21733c",
+        "name": "Direct",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "20.01.c2f298a3a",
+        "name": "Indirect",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "20.01.c997cf320",
+        "name": "limiting what the system can do rather than trying to control what it says",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "20.01.cf9ebd950",
+        "name": "Jailbreaking",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "20.01.caf23dda8",
+        "name": "Data exfiltration",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "20.01.ca94fe46e",
+        "name": "Other attacks",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-safety-guardrails",
+    "topicNumber": "20.02",
+    "concepts": [
+      {
+        "id": "20.02.c8baee77b",
+        "name": "groundedness/faithfulness checking against retrieved context",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "20.02.cfa1da6fd",
+        "name": "Refusal design",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "20.02.caed563bb",
+        "name": "Hallucination mitigation",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "ai-safety-privacy-ethics-governance",
+    "topicNumber": "20.03",
+    "concepts": [
+      {
+        "id": "20.03.c94cbd100",
+        "name": "Red teaming",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "20.03.c897eb70d",
+        "name": "Materials:",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "20.03.c0a990284",
+        "name": "Fairness",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "20.03.c79f21ce0",
+        "name": "Operations",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "20.03.c6ad6f2e0",
+        "name": "Part V — Production (sections 21–24) follows",
+        "source": "4-syllabus-part4-ai-engineering.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "4-syllabus-part4-ai-engineering.md"
+  },
+  {
+    "topicId": "prod-serving-building-the-service",
+    "topicNumber": "21.01",
+    "concepts": [
+      {
+        "id": "21.01.c1f00d0d7",
+        "name": "The blocking-call-in-async-handler bug",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "21.01.ccf0edbc4",
+        "name": "Graceful degradation",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "21.01.cd6ca8a4d",
+        "name": "FastAPI",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "21.01.c43b87e5d",
+        "name": "Async",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "21.01.ccadd43b1",
+        "name": "Streaming",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "21.01.cc9316a8f",
+        "name": "Resilience",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "21.01.cb31add53",
+        "name": "Performance",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "21.01.t82cb46ac",
+        "name": "Ship an API that degrades gracefully instead of failing hard",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "21.01.t2e4ee803",
+        "name": "Know your service's p95 latency and where it comes from",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "5-syllabus-part5-production.md"
+  },
+  {
+    "topicId": "prod-serving-containers-infrastructure",
+    "topicNumber": "21.02",
+    "concepts": [
+      {
+        "id": "21.02.c324547f3",
+        "name": ".dockerignore",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "21.02.c618d5a29",
+        "name": "Materials:",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "21.02.c2c4613d4",
+        "name": "Orchestration",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "21.02.c394b4242",
+        "name": "Cloud",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "21.02.c137b5f83",
+        "name": "Configuration and secrets",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "5-syllabus-part5-production.md"
+  },
+  {
+    "topicId": "prod-mlops-experiment-tracking-reproducibility",
+    "topicNumber": "22.01",
+    "concepts": [
+      {
+        "id": "22.01.c4612e53d",
+        "name": "Reproducibility",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "5-syllabus-part5-production.md"
+  },
+  {
+    "topicId": "prod-mlops-versioning",
+    "topicNumber": "22.02",
+    "concepts": [
+      {
+        "id": "22.02.c8cf88de3",
+        "name": "Data versioning",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "22.02.c51ec7419",
+        "name": "Model versioning",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "22.02.c12499cc9",
+        "name": "Prompt versioning",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "5-syllabus-part5-production.md"
+  },
+  {
+    "topicId": "prod-mlops-pipelines-ci-cd",
+    "topicNumber": "22.03",
+    "concepts": [
+      {
+        "id": "22.03.c882bf15e",
+        "name": "the eval regression suite with a blocking threshold",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "22.03.c63fd55c0",
+        "name": "shadow",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "22.03.cc7c000df",
+        "name": "canary",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "22.03.cc253852f",
+        "name": "blue-green",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "22.03.c0716d481",
+        "name": "A/B",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "5-syllabus-part5-production.md"
+  },
+  {
+    "topicId": "prod-mlops-data-model-operations",
+    "topicNumber": "22.04",
+    "concepts": [
+      {
+        "id": "22.04.c451221c3",
+        "name": "Training/serving skew",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "22.04.cba1280a3",
+        "name": "Drift",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "22.04.c4d03ee78",
+        "name": "Materials:",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "5-syllabus-part5-production.md"
+  },
+  {
+    "topicId": "prod-observability-observability",
+    "topicNumber": "23.01",
+    "concepts": [
+      {
+        "id": "23.01.c21fd1811",
+        "name": "Correlation IDs",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.01.c61187ae1",
+        "name": "LLM-specific tracing",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.01.c75495a4d",
+        "name": "Logging",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.01.c0c76d16c",
+        "name": "Tracing",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.01.c49b48353",
+        "name": "Metrics",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.01.c9b1da36b",
+        "name": "Quality in production",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.01.c06debe63",
+        "name": "Alerting",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.01.cb3fc6252",
+        "name": "Tooling",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "23.01.te326db16",
+        "name": "Diagnose a production quality regression from traces, without reproducing it locally",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.01.tfcf4c9d7",
+        "name": "Answer \"what did the model actually see\" for any past request",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "5-syllabus-part5-production.md"
+  },
+  {
+    "topicId": "prod-observability-cost-engineering",
+    "topicNumber": "23.02",
+    "concepts": [
+      {
+        "id": "23.02.c7cbae505",
+        "name": "max_tokens",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.c6a1b2c15",
+        "name": "Prompt caching",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.c521671b0",
+        "name": "Model routing and cascades",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.c1a891fcc",
+        "name": "Prompt compression",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.c1b4ad52f",
+        "name": "Output length control",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.c9e56f583",
+        "name": "Semantic caching",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.c6dc2692a",
+        "name": "Batch APIs",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.c122e860e",
+        "name": "Retrieval tuning",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.ce60922a0",
+        "name": "Fine-tuning a small model",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.cf6c13e96",
+        "name": "Self-hosting",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.c3b4de225",
+        "name": "Materials:",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.cc84c7d93",
+        "name": "Latency engineering",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "23.02.t09cdd4f5",
+        "name": "**Prompt caching** — restructure prompts so stable content sits first; large savings for repeated system prompts and few-shot blocks",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.t749dd599",
+        "name": "**Model routing and cascades** — classify difficulty, send easy requests to a cheap model, escalate on low confidence",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.t7667c6f5",
+        "name": "**Prompt compression** — removing redundancy, trimming few-shot examples that no longer earn their tokens",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.t80e360db",
+        "name": "**Output length control** — capping `max_tokens`, instructing brevity, structured output instead of prose",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.t3f40172d",
+        "name": "**Semantic caching** — embedding-based cache lookup for near-duplicate queries, and its correctness risk when near-duplicates need different answers",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.tb1193e81",
+        "name": "**Batch APIs** for latency-tolerant workloads",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.t844a06b4",
+        "name": "**Retrieval tuning** — fewer, better chunks rather than more chunks",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.tb3a45393",
+        "name": "**Fine-tuning a small model** to replace a large one, when volume justifies it",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "23.02.t511bf0cc",
+        "name": "**Self-hosting** — the break-even calculation including GPU cost, engineering time, and reliability burden",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "5-syllabus-part5-production.md"
+  },
+  {
+    "topicId": "prod-design-method",
+    "topicNumber": "24.01",
+    "concepts": [
+      {
+        "id": "24.01.c03c3406f",
+        "name": "The interview structure",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "24.01.c2655fb91",
+        "name": "Requirements to always clarify",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "24.01.c2ef06299",
+        "name": "Estimation",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "24.01.c68335e57",
+        "name": "Communicating tradeoffs",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [
+      {
+        "id": "24.01.t7038f833",
+        "name": "Whiteboard a complete AI system in 45 minutes with defensible numbers",
+        "concepts": [],
+        "review": "machine-extracted"
+      },
+      {
+        "id": "24.01.t18b7c45b",
+        "name": "Say what you would *not* build, and why",
+        "concepts": [],
+        "review": "machine-extracted"
+      }
+    ],
+    "source": "5-syllabus-part5-production.md"
+  },
+  {
+    "topicId": "prod-design-the-reference-architecture",
+    "topicNumber": "24.02",
+    "concepts": [],
+    "traps": [],
+    "source": "5-syllabus-part5-production.md"
+  },
+  {
+    "topicId": "prod-design-canonical-problems",
+    "topicNumber": "24.03",
+    "concepts": [
+      {
+        "id": "24.03.cfa231c85",
+        "name": "RAG at scale.",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "24.03.c24f1c4ef",
+        "name": "Multi-tenant LLM platform.",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "24.03.c9216d46d",
+        "name": "Conversational assistant with memory.",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "24.03.c5d5b904d",
+        "name": "Agentic workflow system.",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "24.03.cf40feb56",
+        "name": "Document processing pipeline.",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "24.03.c3400b4ea",
+        "name": "Code assistant.",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "24.03.ca5ffdf45",
+        "name": "Content moderation at scale.",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "24.03.cd466141a",
+        "name": "Real-time recommendation.",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "24.03.cab24d1d7",
+        "name": "Fraud / risk scoring.",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "5-syllabus-part5-production.md"
+  },
+  {
+    "topicId": "prod-design-classical-ml-system-design",
+    "topicNumber": "24.04",
+    "concepts": [
+      {
+        "id": "24.04.c8e43ca9c",
+        "name": "Training/serving skew",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "24.04.ccd458ba5",
+        "name": "Materials:",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      },
+      {
+        "id": "24.04.cf8aa738a",
+        "name": "Part VI — Optional Depth follows",
+        "source": "5-syllabus-part5-production.md",
+        "review": "machine-extracted"
+      }
+    ],
+    "traps": [],
+    "source": "5-syllabus-part5-production.md"
+  }
+]

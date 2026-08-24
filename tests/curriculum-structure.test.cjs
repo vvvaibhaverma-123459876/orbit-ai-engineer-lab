@@ -6,6 +6,7 @@ const childProcess = require("node:child_process");
 
 const app = fs.readFileSync(path.join(__dirname, "..", "app.js"), "utf8");
 const html = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
+const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "content", "manifest.json"), "utf8"));
 
 test("the curriculum has the target 35-section and 197-topic structure", () => {
   assert.match(app, /const foundationsCurriculum = \[/);
@@ -16,6 +17,9 @@ test("the curriculum has the target 35-section and 197-topic structure", () => {
   assert.match(report, /Sections: 35/);
   assert.match(report, /Topics: 197/);
   assert.match(report, /Topic labs: 197/);
+  assert.equal(manifest.sectionCount, 35);
+  assert.equal(manifest.topicCount, 197);
+  assert.equal(manifest.status, "in-progress");
 });
 
 test("Parts II through VI are represented in the same curriculum model", () => {

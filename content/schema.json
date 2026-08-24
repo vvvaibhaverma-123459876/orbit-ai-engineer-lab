@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://orbit.example/content/topic.schema.json",
+  "title": "Orbit topic manifest",
+  "type": "object",
+  "required": ["schemaVersion", "status", "parts", "sectionCount", "topicCount", "sections", "authoring"],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "status": { "enum": ["scaffold", "in-progress", "authored"] },
+    "parts": { "type": "array", "items": { "type": "string" } },
+    "sectionCount": { "type": "integer", "minimum": 1 },
+    "topicCount": { "type": "integer", "minimum": 1 },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "part", "number", "title", "topics"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "part": { "type": "string" },
+          "number": { "type": "string" },
+          "title": { "type": "string" },
+          "topics": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "sectionId", "part", "number", "title", "concepts", "lessons", "drills", "lab", "status"],
+              "properties": {
+                "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+                "sectionId": { "type": "string" },
+                "part": { "type": "string" },
+                "number": { "type": "string" },
+                "title": { "type": "string", "minLength": 1 },
+                "concepts": { "type": "array", "items": { "type": "object", "required": ["id", "name"], "properties": { "id": { "type": "string" }, "name": { "type": "string" }, "source": { "type": "string" }, "review": { "type": "string" } } } },
+                "lessons": { "type": "array", "items": { "type": "string" } },
+                "drills": { "type": "array", "items": { "type": "string" } },
+                "traps": { "type": "array", "items": { "type": "object", "required": ["id", "name"], "properties": { "id": { "type": "string" }, "name": { "type": "string" }, "concepts": { "type": "array", "items": { "type": "string" } } } } },
+                "build": { "type": ["object", "null"] },
+                "lab": { "type": ["object", "null"] },
+                "status": { "enum": ["scaffold", "in-progress", "authored"] }
+              }
+            }
+          }
+        }
+      }
+    },
+    "authoring": { "type": "object" }
+  }
+}

@@ -8,6 +8,8 @@ const vm = require("node:vm");
 
 const appPath = path.join(__dirname, "..", "app.js");
 const source = fs.readFileSync(appPath, "utf8");
+const manifestPath = path.join(__dirname, "..", "content", "manifest.json");
+const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
 const end = source.indexOf("const theoryGuides =");
 if (end < 0) throw new Error("Could not find the curriculum data boundary in app.js");
 
@@ -48,11 +50,33 @@ for (const part of expectedParts) {
 
 if (foundationsCurriculum.length !== 35) errors.push(`expected 35 sections, found ${foundationsCurriculum.length}`);
 if (topicKeys.size !== expectedTopics) errors.push(`expected ${expectedTopics} topics, found ${topicKeys.size}`);
+if (manifest.sectionCount !== foundationsCurriculum.length) errors.push(`manifest section count mismatch: ${manifest.sectionCount}`);
+if (manifest.topicCount !== topicKeys.size) errors.push(`manifest topic count mismatch: ${manifest.topicCount}`);
+const manifestTopics = manifest.sections.flatMap((section) => section.topics || []);
+if (manifestTopics.length !== topicKeys.size) errors.push(`manifest topic records mismatch: ${manifestTopics.length}`);
+const manifestIds = new Set(manifestTopics.map((topic) => topic.id));
+if (manifestIds.size !== manifestTopics.length) errors.push("manifest contains duplicate topic IDs");
+
+const strict = process.argv.includes("--strict");
+const conceptGaps = manifestTopics.filter((topic) => !topic.concepts.length);
+const lessonGaps = manifestTopics.filter((topic) => !topic.lessons.length);
+const drillGaps = manifestTopics.filter((topic) => !topic.drills.length);
+const buildGaps = manifestTopics.filter((topic) => !topic.build);
+const incompleteTopics = manifestTopics.filter((topic) => !topic.concepts.length || !topic.lessons.length || !topic.drills.length || !topic.build);
+if (strict && incompleteTopics.length) errors.push(`strict authoring check: ${incompleteTopics.length} topics still need concepts, lessons, drills, or builds`);
 
 console.log(`Parts: ${expectedParts.length}`);
 console.log(`Sections: ${foundationsCurriculum.length}`);
 console.log(`Topics: ${topicKeys.size}`);
 console.log(`Topic labs: ${topicLabs.length}`);
+console.log(`Concepts indexed: ${manifest.authoring.conceptsIndexed}`);
+console.log(`Lessons authored: ${manifest.authoring.lessonsAuthored}`);
+console.log(`Drills authored: ${manifest.authoring.drillsAuthored}`);
+console.log(`Builds authored: ${manifest.authoring.buildsAuthored}`);
+if (incompleteTopics.length) {
+  console.log(`Authoring queue: ${incompleteTopics.length} topics are incomplete.`);
+  console.log(`  Concept gaps: ${conceptGaps.length} · lesson gaps: ${lessonGaps.length} · drill gaps: ${drillGaps.length} · build gaps: ${buildGaps.length}`);
+}
 if (errors.length) {
   console.error("\nCurriculum errors:");
   errors.forEach((error) => console.error(`- ${error}`));
