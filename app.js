@@ -347,6 +347,27 @@ const lessonContent = {
   }
 };
 
+// Theory is deliberately separate from the assessment questions. Learners get
+// an explanation, vocabulary, a worked mental model, and a business bridge
+// before they are asked to prove anything with code.
+const theoryGuides = {
+  2: { title: "Functions: name a repeatable decision", explanation: "A function is a contract: it accepts inputs, transforms them, and returns a result without exposing every internal step. In AI systems, preprocessing, scoring, retrieval, and evaluation are all composed from small functions.", points: ["Parameters are the input contract.", "return gives a value back; print only displays it.", "A good function is deterministic, testable, and named for its job."], terms: "parameter · argument · return value · side effect", business: "A support team can change a scoring rule in one tested function instead of editing every workflow.", reflection: "Where would a reusable function prevent duplicated business logic?" },
+  3: { title: "Lists: represent a collection", explanation: "Lists preserve an ordered collection of values. Data pipelines use the same idea for rows, tokens, retrieved documents, and evaluation cases. The edge cases—empty, one item, duplicates, and negative values—are part of the contract.", points: ["Indexing starts at zero.", "len measures collection size; sum aggregates numeric values.", "Empty input should have an intentional result."], terms: "list · index · iterable · aggregation", business: "A reporting pipeline that handles an empty day gracefully is more trustworthy than one that crashes at month end.", reflection: "Which edge case would a stakeholder notice first?" },
+  4: { title: "Configuration: separate policy from code", explanation: "Configuration turns changeable policy into data. A learning rate, model name, timeout, or privacy flag should be read from a validated configuration rather than scattered as magic numbers through the code.", points: ["Nested dictionaries mirror JSON documents.", "Hardcoding can pass one demo and fail the next deployment.", "Configuration needs validation and a safe default."], terms: "JSON · key · schema · environment", business: "Operations can change a model endpoint or budget without asking an engineer to rewrite application logic.", reflection: "Which value in an AI product should never be hardcoded?" },
+  5: { title: "Engineering history: make work reproducible", explanation: "A learning log is a miniature version of professional engineering practice. Record what changed, why it changed, and what evidence supports it. Reproducibility lets another person debug, review, and improve the work.", points: ["Small commits make cause and effect visible.", "A test result is stronger evidence than a screenshot.", "Logs should capture context without leaking secrets."], terms: "commit · test case · reproducibility · provenance", business: "A regulated team can explain which data and code produced a model decision.", reflection: "What evidence would help you trust a colleague's result?" },
+  6: { title: "Checkpoint thinking: transfer, do not memorize", explanation: "A checkpoint tests whether a concept transfers to new inputs. The threshold exercise combines aggregation and comparison—the same pattern used in risk gates, quality checks, and business eligibility rules.", points: ["Boundaries deserve explicit tests.", "A Boolean is a decision, not an explanation.", "A checkpoint should expose misconceptions without giving away the answer."], terms: "threshold · boundary case · Boolean · transfer", business: "A lender, support queue, or release process can encode a transparent eligibility rule and audit it.", reflection: "What evidence would convince you that a rule generalizes?" },
+  7: { title: "LLMs: choose capability against constraints", explanation: "A language model predicts the next token from context; it does not automatically know whether a response is true, private, affordable, or appropriate. Model choice therefore begins with the task and constraints, not the brand name.", points: ["Token limits affect context and cost.", "Latency, quality, privacy, and price trade off.", "A model card and an evaluation set inform selection."], terms: "token · context window · inference · model card", business: "A customer-support product may choose a smaller private model for routine cases and escalate complex cases to a stronger one.", reflection: "Which constraint is non-negotiable for your use case?" },
+  8: { title: "Evaluation: turn quality into evidence", explanation: "Evaluation is a repeatable measurement process. Build representative cases, define expected outcomes, and inspect failures by category. A single impressive response is not a reliable quality signal.", points: ["Hold out cases that were not used to tune the prompt.", "Track both average quality and severe failures.", "A metric must map to a user or business outcome."], terms: "evaluation set · baseline · metric · regression", business: "A product manager can decide whether an assistant saves time only when quality and workflow impact are measured together.", reflection: "What would count as a severe failure in your domain?" },
+  9: { title: "RAG: retrieve evidence before generation", explanation: "Retrieval-augmented generation separates finding relevant evidence from composing an answer. The retriever selects context; the generator uses it. You can evaluate each stage instead of treating the model as a black box.", points: ["Chunking affects what can be retrieved.", "Ranking determines which evidence reaches the prompt.", "Citations and faithfulness checks reduce unsupported claims."], terms: "embedding · chunk · retriever · grounding", business: "An HR assistant should answer from the current policy repository, not from outdated model memory.", reflection: "What source should your assistant refuse to answer without?" },
+  10: { title: "RAG safety: define a relevance gate", explanation: "A relevance threshold creates a refusal path when retrieved context is weak. The threshold is a product decision that must be tuned against false refusals and unsupported answers.", points: ["Boundary values need tests.", "High recall finds more candidates; precision keeps noise out.", "A refusal should explain what evidence is missing."], terms: "relevance · precision · recall · refusal", business: "It is safer to route an ambiguous customer request to a human than to confidently cite the wrong policy.", reflection: "When is a refusal better than a plausible answer?" },
+  11: { title: "Fine-tuning: teach behaviour with data", explanation: "Fine-tuning changes model behaviour through examples. It is not a substitute for retrieval, a safety policy, or evaluation. The examples must represent the task, desired style, and edge cases you care about.", points: ["Labels and instructions need consistent definitions.", "Data leakage makes evaluation look better than reality.", "A smaller clean set can beat a larger noisy set."], terms: "fine-tuning · label · leakage · representative data", business: "A classification model can learn a team's consistent triage labels only when those labels are defined and reviewed.", reflection: "What label disagreement would reveal a product ambiguity?" },
+  12: { title: "Alignment: guard the operating range", explanation: "Alignment includes practical controls around model behaviour: input validation, output constraints, monitoring, and escalation. A cap is a tiny example of a larger safety invariant.", points: ["Bounds make unsafe states unreachable.", "Guardrails should fail visibly, not silently.", "Controls need adversarial and normal-case tests."], terms: "guardrail · invariant · validation · escalation", business: "A finance assistant should reject unsupported transaction values rather than silently normalising them.", reflection: "What is the safest failure mode for your system?" },
+  13: { title: "Agents: actions need an explicit policy", explanation: "An agent loops over planning, tool use, observation, and a decision to continue. The useful abstraction is not autonomy; it is a controlled policy that makes actions observable and reviewable.", points: ["Tools have typed inputs and bounded effects.", "The planner should state why it selected a tool.", "Observations become evidence for the next step."], terms: "tool call · planner · observation · policy", business: "A claims workflow can read a document, query a policy database, and ask for human review without granting the model unrestricted access.", reflection: "Which tool should always require confirmation?" },
+  14: { title: "Agents: budgets prevent runaway behaviour", explanation: "Every agent needs limits on steps, time, tokens, money, and permissions. A budget is both a technical control and a business promise about predictable operation.", points: ["Set a maximum before the loop begins.", "Stop with an inspectable reason when it is exceeded.", "Measure budget consumption as part of evaluation."], terms: "budget · timeout · permission · circuit breaker", business: "A procurement agent must stop before it can place orders or spend beyond an approved amount.", reflection: "What should happen when the agent reaches its limit?" },
+  15: { title: "Deployment: make cost and reliability visible", explanation: "Production AI is an operating system, not a notebook. Track latency, error rate, quality, cost per task, and user impact. Service-level objectives turn vague promises into measurable targets.", points: ["A baseline gives you a comparison point.", "Cost is a function of traffic, tokens, retries, and infrastructure.", "Observability makes regressions diagnosable."], terms: "SLO · latency · error budget · observability", business: "A business can choose a slower high-quality path for high-value cases and a cheaper path for routine work.", reflection: "Which metric would trigger a rollback?" },
+  16: { title: "Release readiness: quality and safety are conjunctive", explanation: "A release is ready only when the quality evidence and safety review both pass. This is a deliberately simple AND gate for a much larger launch checklist: evaluation, privacy, security, monitoring, rollback, and ownership.", points: ["One strong demo cannot compensate for an unsafe failure.", "Release criteria should be written before the launch.", "Rollback is part of the design, not an admission of defeat."], terms: "release gate · rollback · safety review · sign-off", business: "A hospital assistant should not ship because it is accurate if its access controls and escalation path are untested.", reflection: "Who owns the decision to pause a release?" }
+};
+
 const modules = [
   {
     code: "00",
@@ -730,9 +751,34 @@ function renderLesson() {
   $("#prompt-title").textContent = data.prompt;
   $("#prompt-hint").textContent = data.hint;
   $("#code-editor").value = data.starter;
+  renderTheoryLesson(data);
   const next = lessonContent[state.currentLesson + 1];
   $("#next-lesson").textContent = next ? "Continue to Lesson " + (state.currentLesson + 1) + " →" : "Return to learning path →";
   renderTheory(data);
+}
+
+function renderTheoryLesson(data) {
+  const guide = theoryGuides[state.currentLesson] || {
+    title: data.title,
+    explanation: data.lead,
+    points: ["Understand the concept before changing the code."],
+    terms: "concept · input · output · evidence",
+    business: "Connect this exercise to a user, system, or business decision.",
+    reflection: "What would you need to explain to a teammate?"
+  };
+  $("#theory-title").textContent = guide.title;
+  $("#theory-explanation").textContent = guide.explanation;
+  $("#theory-terms").textContent = guide.terms;
+  $("#theory-business").textContent = guide.business;
+  $("#theory-reflection").textContent = guide.reflection;
+  const points = $("#theory-points");
+  points.textContent = "";
+  guide.points.forEach((point) => {
+    const item = document.createElement("li");
+    item.textContent = point;
+    points.appendChild(item);
+  });
+  $("#theory-progress").textContent = "Concept · vocabulary · business connection";
 }
 
 function shuffle(items) {
@@ -794,6 +840,7 @@ function openLesson() {
   renderLesson();
   $("#lesson-modal").hidden = false;
   $("#next-lesson").hidden = true;
+  $("#practice-stage").hidden = true;
   $("#test-result").className = "";
   $("#test-result").textContent = "";
   $("#code-editor").disabled = true;
@@ -866,6 +913,7 @@ function checkTheory() {
     result.textContent = "✓ Theory checkpoint passed. The coding test is now unlocked.";
     $("#code-editor").disabled = false;
     $("#run-code").disabled = false;
+    $("#practice-stage").hidden = false;
     $("#editor-status").textContent = "Theory passed · paste is disabled for this assessment.";
   } else {
     $("#theory-check").className = "theory-check failed";

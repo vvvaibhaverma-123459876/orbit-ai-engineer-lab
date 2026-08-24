@@ -59,12 +59,20 @@
   </div>
 
   <div id="lesson-modal" class="modal" hidden>
-    <div class="backdrop" data-close-modal aria-hidden="true"></div>
+    <div class="backdrop" aria-hidden="true"></div>
     <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
       <button class="close" data-close-modal aria-label="Close lesson">×</button>
       <label id="modal-kicker">LESSON 02 · CONCEPT + PRACTICE</label>
       <h2 id="modal-title">Write your first Python function</h2>
       <p id="modal-lead">A function is a named idea you can call again. Read the example, then write one yourself without copying it.</p>
+      <section class="theory-lesson" id="theory-lesson" aria-labelledby="theory-title">
+        <div class="theory-lesson-head"><label>THEORY LESSON</label><span id="theory-progress">Read before you practise</span></div>
+        <h3 id="theory-title">Functions: name a repeatable decision</h3>
+        <p id="theory-explanation">A function is a contract: it accepts inputs, transforms them, and returns a result.</p>
+        <div class="theory-columns"><article><h4>Core ideas</h4><ul id="theory-points"><li>Parameters are the input contract.</li></ul></article><article><h4>Vocabulary</h4><p id="theory-terms">parameter · argument · return value</p></article></div>
+        <div class="theory-business"><strong>Why this matters at work</strong><p id="theory-business">A support team can change a scoring rule in one tested function instead of editing every workflow.</p></div>
+        <p class="theory-reflection"><strong>Think before you code:</strong> <span id="theory-reflection">Where would a reusable function prevent duplicated business logic?</span></p>
+      </section>
       <section class="theory-check" id="theory-check">
         <div class="theory-head"><label>THEORY CHECKPOINT</label><small id="theory-score">0 answered</small></div>
         <div id="theory-questions"></div>
@@ -73,6 +81,7 @@
       <pre><span># Example</span>
 <code id="example-code"><b>def</b> greet(name):
     <b>return</b> f"Hello, {name}!"</code></pre>
+      <section id="practice-stage" hidden>
       <div class="prompt"><label>YOUR TURN</label><strong id="prompt-title">Write double(number) so it returns the input multiplied by two.</strong><small id="prompt-hint">Try a small number first. Hidden examples will check your code.</small></div>
       <label for="code-editor" class="editor-label">Your solution</label>
       <textarea id="code-editor" spellcheck="false">def double(number):
@@ -81,6 +90,7 @@
       <div class="editor-foot"><span id="editor-status">Paste is disabled for this assessment.</span><button class="primary" id="run-code">Run hidden tests →</button></div>
       <div id="test-result" aria-live="polite"></div>
       <button class="secondary next-button" id="next-lesson" type="button" hidden>Continue to Lesson 3 →</button>
+      </section>
     </section>
   </div>
   <script src="python-lite.js"></script>
