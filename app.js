@@ -359,6 +359,45 @@ const foundationsCurriculum = [
   { id: "data", number: "07", title: "Data handling", summary: "Build numerically stable, memory-aware, validated data workflows that can move from exploration to production.", topics: ["Numerical computing with NumPy", "Dataframes", "Cleaning & exploratory analysis", "Visualization", "Pipelines & scale"], competencies: ["Reason about shapes, broadcasting, views, dtypes, and numerical stability.", "Use pandas, Polars, SQL, and Arrow appropriately.", "Document cleaning decisions, validate contracts, and build idempotent pipelines."], traps: ["Silent copies, chained assignment, and object-dtype memory blowups.", "Imputing missing data without understanding MCAR, MAR, or MNAR.", "CSV in production, non-idempotent reruns, and misleading charts."], exercises: ["Implement stable softmax, cross-entropy, and layer norm in NumPy.", "Rewrite a pandas workflow in Polars and benchmark it.", "Clean a messy dataset with a written decision log and validation suite.", "Convert a large CSV workflow to partitioned Parquet and measure the result."], materials: "NumPy docs · Python for Data Analysis · Polars · Fundamentals of Data Engineering · Spark" }
 ];
 
+function makeAdvancedSection(id, part, number, title, topics, summary, materials) {
+  return {
+    id, part, number, title, topics, summary,
+    competencies: ["Explain the core mechanism and assumptions in your own words.", "Implement or evaluate the pattern on a controlled example.", "Name the failure modes, trade-offs, and production decision it affects."],
+    traps: ["Using the technique without checking its assumptions.", "Reporting a result without a baseline, edge cases, or reproducible evidence.", "Optimising a local metric while making the user or system outcome worse."],
+    exercises: topics.slice(0, 4).map((topic) => "Build a worked implementation or evaluation for " + topic + " and defend the trade-offs."),
+    materials
+  };
+}
+
+const advancedCurriculum = [
+  makeAdvancedSection("ml-classical", "PART II · MACHINE LEARNING", "08", "Classical machine learning", ["Framing the problem", "Supervised learning", "Unsupervised learning", "Evaluation", "Feature engineering", "Interpretability"], "Turn a vague business request into a measurable prediction or discovery problem, then build an honest baseline.", "Hands-On Machine Learning · ISLR · scikit-learn user guide"),
+  makeAdvancedSection("ml-deep", "PART II · MACHINE LEARNING", "09", "Deep learning", ["Neural network fundamentals", "Training dynamics", "PyTorch", "Architectures", "Transfer learning", "Scaling & distributed training"], "Build neural networks from first principles, train them reliably, and understand the memory and compute behind modern models.", "Deep Learning · Dive into Deep Learning · PyTorch docs"),
+  makeAdvancedSection("ml-nlp", "PART II · MACHINE LEARNING", "10", "NLP before transformers", ["Text processing", "Statistical language models", "Word representations", "Sequence tasks & models", "Evaluation"], "Understand the representations and sequence models that made modern language systems possible.", "Jurafsky & Martin · Speech and Language Processing · Gensim and spaCy docs"),
+  makeAdvancedSection("llm-transformer", "PART III · TRANSFORMERS & LLMs", "11", "The transformer", ["Attention", "The transformer block & architecture", "Positional information", "Attention variants & efficiency"], "Implement the transformer rather than treating it as a black box: shapes, residuals, normalization, position, and memory.", "Attention Is All You Need · annotated transformer · FlashAttention"),
+  makeAdvancedSection("llm-tokenization", "PART III · TRANSFORMERS & LLMs", "12", "Tokenization", ["Tokenization"], "Understand how text becomes token IDs, why tokenization changes cost and capability, and how budgets fail at boundaries.", "BPE paper · tokenizer implementations · model tokenizer documentation"),
+  makeAdvancedSection("llm-scale", "PART III · TRANSFORMERS & LLMs", "13", "Language models at scale", ["Pretraining", "The model landscape", "Capabilities & limits"], "Connect data, compute, scaling laws, model cards, benchmarks, and reproducible failure analysis.", "Chinchilla · model cards · HELM and benchmark methodology"),
+  makeAdvancedSection("llm-adapting", "PART III · TRANSFORMERS & LLMs", "14", "Adapting models", ["The decision framework", "Fine-tuning", "Alignment", "Compression"], "Choose between prompting, retrieval, fine-tuning, preference optimisation, distillation, quantization, and cascades.", "LoRA · DPO · QLoRA · model compression literature"),
+  makeAdvancedSection("llm-inference", "PART III · TRANSFORMERS & LLMs", "15", "Inference", ["The mechanics", "Serving"], "Reason about KV cache, sampling, batching, throughput, latency, memory arithmetic, and the economics of serving.", "vLLM docs · PagedAttention · inference systems papers"),
+  makeAdvancedSection("ai-models", "PART IV · AI ENGINEERING", "16", "Working with models", ["APIs & integration", "Structured output", "Prompt engineering"], "Build reliable model boundaries with streaming, retries, schemas, validation, versioned prompts, and cost ceilings.", "Provider API docs · Pydantic · prompt evaluation patterns"),
+  makeAdvancedSection("ai-rag", "PART IV · AI ENGINEERING", "17", "Retrieval & RAG", ["Embeddings", "Chunking & ingestion", "Indexing & search", "Query handling & generation", "Advanced patterns"], "Build retrieval from first principles, measure recall and faithfulness, then add hybrid search, permissions, and multi-turn handling.", "RAG papers · BM25 · vector database docs · retrieval evaluation"),
+  makeAdvancedSection("ai-agents", "PART IV · AI ENGINEERING", "18", "Agents", ["Foundations", "Tools", "Planning & reasoning", "Memory", "Multi-agent", "Reliability"], "Build controlled tool-using loops with explicit state, budgets, retries, termination, memory, and trajectory evaluation.", "ReAct · tool-use papers · agent framework docs"),
+  makeAdvancedSection("ai-evaluation", "PART IV · AI ENGINEERING", "19", "Evaluation", ["Foundations", "Datasets", "Methods", "System-specific evaluation", "Operationalizing"], "Create eval sets, metrics, judges, regression gates, and a flywheel that turns production failures into learning.", "LLM-as-judge research · RAG metrics · experiment design"),
+  makeAdvancedSection("ai-safety", "PART IV · AI ENGINEERING", "20", "Safety & guardrails", ["Adversarial input", "Guardrails", "Privacy, ethics & governance"], "Threat-model model applications, layer controls, measure false positives and negatives, and protect privacy and agency.", "OWASP LLM guidance · NIST AI RMF · privacy and safety case studies"),
+  makeAdvancedSection("prod-serving", "PART V · PRODUCTION", "21", "Serving & deployment", ["Building the service", "Containers & infrastructure"], "Ship a streaming, observable service with timeouts, circuit breakers, fallbacks, health checks, autoscaling, and graceful shutdown.", "FastAPI · Docker · Kubernetes · cloud deployment documentation"),
+  makeAdvancedSection("prod-mlops", "PART V · PRODUCTION", "22", "MLOps", ["Experiment tracking & reproducibility", "Versioning", "Pipelines & CI/CD", "Data & model operations"], "Make experiments reproducible and releases reversible by versioning data, code, prompts, models, and evals together.", "MLflow · DVC · CI/CD docs · feature and model stores"),
+  makeAdvancedSection("prod-observability", "PART V · PRODUCTION", "23", "Observability & cost", ["Observability", "Cost engineering"], "Trace every stage, attribute cost, measure latency and quality, and build budgets and caches that do not hide incorrect answers.", "OpenTelemetry · Prometheus · cost attribution patterns"),
+  makeAdvancedSection("prod-design", "PART V · PRODUCTION", "24", "System design for AI", ["Method", "The reference architecture", "Canonical problems", "Classical ML system design"], "Whiteboard AI systems with explicit scale numbers, bottlenecks, failure modes, cost, and ownership.", "DDIA · system design interviews · production architecture reviews"),
+  makeAdvancedSection("optional-vision", "PART VI · OPTIONAL DEPTH", "A", "Computer vision", ["Image formation & representations", "CNNs and vision transformers", "Detection and segmentation", "Vision evaluation"], "Extend the engineering toolkit to image representation, spatial inductive bias, multimodal inputs, and honest visual evaluation.", "CS231n · vision transformer papers · torchvision"),
+  makeAdvancedSection("optional-speech", "PART VI · OPTIONAL DEPTH", "B", "Speech & audio", ["Audio signals", "Speech recognition", "Speech synthesis", "Audio evaluation"], "Work with waveforms, spectrograms, recognition, synthesis, latency, and noisy real-world audio.", "Speech and Signal Processing texts · Whisper · audio model docs"),
+  makeAdvancedSection("optional-multimodal", "PART VI · OPTIONAL DEPTH", "C", "Multimodal", ["Vision-language models", "Document intelligence", "Multimodal agents"], "Combine text, image, document, and tool signals into systems with explicit grounding and evaluation.", "Multimodal model papers · document AI references"),
+  makeAdvancedSection("optional-rl", "PART VI · OPTIONAL DEPTH", "D", "Reinforcement learning", ["MDPs and value functions", "Policy optimisation", "Offline and preference learning"], "Reason about sequential decisions, reward design, exploration, and the safety risks of learning from feedback.", "Sutton & Barto · policy optimisation papers"),
+  makeAdvancedSection("optional-recommenders", "PART VI · OPTIONAL DEPTH", "E", "Recommender systems", ["Candidate generation", "Ranking", "Exploration and experimentation"], "Design recommenders that balance relevance, novelty, diversity, feedback loops, and business outcomes.", "Recommender systems literature · experimentation references"),
+  makeAdvancedSection("optional-graph", "PART VI · OPTIONAL DEPTH", "F", "Graph machine learning", ["Graph representations", "Message passing", "Graph retrieval and evaluation"], "Model relational structure and understand where graph assumptions help or fail.", "Graph neural network papers · network science references"),
+  makeAdvancedSection("optional-timeseries", "PART VI · OPTIONAL DEPTH", "G", "Time series & forecasting", ["Temporal validation", "Forecasting models", "Uncertainty and drift"], "Build forecasts without leakage, compare baselines, and communicate uncertainty under drift.", "Forecasting texts · temporal cross-validation references"),
+  makeAdvancedSection("optional-performance", "PART VI · OPTIONAL DEPTH", "H", "Performance engineering", ["Profiling", "Memory and kernels", "Serving efficiency"], "Find the real bottleneck, reason about hardware, and improve throughput without sacrificing correctness.", "High Performance Python · systems profiling docs")
+];
+foundationsCurriculum.push(...advancedCurriculum);
+
 const topicLabs = [
   ["python", "Language core", "Predict a short Python program's output, then explain identity, equality, truthiness, default arguments, closures, exceptions, and imports.", "Write a one-page reasoning note for three snippets: a mutable default, a late-bound closure, and a try/except/else/finally flow. State the output before running it.", "A prediction table with output, memory/identity reasoning, and one corrected implementation."],
   ["python", "Data structures in practice", "Choose lists, dictionaries, sets, tuples, deque, Counter, heapq, or itertools from the access pattern and complexity—not habit.", "Take a slow membership-counting script and replace the right structure. Include expected complexity for lookup, insertion, and iteration.", "A before/after benchmark and a short structure-selection decision record."],
@@ -399,6 +438,20 @@ const topicLabs = [
   id: section + "-" + title.toLowerCase().replace(/[^a-z0-9]+/g, "-"), section, title, theory, lab, deliverable,
   minimum: 80
 }));
+
+advancedCurriculum.forEach((section) => {
+  section.topics.forEach((title) => {
+    topicLabs.push({
+      id: section.id + "-" + title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+      section: section.id,
+      title,
+      theory: "Study " + title + " as part of " + section.title + ". Explain the mechanism, assumptions, shapes or interfaces, and how it changes an AI engineering decision. Connect the idea to a concrete failure mode rather than memorising a definition.",
+      lab: "Build a focused notebook, implementation, experiment, or design review for " + title + ". Start with a baseline, record the inputs and constraints, then compare the result against one alternative.",
+      deliverable: "A reproducible artifact with a short explanation, one edge case, one trade-off, and evidence a reviewer can inspect.",
+      minimum: 100
+    });
+  });
+});
 
 const topicLabByKey = new Map(topicLabs.map((topic) => [topic.section + "::" + topic.title, topic]));
 
@@ -792,14 +845,14 @@ function renderCurriculumSections() {
     button.className = "curriculum-tab" + (index === 0 ? " selected" : "");
     button.dataset.curriculumSection = String(index);
     const complete = section.topics.filter((topic) => state.topicProgress[(section.id + "-" + topic.toLowerCase().replace(/[^a-z0-9]+/g, "-"))]).length;
-    button.innerHTML = "<b>SECTION " + section.number + "</b><strong>" + section.title + "</strong><small>" + complete + " / " + section.topics.length + " labs complete</small>";
+    button.innerHTML = "<b>" + (section.part || "PART I · FOUNDATIONS") + " · " + section.number + "</b><strong>" + section.title + "</strong><small>" + complete + " / " + section.topics.length + " labs complete</small>";
     host.appendChild(button);
   });
 }
 
 function renderCurriculumDetail(index) {
   const section = foundationsCurriculum[index] || foundationsCurriculum[0];
-  $("#curriculum-kicker").textContent = "SECTION " + section.number;
+  $("#curriculum-kicker").textContent = (section.part || "PART I · FOUNDATIONS") + " · " + section.number;
   $("#curriculum-title").textContent = section.title;
   $("#curriculum-summary").textContent = section.summary;
   $("#curriculum-topic-count").textContent = section.topics.length;
@@ -1245,3 +1298,6 @@ updateDashboard();
 filterPulse("all");
 renderCurriculumSections();
 renderCurriculumDetail(0);
+const curriculumTopicTotal = foundationsCurriculum.reduce((total, section) => total + section.topics.length, 0);
+$("#view-curriculum .page-intro h1").textContent = "AI engineer syllabus · Parts I–VI";
+$("#view-curriculum .page-intro p").textContent = "Six parts, " + curriculumTopicTotal + " topics, and the competencies that make later AI work durable. Read the theory, practise the pattern, and attach evidence to your portfolio.";

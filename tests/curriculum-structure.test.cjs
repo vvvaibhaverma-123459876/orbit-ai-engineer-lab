@@ -13,6 +13,16 @@ test("the foundations syllabus has all seven sections and 35 topic labs", () => 
   assert.match(html, /id="topic-modal"/);
 });
 
+test("Parts II through VI are represented in the same curriculum model", () => {
+  assert.match(app, /const advancedCurriculum = \[/);
+  assert.match(app, /PART II · MACHINE LEARNING/);
+  assert.match(app, /PART III · TRANSFORMERS & LLMs/);
+  assert.match(app, /PART IV · AI ENGINEERING/);
+  assert.match(app, /PART V · PRODUCTION/);
+  assert.match(app, /PART VI · OPTIONAL DEPTH/);
+  assert.match(app, /advancedCurriculum\.forEach/);
+});
+
 test("lesson and topic modal backdrops cannot dismiss the dialog", () => {
   assert.doesNotMatch(html, /<div class="backdrop" data-close-modal/);
   assert.doesNotMatch(html, /<div class="backdrop" data-close-topic/);
