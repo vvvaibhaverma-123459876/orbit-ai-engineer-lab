@@ -43,6 +43,19 @@ test("the learning path is derived from the syllabus sections", () => {
   assert.match(app, /data-open-curriculum-section/);
 });
 
+test("the first reference topic is a complete authored vertical slice", () => {
+  const python = manifest.sections.flatMap((section) => section.topics || []).find((topic) => topic.id === "python-language-core");
+  assert.ok(python);
+  assert.equal(python.status, "authored");
+  assert.equal(python.lessons.length, 12);
+  assert.equal(python.drills.length, 5);
+  assert.equal(python.build.id, "01.01.build");
+  assert.equal(manifest.authoring.lessonsAuthored, 12);
+  assert.equal(manifest.authoring.drillsAuthored, 5);
+  assert.equal(manifest.authoring.buildsAuthored, 1);
+  assert.equal(fs.existsSync(path.join(__dirname, "..", "content", "part-01", "section-01-python", "topic-01-language-core", "lesson-12-capstone.mdx")), true);
+});
+
 test("lesson and topic modal backdrops cannot dismiss the dialog", () => {
   assert.doesNotMatch(html, /<div class="backdrop" data-close-modal/);
   assert.doesNotMatch(html, /<div class="backdrop" data-close-topic/);

@@ -1,0 +1,19 @@
+---
+id: 01.01.02
+title: Control flow and pattern matching
+minutes: 25
+covers: [01.01.cfe86e0b5, 01.01.c2dccd01f, 01.01.ce648f5d7, 01.01.cfeca63c5]
+prereqs: [01.01.01]
+checkpoint: {type: trace-state, id: 01.01.02.cp01}
+---
+
+# Control flow and pattern matching
+
+`for` consumes an iterable; it does not require indexing. A loop `else` runs
+only when the loop finishes without `break`, which makes it useful for search.
+`while` repeats while a condition remains true, so every path must make progress
+or terminate. Structural `match` selects by shape and can bind names; it is a
+readability tool, not a replacement for every `if`.
+
+Trace the state on paper first. For a production bug, record the invariant that
+must hold at the top and bottom of each iteration.

@@ -1,0 +1,18 @@
+---
+id: 01.01.10
+title: Modules, packages, and import resolution
+minutes: 25
+covers: [01.01.c08e064f6, 01.01.c62adc9a0, 01.01.c4edd2d33, 01.01.cbb842746]
+prereqs: [01.01.09]
+checkpoint: {type: find-the-bug, id: 01.01.10.cp01}
+---
+
+# Modules, packages, and import resolution
+
+Python searches `sys.path` in order. A package directory can expose an
+intentional public surface through `__init__.py`; `__main__` is the entry point
+for `python -m package`. `importlib` supports explicit, dynamic loading but
+should not be used to hide ordinary dependencies.
+
+Keep imports acyclic, avoid work at import time, and test the command from a
+clean environment so an accidental working-directory dependency is visible.

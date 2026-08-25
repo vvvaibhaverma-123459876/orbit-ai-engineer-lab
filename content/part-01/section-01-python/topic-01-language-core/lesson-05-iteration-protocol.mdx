@@ -1,0 +1,18 @@
+---
+id: 01.01.05
+title: The iteration protocol
+minutes: 20
+covers: [01.01.c320f284f, 01.01.c7f1bdeb9, 01.01.c1e4447ce]
+prereqs: [01.01.04]
+checkpoint: {type: implement, id: 01.01.05.cp01}
+---
+
+# The iteration protocol
+
+`iter(value)` asks for an iterator. `next(iterator)` asks for the next value;
+the iterator signals completion by raising `StopIteration`. A `for` loop hides
+this protocol, which is why custom iterables work naturally with built-ins.
+
+Implement a finite iterator only when the state machine is clearer than a
+generator. Never catch `StopIteration` inside a generator body to signal normal
+completion; use `return` instead.

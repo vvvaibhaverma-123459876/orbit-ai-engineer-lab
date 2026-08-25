@@ -1,0 +1,19 @@
+---
+id: 01.01.08
+title: Exceptions, chaining, and recovery
+minutes: 25
+covers: [01.01.c6184ccbf, 01.01.c74706863, 01.01.c6a5a4a98, 01.01.c8c8962c1]
+prereqs: [01.01.07]
+checkpoint: {type: trace-state, id: 01.01.08.cp01}
+---
+
+# Exceptions, chaining, and recovery
+
+Catch the narrowest exception you can recover from. `else` runs only when the
+`try` body succeeds; `finally` is for cleanup and runs on success, failure, or
+return. Use `raise NewError(...) from error` to preserve the causal chain while
+presenting a domain-level error to callers.
+
+Do not use exceptions for ordinary branching or catch `Exception` at every
+layer. Translate at boundaries, log context once, and preserve the original
+cause for diagnosis.

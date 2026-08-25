@@ -1,0 +1,26 @@
+drills:
+  - id: 01.01.d01
+    title: Mutable default repair
+    type: find-the-bug
+    traps: [01.01.tf17613d9]
+    prompt: Explain why repeated calls share state and repair the function.
+  - id: 01.01.d02
+    title: Closure trace
+    type: predict-output
+    traps: [01.01.t8ed28683]
+    prompt: Predict three callbacks created in a loop, then fix late binding.
+  - id: 01.01.d03
+    title: Safe filtering
+    type: implement
+    traps: [01.01.tcf379d1b]
+    prompt: Remove invalid records without mutating the collection being traversed.
+  - id: 01.01.d04
+    title: Identity and copying
+    type: trace-state
+    traps: [01.01.tee0a8f4d, 01.01.tff1bbd85]
+    prompt: Predict aliasing in nested dictionaries and choose a copy strategy.
+  - id: 01.01.d05
+    title: Exception boundary
+    type: implement
+    traps: [01.01.t8ed28683]
+    prompt: Translate a low-level parse failure while preserving its cause.

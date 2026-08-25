@@ -1,0 +1,23 @@
+id: python-language-core
+number: 01.01
+title: Language core
+status: authored
+minutes: 300
+summary: >-
+  Read and predict Python programs by reasoning about objects, control flow,
+  functions, iteration, resource management, exceptions, and imports.
+prerequisites: []
+concepts: [01.01.cc59b4647, 01.01.ce49371b5, 01.01.c7973872e, 01.01.c38a678f9,
+  01.01.ce6834b8c, 01.01.cfe86e0b5, 01.01.c2dccd01f, 01.01.ce648f5d7,
+  01.01.cfeca63c5, 01.01.cad142ae3, 01.01.c9b1c2613, 01.01.cdb1da2bf,
+  01.01.c17ced352, 01.01.c2ce45251, 01.01.c883a466c, 01.01.c579fdb31,
+  01.01.ca334e0a0, 01.01.c320f284f, 01.01.c7f1bdeb9, 01.01.c1e4447ce,
+  01.01.c4951bccb, 01.01.cbde5feab, 01.01.cdfb74ba2, 01.01.c5cc7e97d,
+  01.01.ccb226622, 01.01.c3dd83e34, 01.01.c4efce046, 01.01.c18054155,
+  01.01.c6184ccbf, 01.01.c74706863, 01.01.c6a5a4a98, 01.01.c8c8962c1,
+  01.01.cf9bcb446, 01.01.c08e064f6, 01.01.c62adc9a0, 01.01.c4edd2d33,
+  01.01.cbb842746, 01.01.c020b8cd0, 01.01.c6cdfb343, 01.01.cc4abdc86,
+  01.01.caf37a0a8, 01.01.c7aa729ba, 01.01.c7ddc7e4f, 01.01.cc26a8565,
+  01.01.cd90b1f49, 01.01.c75f44f39]
+traps: [01.01.tf17613d9, 01.01.t8ed28683, 01.01.tcf379d1b, 01.01.tee0a8f4d,
+  01.01.tff1bbd85]

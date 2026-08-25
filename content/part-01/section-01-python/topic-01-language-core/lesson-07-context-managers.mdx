@@ -1,0 +1,18 @@
+---
+id: 01.01.07
+title: Context managers and resource lifetime
+minutes: 25
+covers: [01.01.c5cc7e97d, 01.01.ccb226622, 01.01.c3dd83e34, 01.01.c4efce046, 01.01.c18054155]
+prereqs: [01.01.03]
+checkpoint: {type: implement, id: 01.01.07.cp01}
+---
+
+# Context managers and resource lifetime
+
+`with` makes acquire/use/release visible. `__enter__` returns the bound value;
+`__exit__` runs even when the body raises and may suppress an exception only by
+returning true. `contextlib.contextmanager` turns a generator around a `yield`
+into the same protocol. `ExitStack` composes a dynamic number of resources.
+
+In AI systems this protects temporary files, database connections, locks, and
+model handles. The cleanup policy belongs next to the acquisition code.

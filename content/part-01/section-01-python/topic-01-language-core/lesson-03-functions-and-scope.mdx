@@ -1,0 +1,27 @@
+---
+id: 01.01.03
+title: Functions, arguments, and scope
+minutes: 30
+covers: [01.01.cad142ae3, 01.01.c9b1c2613, 01.01.cdb1da2bf, 01.01.c17ced352, 01.01.c2ce45251, 01.01.c883a466c, 01.01.cf9bcb446]
+prereqs: [01.01.02]
+checkpoint: {type: find-the-bug, id: 01.01.03.cp01}
+---
+
+# Functions, arguments, and scope
+
+Arguments are evaluated at the call site; default expressions are evaluated
+once when the function is defined. That is why `def add(x, bucket=[]):` shares
+state across calls. Use `None` as the default and allocate inside the function.
+
+`*args` collects positional arguments and `**kwargs` collects keyword
+arguments. A closure remembers referenced variables; `nonlocal` rebinding
+changes the nearest enclosing binding, while `global` changes module scope.
+Prefer explicit parameters and return values over hidden mutation.
+
+```python
+def append_once(value, bucket=None):
+    if bucket is None:
+        bucket = []
+    bucket.append(value)
+    return bucket
+```

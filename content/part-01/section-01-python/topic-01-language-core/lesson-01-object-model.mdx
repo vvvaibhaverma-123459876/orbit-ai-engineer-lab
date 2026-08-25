@@ -1,0 +1,34 @@
+---
+id: 01.01.01
+title: Objects, identity, equality, and truthiness
+minutes: 25
+covers: [01.01.cc59b4647, 01.01.ce49371b5, 01.01.c7973872e, 01.01.c38a678f9, 01.01.ce6834b8c]
+checkpoint: {type: predict-output, id: 01.01.01.cp01}
+---
+
+# Objects, identity, equality, and truthiness
+
+Every Python value is an object. A variable is a name bound to an object; it is
+not a box containing a primitive value. `==` asks whether two objects compare
+equal. `is` asks whether the names point to the same object. Use `is None` for
+the sentinel because identity is the contract; never rely on integer or string
+interning.
+
+Truth testing calls `__bool__` when available, otherwise `__len__`. Empty
+collections, zero, `None`, and `False` are false-y; most other objects are
+truthy. This protocol lets domain objects express whether they contain usable
+data, but it should be unsurprising.
+
+## Worked example
+
+```python
+records = []
+alias = records
+copy = []
+assert alias is records
+assert alias == copy
+assert bool(records) is False
+```
+
+Checkpoint: predict each assertion before running it, then explain which claim
+uses identity and which uses equality.

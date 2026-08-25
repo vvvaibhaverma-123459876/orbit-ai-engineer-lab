@@ -479,9 +479,32 @@
               "review": "human-approved"
             }
           ],
-          "lessons": [],
-          "drills": [],
-          "build": null,
+          "lessons": [
+            "python-language-core/lesson-01-object-model",
+            "python-language-core/lesson-02-control-flow",
+            "python-language-core/lesson-03-functions-and-scope",
+            "python-language-core/lesson-04-comprehensions-generators",
+            "python-language-core/lesson-05-iteration-protocol",
+            "python-language-core/lesson-06-decorators-and-caching",
+            "python-language-core/lesson-07-context-managers",
+            "python-language-core/lesson-08-exceptions",
+            "python-language-core/lesson-09-return-and-composition",
+            "python-language-core/lesson-10-modules-imports",
+            "python-language-core/lesson-11-debugging-traps",
+            "python-language-core/lesson-12-capstone"
+          ],
+          "drills": [
+            "01.01.d01",
+            "01.01.d02",
+            "01.01.d03",
+            "01.01.d04",
+            "01.01.d05"
+          ],
+          "build": {
+            "id": "01.01.build",
+            "title": "Streaming experiment record pipeline",
+            "source": "content\\part-01\\section-01-python\\topic-01-language-core\\build.yaml"
+          },
           "traps": [
             {
               "id": "01.01.tc03c6aa7",
@@ -539,7 +562,7 @@
             "deliverable": "A prediction table with output, memory/identity reasoning, and one corrected implementation.",
             "minimumEvidenceCharacters": 80
           },
-          "status": "in-progress"
+          "status": "authored"
         },
         {
           "id": "python-data-structures-in-practice",
@@ -10620,12 +10643,6 @@
       ]
     }
   ],
-  "authoring": {
-    "conceptsIndexed": 806,
-    "lessonsAuthored": 0,
-    "drillsAuthored": 0,
-    "buildsAuthored": 0
-  },
   "extraction": {
     "status": "human-approved",
     "sourceFiles": [
@@ -10637,5 +10654,11 @@
     ],
     "topicsMatched": 100,
     "topicsUnmatched": 97
+  },
+  "authoring": {
+    "conceptsIndexed": 806,
+    "lessonsAuthored": 12,
+    "drillsAuthored": 5,
+    "buildsAuthored": 1
   }
 }

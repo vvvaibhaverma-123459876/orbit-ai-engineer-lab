@@ -1,0 +1,18 @@
+---
+id: 01.01.06
+title: Decorators and caching
+minutes: 25
+covers: [01.01.c4951bccb, 01.01.cbde5feab, 01.01.cdfb74ba2]
+prereqs: [01.01.03]
+checkpoint: {type: find-the-bug, id: 01.01.06.cp01}
+---
+
+# Decorators and caching
+
+A decorator receives a callable and returns a callable. `functools.wraps`
+preserves the wrapped function's name, docstring, and introspection metadata.
+`lru_cache` memoises calls by hashable arguments; it is excellent for pure,
+repeatable work and dangerous for unbounded or mutable inputs.
+
+Before caching, measure whether recomputation dominates. Document the cache
+key, lifetime, invalidation rule, and memory bound.

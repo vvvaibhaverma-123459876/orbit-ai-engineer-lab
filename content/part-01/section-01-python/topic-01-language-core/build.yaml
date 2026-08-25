@@ -1,0 +1,15 @@
+id: 01.01.build
+title: Streaming experiment record pipeline
+brief: >-
+  Build a command-line pipeline that reads newline-delimited records, validates
+  them, emits a summary without loading the file into memory, and reports bad
+  rows with line numbers.
+constraints:
+  - Use a generator pipeline and constant peak memory.
+  - Keep parsing, validation, and output as separately testable functions.
+  - Include malformed input, empty input, and a file with one million rows.
+evidence:
+  - source package with tests
+  - complexity and memory note
+  - three-minute oral defence
+gate: 1

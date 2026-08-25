@@ -20,6 +20,33 @@ vm.runInNewContext(source.slice(0, end) + "\nmodule.exports = { foundationsCurri
 const { foundationsCurriculum, topicLabs } = sandbox.module.exports;
 const slug = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
+// Authored topic folders are deliberately plain text/YAML so they can be
+// reviewed in GitHub. The exporter only needs their stable IDs and filenames;
+// it does not try to become a YAML parser.
+const authoredById = new Map();
+const authoredRoot = path.join(root, "content");
+function walk(directory) {
+  if (!fs.existsSync(directory)) return;
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    const full = path.join(directory, entry.name);
+    if (entry.isDirectory()) walk(full);
+    else if (entry.name === "topic.yaml") {
+      const text = fs.readFileSync(full, "utf8");
+      const id = text.match(/^id:\s*([^\s#]+)/m)?.[1];
+      if (!id) continue;
+      const folder = path.dirname(full);
+      const lessons = fs.readdirSync(folder).filter((name) => /^lesson-.*\.mdx$/i.test(name)).sort();
+      const drillsText = fs.existsSync(path.join(folder, "drills.yaml")) ? fs.readFileSync(path.join(folder, "drills.yaml"), "utf8") : "";
+      const drills = [...drillsText.matchAll(/^\s*-\s*id:\s*([^\s#]+)/gm)].map((match) => match[1]);
+      const buildText = fs.existsSync(path.join(folder, "build.yaml")) ? fs.readFileSync(path.join(folder, "build.yaml"), "utf8") : "";
+      const buildId = buildText.match(/^id:\s*([^\s#]+)/m)?.[1];
+      const buildTitle = buildText.match(/^title:\s*(.+)$/m)?.[1]?.trim();
+      authoredById.set(id, { lessons, drills, build: buildId ? { id: buildId, title: buildTitle || buildId, source: path.relative(root, path.join(folder, "build.yaml")) } : null });
+    }
+  }
+}
+walk(authoredRoot);
+
 const sections = foundationsCurriculum.map((section) => ({
   id: section.id,
   part: section.part || "PART I · FOUNDATIONS",
@@ -34,6 +61,7 @@ const sections = foundationsCurriculum.map((section) => ({
     const lab = topicLabs.find((candidate) => candidate.section === section.id && candidate.title === title);
     const id = `${section.id}-${slug(title)}`;
     const previous = existingTopics.get(id);
+    const authored = authoredById.get(id);
     return {
       id,
       sectionId: section.id,
@@ -42,9 +70,9 @@ const sections = foundationsCurriculum.map((section) => ({
       title,
       summary: section.summary,
       concepts: previous?.concepts || [],
-      lessons: previous?.lessons || [],
-      drills: previous?.drills || [],
-      build: previous?.build || null,
+      lessons: authored ? authored.lessons.map((file) => `${id}/${file.replace(/\.mdx$/i, "")}`) : (previous?.lessons || []),
+      drills: authored ? authored.drills : (previous?.drills || []),
+      build: authored?.build || previous?.build || null,
       traps: previous?.traps || [],
       lab: lab ? {
         id: lab.id,
@@ -53,7 +81,7 @@ const sections = foundationsCurriculum.map((section) => ({
         deliverable: lab.deliverable,
         minimumEvidenceCharacters: lab.minimum
       } : null,
-      status: previous?.status || "scaffold"
+      status: authored ? "authored" : (previous?.status || "scaffold")
     };
   })
 }));

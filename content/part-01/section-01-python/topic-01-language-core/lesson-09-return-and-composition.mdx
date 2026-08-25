@@ -1,0 +1,15 @@
+---
+id: 01.01.09
+title: Return values and composable boundaries
+minutes: 20
+covers: [01.01.cf9bcb446]
+prereqs: [01.01.08]
+checkpoint: {type: explain, id: 01.01.09.cp01}
+---
+
+# Return values and composable boundaries
+
+`return` ends a function and sends a value to its caller; falling off the end
+returns `None`. A small function should make its inputs, outputs, side effects,
+and failure modes visible. Compose pure transformations first, then isolate I/O
+at the edge so tests do not need the network or filesystem.

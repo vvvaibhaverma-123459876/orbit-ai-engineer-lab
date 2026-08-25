@@ -1,0 +1,18 @@
+---
+id: 01.01.04
+title: Comprehensions, generators, and lazy pipelines
+minutes: 25
+covers: [01.01.caf37a0a8, 01.01.c579fdb31, 01.01.ca334e0a0]
+prereqs: [01.01.03]
+checkpoint: {type: implement, id: 01.01.04.cp01}
+---
+
+# Comprehensions, generators, and lazy pipelines
+
+A list comprehension materialises all results. A generator expression or a
+function containing `yield` produces one value at a time. Laziness reduces
+peak memory and allows pipelines to process files larger than RAM. `yield from`
+delegates iteration while preserving the generator protocol.
+
+Choose eager data when you need repeated traversal or random access; choose
+lazy data when the source is large, streaming, or only partly consumed.

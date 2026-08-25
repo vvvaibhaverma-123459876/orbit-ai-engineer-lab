@@ -1,0 +1,12 @@
+id: python-language-core-lab
+title: Predict, implement, and defend Python behaviour
+theory: >-
+  Connect the object model, control flow, functions, generators, decorators,
+  context managers, exceptions, and imports to behaviour you can predict.
+instructions: >-
+  Complete lessons 01–11, then submit the streaming experiment and defend three
+  unseen snippets without running them first.
+deliverable: >-
+  A tested repository, prediction table, memory note, and oral explanation of
+  one failure mode you initially missed.
+minimumEvidenceCharacters: 300

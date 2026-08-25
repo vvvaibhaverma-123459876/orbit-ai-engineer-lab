@@ -1,0 +1,17 @@
+---
+id: 01.01.11
+title: Debugging the five classic language traps
+minutes: 30
+covers: [01.01.c020b8cd0, 01.01.c6cdfb343, 01.01.cc4abdc86, 01.01.c7aa729ba, 01.01.cc26a8565, 01.01.cd90b1f49]
+prereqs: [01.01.10]
+traps: [01.01.tf17613d9, 01.01.t8ed28683, 01.01.tcf379d1b, 01.01.tee0a8f4d, 01.01.tff1bbd85]
+checkpoint: {type: find-the-bug, id: 01.01.11.cp01}
+---
+
+# Debugging the five classic language traps
+
+Diagnose rather than memorise: mutable defaults retain state, closures late-bind
+loop variables, mutating a list while iterating skips elements, `is` is not an
+equality operator, and shallow copies share nested objects. For each bug, write
+the smallest failing example, predict the state transition, then fix it without
+changing the public contract.
